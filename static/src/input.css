@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors — proxy through runtime CSS variables (defined in main.css)
+     so every utility generated from these tokens repaints when the
+     variables change, e.g. via the light/dark theme toggle. */
+  --color-panel-dark: var(--bg-panel-dark, #1b1235);
+  --color-secondary: var(--accent);
+  --color-accent: var(--accent-light);
+
+  /* Backgrounds */
+  --color-bg: var(--bg-base);
+  --color-bg-light: var(--bg-panel);
+  --color-bg-card: var(--bg-panel-light);
+  --color-bg-card-hover: var(--bg-panel-hover, var(--bg-panel-light));
+
+  /* Text — 'primary' is the page's main foreground text color */
+  --color-primary: var(--text-primary);
+  --color-text-dim: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  /* Borders & surfaces */
+  --color-border-dim: var(--border-tinted);
+  --color-surface: var(--surface-tint);
+  --color-surface-strong: var(--surface-tint-strong);
+  --color-surface-stronger: var(--surface-tint-stronger);
+  --color-overlay: var(--overlay-tint);
+
+  /* Font */
+  --font-sans: "Inter", sans-serif;
+
+  /* Border radius */
+  --radius-xl2: 16px;
+  --radius-xl3: 20px;
+}

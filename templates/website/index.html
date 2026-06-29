@@ -1,0 +1,1280 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+
+
+<!-- ===================== HERO SECTION ===================== -->
+
+<section
+  class="hero-bg relative min-h-screen flex items-center pt-20 overflow-hidden"
+>
+  <!-- Grid pattern overlay -->
+  <div class="absolute inset-0 grid-pattern opacity-40"></div>
+
+  <!-- Floating shapes -->
+  <div
+    class="absolute top-32 left-10 w-72 h-72 bg-secondary/5 rounded-full blur-3xl animate-float-slow"
+  ></div>
+  <div
+    class="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float-reverse"
+  ></div>
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/3 rounded-full blur-[120px]"
+  ></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Left content -->
+      <div>
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent text-xs font-semibold text-accent mb-6"
+          style="animation: slide-up 0.6s ease-out"
+        >
+          <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+          All Systems Operational
+        </div>
+
+        <h1
+          class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight mb-6"
+          style="animation: slide-up 0.6s ease-out 0.1s both"
+        >
+          <span class="gradient-text-white">High Performance</span><br />
+          <span class="gradient-text">Hosting Built</span><br />
+          <span class="gradient-text-white">for Speed</span>
+        </h1>
+
+        <p
+          class="text-lg sm:text-xl text-text-dim leading-relaxed mb-8 max-w-xl"
+          style="animation: slide-up 0.6s ease-out 0.2s both"
+        >
+          Enterprise-grade infrastructure with NVMe SSD storage, DDoS
+          protection, 99.9% uptime guarantee, instant deployment, and 24/7
+          expert support.
+        </p>
+
+        <!-- Domain Search -->
+        <div class="mb-8" style="animation: slide-up 0.6s ease-out 0.3s both">
+          <div
+            class="flex flex-col sm:flex-row gap-3 p-2 glass rounded-xl2 max-w-xl"
+          >
+            <div class="flex-1 relative">
+              <i
+                data-lucide="search"
+                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted"
+              ></i>
+              <input
+                id="domainInput"
+                type="text"
+                placeholder="Find your perfect domain..."
+                class="w-full pl-12 pr-4 py-3.5 bg-transparent text-primary placeholder-text-muted focus:outline-none text-sm"
+              />
+            </div>
+            <button
+              id="domainSearchBtn"
+              class="px-6 py-3.5 gradient-accent rounded-xl text-sm font-semibold btn-ripple hover:shadow-lg hover:shadow-secondary/25 transition-all flex items-center justify-center gap-2 flex-shrink-0"
+            >
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              Search
+            </button>
+          </div>
+          <div id="domainResult" class="mt-3 hidden"></div>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <span class="text-xs text-text-muted">Popular:</span>
+            <button
+              class="text-xs text-accent hover:text-primary transition-colors"
+            >
+              .com
+            </button>
+            <button
+              class="text-xs text-accent hover:text-primary transition-colors"
+            >
+              .io
+            </button>
+            <button
+              class="text-xs text-accent hover:text-primary transition-colors"
+            >
+              .dev
+            </button>
+            <button
+              class="text-xs text-accent hover:text-primary transition-colors"
+            >
+              .net
+            </button>
+            <button
+              class="text-xs text-accent hover:text-primary transition-colors"
+            >
+              .org
+            </button>
+            <button
+              class="text-xs text-accent hover:text-primary transition-colors"
+            >
+              .co
+            </button>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div
+          class="flex flex-wrap gap-4"
+          style="animation: slide-up 0.6s ease-out 0.4s both"
+        >
+          <a
+            href="#pricing"
+            class="px-8 py-4 gradient-accent rounded-xl text-sm font-semibold btn-ripple hover:shadow-lg hover:shadow-secondary/25 transition-all flex items-center gap-2"
+          >
+            Get Started
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <a
+            href="#pricing"
+            class="px-8 py-4 glass rounded-xl text-sm font-semibold text-text-dim hover:text-primary hover:border-accent/30 transition-all flex items-center gap-2"
+          >
+            <i data-lucide="tag" class="w-4 h-4"></i>
+            View Pricing
+          </a>
+        </div>
+
+        <!-- Trust badges -->
+        <div
+          class="flex flex-wrap items-center gap-6 mt-10"
+          style="animation: slide-up 0.6s ease-out 0.5s both"
+        >
+          <div class="flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4 text-green-400"></i>
+            <span class="text-xs text-text-muted">DDoS Protected</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="zap" class="w-4 h-4 text-accent"></i>
+            <span class="text-xs text-text-muted">NVMe SSD</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="clock" class="w-4 h-4 text-secondary"></i>
+            <span class="text-xs text-text-muted">99.9% Uptime</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right illustration -->
+      <div
+        class="hidden lg:block relative"
+        style="animation: scale-in 0.8s ease-out 0.3s both"
+      >
+        <!-- Server illustration -->
+        <div class="relative">
+          <!-- Central server rack -->
+          <div class="relative mx-auto w-80 h-96">
+            <!-- Orbiting elements -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="w-[300px] h-[300px] border border-secondary/10 rounded-full animate-rotate-slow"
+              ></div>
+            </div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="w-[220px] h-[220px] border border-accent/10 rounded-full"
+                style="animation: rotate-slow 20s linear infinite reverse"
+              ></div>
+            </div>
+
+            <!-- Orbit dots -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="animate-orbit">
+                <div
+                  class="w-3 h-3 rounded-full gradient-accent shadow-lg shadow-accent/30"
+                ></div>
+              </div>
+            </div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div style="animation: orbit 8s linear infinite reverse">
+                <div
+                  class="w-2.5 h-2.5 rounded-full bg-secondary shadow-lg shadow-secondary/30"
+                ></div>
+              </div>
+            </div>
+
+            <!-- Server cards floating -->
+            <div
+              class="absolute top-8 left-0 glass rounded-xl p-3 animate-float"
+              style="animation-delay: 0s"
+            >
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center"
+                >
+                  <i data-lucide="activity" class="w-4 h-4 text-green-400"></i>
+                </div>
+                <div>
+                  <div class="text-[10px] text-text-muted">CPU</div>
+                  <div class="text-xs font-semibold text-green-400">12%</div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="absolute top-20 right-0 glass rounded-xl p-3 animate-float-slow"
+            >
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center"
+                >
+                  <i data-lucide="hard-drive" class="w-4 h-4 text-accent"></i>
+                </div>
+                <div>
+                  <div class="text-[10px] text-text-muted">SSD</div>
+                  <div class="text-xs font-semibold text-accent">NVMe</div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="absolute bottom-24 left-4 glass rounded-xl p-3 animate-float-reverse"
+            >
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center"
+                >
+                  <i data-lucide="shield" class="w-4 h-4 text-secondary"></i>
+                </div>
+                <div>
+                  <div class="text-[10px] text-text-muted">DDoS</div>
+                  <div class="text-xs font-semibold text-secondary">Active</div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="absolute bottom-12 right-4 glass rounded-xl p-3 animate-float"
+              style="animation-delay: 1s"
+            >
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center"
+                >
+                  <i data-lucide="wifi" class="w-4 h-4 text-purple-400"></i>
+                </div>
+                <div>
+                  <div class="text-[10px] text-text-muted">Network</div>
+                  <div class="text-xs font-semibold text-purple-400">
+                    10 Gbps
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Center server icon -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div
+                class="w-28 h-28 rounded-3xl gradient-accent flex items-center justify-center animate-pulse-glow shadow-2xl shadow-secondary/30"
+              >
+                <i data-lucide="server" class="w-14 h-14 text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom gradient fade -->
+  <div
+    class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg to-transparent"
+  ></div>
+</section>
+
+<!-- ===================== Service SECTION ===================== -->
+
+<section class="py-24 relative" id="services">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent text-xs font-semibold text-accent mb-4"
+      >
+        <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+        Our Services
+      </div>
+      <h2
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4"
+      >
+        <span class="gradient-text-white">Hosting Solutions for</span><br />
+        <span class="gradient-text">Every Need</span>
+      </h2>
+      <p class="text-text-dim text-lg max-w-2xl mx-auto">
+        From personal blogs to enterprise infrastructure, we have the perfect
+        hosting solution tailored to your requirements.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Web Hosting -->
+      <div
+        class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-1 group cursor-pointer"
+      >
+        <div
+          class="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-5 group-hover:bg-secondary/20 group-hover:scale-110 transition-all"
+        >
+          <i data-lucide="globe" class="w-7 h-7 text-secondary"></i>
+        </div>
+        <h3 class="text-lg font-semibold mb-2">Web Hosting</h3>
+        <p class="text-text-dim text-sm leading-relaxed mb-4">
+          Blazing-fast shared hosting with LiteSpeed servers, free SSL, and
+          one-click WordPress installation.
+        </p>
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-2xl font-bold text-primary">₹149</span>
+            <span class="text-text-muted text-sm">/mo</span>
+          </div>
+          <a
+            href="#"
+            class="flex items-center gap-1 text-sm font-medium text-accent group-hover:gap-2 transition-all"
+          >
+            Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- VPS Hosting -->
+      <div
+        class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-2 group cursor-pointer"
+      >
+        <div
+          class="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 group-hover:scale-110 transition-all"
+        >
+          <i data-lucide="server" class="w-7 h-7 text-accent"></i>
+        </div>
+        <h3 class="text-lg font-semibold mb-2">VPS Hosting</h3>
+        <p class="text-text-dim text-sm leading-relaxed mb-4">
+          Full root access with scalable resources, KVM virtualization, and
+          instant provisioning.
+        </p>
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-2xl font-bold text-primary">₹399</span>
+            <span class="text-text-muted text-sm">/mo</span>
+          </div>
+          <a
+            href="#"
+            class="flex items-center gap-1 text-sm font-medium text-accent group-hover:gap-2 transition-all"
+          >
+            Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Game Servers -->
+      <div
+        class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-1 group cursor-pointer"
+      >
+        <div
+          class="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center mb-5 group-hover:bg-green-500/20 group-hover:scale-110 transition-all"
+        >
+          <i data-lucide="gamepad-2" class="w-7 h-7 text-green-400"></i>
+        </div>
+        <h3 class="text-lg font-semibold mb-2">Game Servers</h3>
+        <p class="text-text-dim text-sm leading-relaxed mb-4">
+          Ultra-low latency game servers for Minecraft, Rust, ARK, and 50+ other
+          games.
+        </p>
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-2xl font-bold text-primary">₹249</span>
+            <span class="text-text-muted text-sm">/mo</span>
+          </div>
+          <a
+            href="#"
+            class="flex items-center gap-1 text-sm font-medium text-accent group-hover:gap-2 transition-all"
+          >
+            Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Bot Hosting -->
+      <div
+        class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-2 group cursor-pointer"
+      >
+        <div
+          class="w-14 h-14 rounded-xl bg-yellow-500/10 flex items-center justify-center mb-5 group-hover:bg-yellow-500/20 group-hover:scale-110 transition-all"
+        >
+          <i data-lucide="bot" class="w-7 h-7 text-yellow-400"></i>
+        </div>
+        <h3 class="text-lg font-semibold mb-2">Bot Hosting</h3>
+        <p class="text-text-dim text-sm leading-relaxed mb-4">
+          Reliable Discord & Telegram bot hosting with 24/7 uptime and easy
+          panel management.
+        </p>
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-2xl font-bold text-primary">₹99</span>
+            <span class="text-text-muted text-sm">/mo</span>
+          </div>
+          <a
+            href="#"
+            class="flex items-center gap-1 text-sm font-medium text-accent group-hover:gap-2 transition-all"
+          >
+            Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHY CHOOSE US ==================== -->
+<section class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0 gradient-bg opacity-50"></div>
+  <div class="absolute inset-0 grid-pattern opacity-20"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent text-xs font-semibold text-accent mb-4"
+      >
+        <i data-lucide="award" class="w-3.5 h-3.5"></i>
+        Why InPixel Cloud
+      </div>
+      <h2
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4"
+      >
+        <span class="gradient-text-white">Built Different.</span><br />
+        <span class="gradient-text">Built Better.</span>
+      </h2>
+      <p class="text-text-dim text-lg max-w-2xl mx-auto">
+        We don't cut corners. Every aspect of our infrastructure is engineered
+        for maximum performance and reliability.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+      <div
+        class="glass rounded-xl2 p-5 text-center card-hover reveal reveal-delay-1 group"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-secondary/20 transition-colors"
+        >
+          <i data-lucide="hard-drive" class="w-6 h-6 text-secondary"></i>
+        </div>
+        <h4 class="text-sm font-semibold mb-1">NVMe SSD</h4>
+        <p class="text-xs text-text-muted">Ultra-fast storage</p>
+      </div>
+      <div
+        class="glass rounded-xl2 p-5 text-center card-hover reveal reveal-delay-2 group"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-green-500/20 transition-colors"
+        >
+          <i data-lucide="shield-check" class="w-6 h-6 text-green-400"></i>
+        </div>
+        <h4 class="text-sm font-semibold mb-1">Free SSL</h4>
+        <p class="text-xs text-text-muted">Auto-installed</p>
+      </div>
+      <div
+        class="glass rounded-xl2 p-5 text-center card-hover reveal reveal-delay-3 group"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-accent/20 transition-colors"
+        >
+          <i data-lucide="arrow-right-left" class="w-6 h-6 text-accent"></i>
+        </div>
+        <h4 class="text-sm font-semibold mb-1">Free Migration</h4>
+        <p class="text-xs text-text-muted">We handle it all</p>
+      </div>
+      <div
+        class="glass rounded-xl2 p-5 text-center card-hover reveal reveal-delay-4 group"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-red-500/20 transition-colors"
+        >
+          <i data-lucide="shield" class="w-6 h-6 text-red-400"></i>
+        </div>
+        <h4 class="text-sm font-semibold mb-1">DDoS Protection</h4>
+        <p class="text-xs text-text-muted">Enterprise-grade</p>
+      </div>
+      <div
+        class="glass rounded-xl2 p-5 text-center card-hover reveal reveal-delay-5 group"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-yellow-500/20 transition-colors"
+        >
+          <i data-lucide="zap" class="w-6 h-6 text-yellow-400"></i>
+        </div>
+        <h4 class="text-sm font-semibold mb-1">Instant Setup</h4>
+        <p class="text-xs text-text-muted">Deploy in seconds</p>
+      </div>
+      <div
+        class="glass rounded-xl2 p-5 text-center card-hover reveal reveal-delay-1 group"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-purple-500/20 transition-colors"
+        >
+          <i data-lucide="clock" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h4 class="text-sm font-semibold mb-1">99.9% Uptime</h4>
+        <p class="text-xs text-text-muted">SLA guaranteed</p>
+      </div>
+      <div
+        class="glass rounded-xl2 p-5 text-center card-hover reveal reveal-delay-2 group"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-cyan-500/20 transition-colors"
+        >
+          <i data-lucide="database" class="w-6 h-6 text-cyan-400"></i>
+        </div>
+        <h4 class="text-sm font-semibold mb-1">Daily Backups</h4>
+        <p class="text-xs text-text-muted">Automatic & secure</p>
+      </div>
+      <div
+        class="glass rounded-xl2 p-5 text-center card-hover reveal reveal-delay-3 group"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-pink-500/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-pink-500/20 transition-colors"
+        >
+          <i data-lucide="headphones" class="w-6 h-6 text-pink-400"></i>
+        </div>
+        <h4 class="text-sm font-semibold mb-1">24/7 Support</h4>
+        <p class="text-xs text-text-muted">Expert assistance</p>
+      </div>
+      <div
+        class="glass rounded-xl2 p-5 text-center card-hover reveal reveal-delay-4 group"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-orange-500/20 transition-colors"
+        >
+          <i data-lucide="gauge" class="w-6 h-6 text-orange-400"></i>
+        </div>
+        <h4 class="text-sm font-semibold mb-1">LiteSpeed</h4>
+        <p class="text-xs text-text-muted">Web server tech</p>
+      </div>
+      <div
+        class="glass rounded-xl2 p-5 text-center card-hover reveal reveal-delay-5 group"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-teal-500/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-teal-500/20 transition-colors"
+        >
+          <i data-lucide="map-pin" class="w-6 h-6 text-teal-400"></i>
+        </div>
+        <h4 class="text-sm font-semibold mb-1">Global DCs</h4>
+        <p class="text-xs text-text-muted">Worldwide reach</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRICING SECTION ===================== -->
+<section id="pricing-section" class="max-w-7xl mx-auto px-6 mb-24 text-center">
+  <p class="eyebrow text-xs font-semibold mb-3">PRICING</p>
+  <h2 class="text-3xl font-bold mb-3">Simple, Transparent Pricing</h2>
+  <p class="text-muted mb-8">Choose the perfect plan for your needs</p>
+
+  <!-- Pricing Toggle -->
+  <div
+    class="inline-flex items-center gap-2 panel-light rounded-full p-1.5 mb-12"
+  >
+    <button
+      id="monthlyBtn"
+      class="px-5 py-2 rounded-full text-sm font-medium text-faint transition-all"
+    >
+      Monthly
+    </button>
+    <button
+      id="yearlyBtn"
+      class="px-5 py-2 rounded-full text-sm font-medium btn-primary text-white transition-all"
+    >
+      Yearly <span class="text-xs opacity-80">-40%</span>
+    </button>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6 text-left">
+    <!-- Starter -->
+    <div class="pricing-card rounded-2xl p-7">
+      <h3 class="font-semibold mb-1">Starter</h3>
+      <p class="text-faint text-xs mb-5">Perfect for small projects</p>
+      <p class="mb-6">
+        <span
+          class="text-3xl font-extrabold price-value"
+          data-monthly="299"
+          data-yearly="179"
+          >₹179</span
+        ><span class="text-faint text-sm">/month</span>
+      </p>
+      <p class="text-faint text-xs -mt-5 mb-6 billing-period">
+        Billed annually
+      </p>
+      <ul class="text-sm text-muted space-y-2.5 mb-7">
+        <li class="check-mark">2 vCPU Cores</li>
+        <li class="check-mark">4 GB RAM</li>
+        <li class="check-mark">50 GB NVMe SSD</li>
+        <li class="check-mark">1 TB Bandwidth</li>
+        <li class="check-mark">DDoS Protection</li>
+      </ul>
+      <button class="btn-outline w-full font-medium py-2.5 rounded-lg text-sm">
+        Get Started
+      </button>
+    </div>
+
+    <!-- Pro (featured) -->
+    <div class="pricing-card featured rounded-2xl p-7 relative">
+      <span
+        class="absolute -top-3 right-7 btn-primary text-white text-[11px] font-semibold px-3 py-1 rounded-full"
+        >Most Popular</span
+      >
+      <h3 class="font-semibold mb-1">Pro</h3>
+      <p class="text-faint text-xs mb-5">Great for growing businesses</p>
+      <p class="mb-6">
+        <span
+          class="text-3xl font-extrabold price-value"
+          data-monthly="599"
+          data-yearly="359"
+          >₹359</span
+        ><span class="text-faint text-sm">/month</span>
+      </p>
+      <p class="text-faint text-xs -mt-5 mb-6 billing-period">
+        Billed annually
+      </p>
+      <ul class="text-sm text-muted space-y-2.5 mb-7">
+        <li class="check-mark">4 vCPU Cores</li>
+        <li class="check-mark">8 GB RAM</li>
+        <li class="check-mark">100 GB NVMe SSD</li>
+        <li class="check-mark">2 TB Bandwidth</li>
+        <li class="check-mark">DDoS Protection</li>
+      </ul>
+      <button
+        class="btn-primary w-full text-white font-medium py-2.5 rounded-lg text-sm"
+      >
+        Get Started
+      </button>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="pricing-card rounded-2xl p-7">
+      <h3 class="font-semibold mb-1">Enterprise</h3>
+      <p class="text-faint text-xs mb-5">For high performance needs</p>
+      <p class="mb-6">
+        <span
+          class="text-3xl font-extrabold price-value"
+          data-monthly="999"
+          data-yearly="599"
+          >₹599</span
+        ><span class="text-faint text-sm">/month</span>
+      </p>
+      <p class="text-faint text-xs -mt-5 mb-6 billing-period">
+        Billed annually
+      </p>
+      <ul class="text-sm text-muted space-y-2.5 mb-7">
+        <li class="check-mark">8 vCPU Cores</li>
+        <li class="check-mark">16 GB RAM</li>
+        <li class="check-mark">200 GB NVMe SSD</li>
+        <li class="check-mark">4 TB Bandwidth</li>
+        <li class="check-mark">DDoS Protection</li>
+      </ul>
+      <button class="btn-outline w-full font-medium py-2.5 rounded-lg text-sm">
+        Get Started
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CUSTOMER REVIEWS ==================== -->
+<section class="py-24 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent text-xs font-semibold text-accent mb-4"
+      >
+        <i data-lucide="star" class="w-3.5 h-3.5"></i>
+        Customer Reviews
+      </div>
+      <h2
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4"
+      >
+        <span class="gradient-text-white">Loved by</span>
+        <span class="gradient-text"> 50,000+ Users</span>
+      </h2>
+      <div class="flex items-center justify-center gap-2 mb-2">
+        <div class="flex gap-0.5">
+          <i
+            data-lucide="star"
+            class="w-5 h-5 text-yellow-400 fill-yellow-400"
+          ></i>
+          <i
+            data-lucide="star"
+            class="w-5 h-5 text-yellow-400 fill-yellow-400"
+          ></i>
+          <i
+            data-lucide="star"
+            class="w-5 h-5 text-yellow-400 fill-yellow-400"
+          ></i>
+          <i
+            data-lucide="star"
+            class="w-5 h-5 text-yellow-400 fill-yellow-400"
+          ></i>
+          <i
+            data-lucide="star"
+            class="w-5 h-5 text-yellow-400 fill-yellow-400"
+          ></i>
+        </div>
+        <span class="text-text-dim font-medium"
+          >4.9/5 from 12,000+ reviews</span
+        >
+      </div>
+    </div>
+
+    <div class="relative overflow-hidden reveal">
+      <div id="testimonialTrack" class="testimonial-track flex gap-6">
+        <!-- Review 1 -->
+        <div class="flex-shrink-0 w-[350px] sm:w-[400px] glass rounded-xl2 p-6">
+          <div class="flex gap-0.5 mb-4">
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+          </div>
+          <p class="text-sm text-text-dim leading-relaxed mb-5">
+            "Migrated from Hostinger and the speed difference is night and day.
+            My WordPress site loads in under 1 second now. The support team
+            helped with the entire migration for free."
+          </p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-sm font-bold text-secondary"
+            >
+              JM
+            </div>
+            <div>
+              <div class="text-sm font-semibold">James Mitchell</div>
+              <div class="text-xs text-text-muted">CEO, TechVentures</div>
+            </div>
+          </div>
+        </div>
+        <!-- Review 2 -->
+        <div class="flex-shrink-0 w-[350px] sm:w-[400px] glass rounded-xl2 p-6">
+          <div class="flex gap-0.5 mb-4">
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+          </div>
+          <p class="text-sm text-text-dim leading-relaxed mb-5">
+            "The VPS hosting is incredible value. I'm running 3 Docker
+            containers with 4GB RAM for less than what I was paying for a shared
+            host elsewhere. Zero downtime in 8 months."
+          </p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-sm font-bold text-accent"
+            >
+              SK
+            </div>
+            <div>
+              <div class="text-sm font-semibold">Sarah Kim</div>
+              <div class="text-xs text-text-muted">DevOps Engineer</div>
+            </div>
+          </div>
+        </div>
+        <!-- Review 3 -->
+        <div class="flex-shrink-0 w-[350px] sm:w-[400px] glass rounded-xl2 p-6">
+          <div class="flex gap-0.5 mb-4">
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+          </div>
+          <p class="text-sm text-text-dim leading-relaxed mb-5">
+            "Our Minecraft server with 100+ players runs flawlessly. The control
+            panel is intuitive and the DDoS protection has saved us multiple
+            times during raids. Highly recommend!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-sm font-bold text-green-400"
+            >
+              AR
+            </div>
+            <div>
+              <div class="text-sm font-semibold">Alex Rivera</div>
+              <div class="text-xs text-text-muted">Game Server Admin</div>
+            </div>
+          </div>
+        </div>
+        <!-- Review 4 -->
+        <div class="flex-shrink-0 w-[350px] sm:w-[400px] glass rounded-xl2 p-6">
+          <div class="flex gap-0.5 mb-4">
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+          </div>
+          <p class="text-sm text-text-dim leading-relaxed mb-5">
+            "Running a Discord bot with 50k+ servers on InPixel Bot Hosting.
+            Never had an outage. The ₹99 plan is insane value. Support responds
+            in under 5 minutes every time."
+          </p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-sm font-bold text-purple-400"
+            >
+              LP
+            </div>
+            <div>
+              <div class="text-sm font-semibold">Liam Patel</div>
+              <div class="text-xs text-text-muted">Bot Developer</div>
+            </div>
+          </div>
+        </div>
+        <!-- Review 5 -->
+        <div class="flex-shrink-0 w-[350px] sm:w-[400px] glass rounded-xl2 p-6">
+          <div class="flex gap-0.5 mb-4">
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+            <i
+              data-lucide="star"
+              class="w-4 h-4 text-yellow-400 fill-yellow-400"
+            ></i>
+          </div>
+          <p class="text-sm text-text-dim leading-relaxed mb-5">
+            "We moved our e-commerce store to InPixel Cloud Hosting and saw a
+            40% improvement in page load times. Our conversion rate went up
+            significantly. Worth every penny."
+          </p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-sm font-bold text-yellow-400"
+            >
+              EW
+            </div>
+            <div>
+              <div class="text-sm font-semibold">Emma Watson</div>
+              <div class="text-xs text-text-muted">E-Commerce Director</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slider controls -->
+      <div class="flex items-center justify-center gap-4 mt-8">
+        <button
+          id="prevTestimonial"
+          class="w-10 h-10 rounded-full glass flex items-center justify-center text-text-dim hover:text-accent hover:border-accent/30 transition-all"
+        >
+          <i data-lucide="chevron-left" class="w-5 h-5"></i>
+        </button>
+        <div id="testimonialDots" class="flex gap-2">
+          <button
+            class="w-2.5 h-2.5 rounded-full bg-accent transition-all testimonial-dot"
+            data-index="0"
+          ></button>
+          <button
+            class="w-2.5 h-2.5 rounded-full bg-surface-strong transition-all testimonial-dot"
+            data-index="1"
+          ></button>
+          <button
+            class="w-2.5 h-2.5 rounded-full bg-surface-strong transition-all testimonial-dot"
+            data-index="2"
+          ></button>
+        </div>
+        <button
+          id="nextTestimonial"
+          class="w-10 h-10 rounded-full glass flex items-center justify-center text-text-dim hover:text-accent hover:border-accent/30 transition-all"
+        >
+          <i data-lucide="chevron-right" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DATA CENTER LOCATIONS ==================== -->
+<section class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0 gradient-bg opacity-30"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent text-xs font-semibold text-accent mb-4"
+      >
+        <i data-lucide="map" class="w-3.5 h-3.5"></i>
+        Global Infrastructure
+      </div>
+      <h2
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4"
+      >
+        <span class="gradient-text-white">Data Centers</span><br />
+        <span class="gradient-text">Around the World</span>
+      </h2>
+      <p class="text-text-dim text-lg max-w-2xl mx-auto">
+        Choose the location closest to your audience for the lowest latency and
+        fastest load times.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <!-- World Map SVG -->
+      <div class="relative max-w-4xl mx-auto mb-12">
+        <svg viewBox="0 0 1000 500" class="w-full opacity-60">
+          <!-- Simplified world map paths -->
+          <path
+            class="world-map-path"
+            d="M150,120 L200,100 L250,110 L280,90 L320,100 L340,120 L330,160 L350,180 L340,220 L300,240 L280,220 L250,230 L220,210 L200,220 L180,200 L160,180 L140,150 Z"
+          />
+          <path
+            class="world-map-path"
+            d="M320,80 L360,70 L400,60 L440,70 L460,90 L450,120 L430,140 L400,150 L370,140 L340,130 Z"
+          />
+          <path
+            class="world-map-path"
+            d="M460,80 L520,70 L560,80 L580,100 L570,130 L550,150 L520,160 L490,150 L470,130 L460,110 Z"
+          />
+          <path
+            class="world-map-path"
+            d="M580,90 L640,80 L700,90 L740,110 L750,140 L730,170 L700,190 L660,200 L620,190 L590,170 L570,140 L570,110 Z"
+          />
+          <path
+            class="world-map-path"
+            d="M280,250 L320,240 L360,260 L380,290 L370,330 L350,360 L320,380 L290,370 L270,340 L260,300 Z"
+          />
+          <path
+            class="world-map-path"
+            d="M360,260 L420,250 L460,270 L480,310 L470,360 L440,390 L400,400 L370,390 L350,360 L340,320 L340,280 Z"
+          />
+          <path
+            class="world-map-path"
+            d="M440,280 L500,270 L540,290 L560,330 L550,380 L520,410 L480,420 L450,410 L430,380 L420,340 L430,300 Z"
+          />
+          <path
+            class="world-map-path"
+            d="M700,200 L760,190 L820,200 L860,230 L870,270 L850,310 L810,340 L770,350 L730,340 L700,310 L690,270 L690,230 Z"
+          />
+          <path
+            class="world-map-path"
+            d="M780,350 L820,340 L860,360 L870,400 L850,440 L810,460 L770,450 L750,420 L750,380 Z"
+          />
+          <path
+            class="world-map-path"
+            d="M860,100 L900,90 L940,100 L960,120 L950,150 L920,170 L880,170 L860,150 L850,120 Z"
+          />
+        </svg>
+
+        <!-- Data center dots -->
+        <div class="map-dot" style="left: 22%; top: 28%" title="New York"></div>
+        <div class="map-dot" style="left: 18%; top: 35%" title="Dallas"></div>
+        <div
+          class="map-dot"
+          style="left: 13%; top: 40%"
+          title="Los Angeles"
+        ></div>
+        <div class="map-dot" style="left: 45%; top: 22%" title="London"></div>
+        <div
+          class="map-dot"
+          style="left: 48%; top: 25%"
+          title="Frankfurt"
+        ></div>
+        <div
+          class="map-dot"
+          style="left: 50%; top: 28%"
+          title="Amsterdam"
+        ></div>
+        <div class="map-dot" style="left: 53%; top: 24%" title="Paris"></div>
+        <div class="map-dot" style="left: 56%; top: 30%" title="Warsaw"></div>
+        <div
+          class="map-dot"
+          style="left: 72%; top: 38%"
+          title="Singapore"
+        ></div>
+        <div class="map-dot" style="left: 77%; top: 42%" title="Tokyo"></div>
+        <div class="map-dot" style="left: 80%; top: 45%" title="Sydney"></div>
+        <div class="map-dot" style="left: 62%; top: 35%" title="Mumbai"></div>
+      </div>
+
+      <!-- Location list -->
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto"
+      >
+        <div class="glass rounded-xl p-4 flex items-center gap-3 card-hover">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent flex-shrink-0"></div>
+          <div>
+            <div class="text-sm font-medium">New York</div>
+            <div class="text-xs text-text-muted">North America</div>
+          </div>
+        </div>
+        <div class="glass rounded-xl p-4 flex items-center gap-3 card-hover">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent flex-shrink-0"></div>
+          <div>
+            <div class="text-sm font-medium">London</div>
+            <div class="text-xs text-text-muted">Europe</div>
+          </div>
+        </div>
+        <div class="glass rounded-xl p-4 flex items-center gap-3 card-hover">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent flex-shrink-0"></div>
+          <div>
+            <div class="text-sm font-medium">Frankfurt</div>
+            <div class="text-xs text-text-muted">Europe</div>
+          </div>
+        </div>
+        <div class="glass rounded-xl p-4 flex items-center gap-3 card-hover">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent flex-shrink-0"></div>
+          <div>
+            <div class="text-sm font-medium">Singapore</div>
+            <div class="text-xs text-text-muted">Asia Pacific</div>
+          </div>
+        </div>
+        <div class="glass rounded-xl p-4 flex items-center gap-3 card-hover">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent flex-shrink-0"></div>
+          <div>
+            <div class="text-sm font-medium">Tokyo</div>
+            <div class="text-xs text-text-muted">Asia Pacific</div>
+          </div>
+        </div>
+        <div class="glass rounded-xl p-4 flex items-center gap-3 card-hover">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent flex-shrink-0"></div>
+          <div>
+            <div class="text-sm font-medium">Sydney</div>
+            <div class="text-xs text-text-muted">Oceania</div>
+          </div>
+        </div>
+        <div class="glass rounded-xl p-4 flex items-center gap-3 card-hover">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent flex-shrink-0"></div>
+          <div>
+            <div class="text-sm font-medium">Dallas</div>
+            <div class="text-xs text-text-muted">North America</div>
+          </div>
+        </div>
+        <div class="glass rounded-xl p-4 flex items-center gap-3 card-hover">
+          <div class="w-2.5 h-2.5 rounded-full bg-accent flex-shrink-0"></div>
+          <div>
+            <div class="text-sm font-medium">Amsterdam</div>
+            <div class="text-xs text-text-muted">Europe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ SECTION ===================== -->
+<section id="faq-section" class="max-w-7xl mx-auto px-6 mb-20">
+  <div class="grid lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <p class="eyebrow text-xs font-semibold mb-3 text-center lg:text-left">
+        FAQ
+      </p>
+      <h2 class="text-3xl font-bold mb-8 text-center lg:text-left">
+        Frequently Asked Questions
+      </h2>
+
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item open rounded-xl p-4 cursor-pointer">
+          <div class="faq-question flex items-center justify-between">
+            <p class="text-sm font-medium flex items-center gap-2">
+              <span class="text-violet-400">»</span> How fast will my server be
+              ready?
+            </p>
+            <span class="faq-toggle text-faint">⌄</span>
+          </div>
+          <div class="faq-answer">
+            <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+              Most servers are deployed instantly. Some locations may take up to
+              5 minutes.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item rounded-xl p-4 cursor-pointer">
+          <div class="faq-question flex items-center justify-between">
+            <p class="text-sm font-medium flex items-center gap-2">
+              <span class="text-violet-400">»</span> Do you offer DDoS
+              protection?
+            </p>
+            <span class="faq-toggle text-faint">⌄</span>
+          </div>
+          <div class="faq-answer">
+            <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+              Yes, every plan includes enterprise-grade DDoS protection at no
+              extra cost.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item rounded-xl p-4 cursor-pointer">
+          <div class="faq-question flex items-center justify-between">
+            <p class="text-sm font-medium flex items-center gap-2">
+              <span class="text-violet-400">»</span> Can I upgrade my plan
+              later?
+            </p>
+            <span class="faq-toggle text-faint">⌄</span>
+          </div>
+          <div class="faq-answer">
+            <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+              Absolutely, you can upgrade or downgrade your plan anytime from
+              your dashboard.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item rounded-xl p-4 cursor-pointer">
+          <div class="faq-question flex items-center justify-between">
+            <p class="text-sm font-medium flex items-center gap-2">
+              <span class="text-violet-400">»</span> What payment methods do you
+              accept?
+            </p>
+            <span class="faq-toggle text-faint">⌄</span>
+          </div>
+          <div class="faq-answer">
+            <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+              We accept credit/debit cards, UPI, net banking, and major crypto
+              currencies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hide-mobile flex justify-center">
+      <svg viewBox="0 0 300 300" class="server-stack-illustration w-72 h-72">
+        <ellipse
+          cx="150"
+          cy="260"
+          rx="90"
+          ry="14"
+          fill="#7c3aed"
+          opacity="0.15"
+        ></ellipse>
+        <g>
+          <rect
+            x="80"
+            y="170"
+            width="140"
+            height="40"
+            rx="8"
+            fill="#1e1b3a"
+            stroke="#7c3aed"
+            stroke-opacity="0.4"
+          ></rect>
+          <rect
+            x="80"
+            y="120"
+            width="140"
+            height="40"
+            rx="8"
+            fill="#241f4d"
+            stroke="#7c3aed"
+            stroke-opacity="0.4"
+          ></rect>
+          <rect
+            x="80"
+            y="70"
+            width="140"
+            height="40"
+            rx="8"
+            fill="#2b2560"
+            stroke="#7c3aed"
+            stroke-opacity="0.4"
+          ></rect>
+          <circle cx="100" cy="190" r="4" fill="#a78bfa"></circle>
+          <circle cx="100" cy="140" r="4" fill="#a78bfa"></circle>
+          <circle cx="100" cy="90" r="4" fill="#a78bfa"></circle>
+        </g>
+        <circle
+          cx="215"
+          cy="225"
+          r="34"
+          fill="#161430"
+          stroke="#7c3aed"
+          stroke-width="2"
+        ></circle>
+        <path
+          d="M203,225 l8,8 l16,-18"
+          stroke="#a78bfa"
+          stroke-width="4"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+      </svg>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}
