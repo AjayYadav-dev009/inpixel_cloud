@@ -5,11 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-        {% block title %}
-            InPixel Cloud
-        {% endblock %}
-    </title>
+    <title>{% block title %} InPixel Cloud {% endblock %}</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
@@ -30,6 +26,7 @@
       })();
     </script>
   </head>
+
   <body class="min-h-screen">
     <!-- ===================== HEADER / NAVBAR ===================== -->
     <header
@@ -190,29 +187,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
     <main>
-        {% block content %}
-        {% endblock %}
+      {% block content %} 
+      
+      {% endblock %}
     </main>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -620,7 +599,7 @@
     <!-- ==================== LIVE CHAT BUTTON ==================== -->
     <button
       id="liveChatBtn"
-      class="fixed bottom-6 right-6 z-40 w-14 h-14 gradient-accent rounded-full flex items-center justify-center shadow-lg shadow-secondary/30 hover:shadow-xl hover:shadow-secondary/40 hover:scale-110 transition-all chat-pulse"
+      class="fixed bottom-20 right-1 z-40 w-14 h-14 gradient-accent rounded-full flex items-center justify-center shadow-lg shadow-secondary/30 hover:shadow-xl hover:shadow-secondary/40 hover:scale-110 transition-all chat-pulse"
       title="Live Chat"
     >
       <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
@@ -629,7 +608,7 @@
     <!-- Live Chat Panel -->
     <div
       id="chatPanel"
-      class="fixed bottom-24 right-6 z-50 w-80 sm:w-96 hidden"
+      class="fixed bottom-24 left-6 z-50 w-80 sm:w-96 hidden"
       style="animation: scale-in 0.3s ease-out"
     >
       <div class="glass rounded-xl2 overflow-hidden shadow-2xl">
@@ -695,7 +674,7 @@
     <!-- ==================== SCROLL TO TOP ==================== -->
     <button
       id="scrollTopBtn"
-      class="fixed bottom-6 left-6 z-40 w-12 h-12 glass rounded-full flex items-center justify-center text-text-dim hover:text-accent hover:border-accent/30 transition-all opacity-0 invisible translate-y-4"
+      class="fixed bottom-6 right-6 z-40 w-12 h-12 glass rounded-full flex items-center justify-center text-text-dim hover:text-accent hover:border-accent/30 transition-all opacity-0 invisible translate-y-4"
       title="Scroll to top"
     >
       <i data-lucide="chevron-up" class="w-5 h-5"></i>
@@ -705,6 +684,5 @@
     <div id="toastContainer" class="fixed top-24 right-6 z-50 space-y-3"></div>
 
     <script src="{% static 'js/main.js' %}"></script>
-
   </body>
 </html>

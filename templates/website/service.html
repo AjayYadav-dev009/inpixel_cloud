@@ -1,0 +1,2382 @@
+{% extends 'base.html' %} {% block title %} Service {% endblock %} {% block
+content %}
+
+<style>
+  /* ===================================================================
+   InPixel Cloud — Hosting Solutions Section
+   =================================================================== */
+
+  /* ===================================================================
+   1. VARIABLES
+   =================================================================== */
+  :root {
+    /* Colors — base */
+    --color-bg: #0a0a14;
+    --color-bg-alt: #0d0c18;
+    --color-surface: #12111e;
+    --color-surface-alt: #15141f;
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-strong: rgba(255, 255, 255, 0.14);
+
+    /* Colors — text */
+    --color-text-primary: #f5f5f9;
+    --color-text-secondary: #a3a1b5;
+    --color-text-muted: #7d7b91;
+
+    /* Colors — brand */
+    --color-purple-400: #a78bfa;
+    --color-purple-500: #8b5cf6;
+    --color-purple-600: #7c3aed;
+    --color-purple-700: #6d28d9;
+    --color-blue-400: #60a5fa;
+    --color-blue-500: #3b82f6;
+    --color-blue-600: #2563eb;
+    --color-green-400: #34d399;
+    --color-green-500: #10b981;
+    --color-green-600: #059669;
+    --color-amber-400: #fbbf24;
+    --color-amber-500: #f59e0b;
+    --color-red-400: #f87171;
+
+    /* Gradients */
+    --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+    --gradient-blue: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    --gradient-purple-pink: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+    --gradient-green: linear-gradient(135deg, #34d399 0%, #059669 100%);
+    --gradient-text: linear-gradient(
+      135deg,
+      #c084fc 0%,
+      #8b5cf6 60%,
+      #6d28d9 100%
+    );
+    --gradient-cta: linear-gradient(
+      120deg,
+      #6d28d9 0%,
+      #7c3aed 45%,
+      #4338ca 100%
+    );
+    --gradient-hero-glow: radial-gradient(
+      ellipse 60% 50% at 50% 0%,
+      rgba(124, 58, 237, 0.25),
+      transparent 70%
+    );
+
+    /* Typography */
+    --font-base:
+      "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.8125rem;
+    --fs-base: 0.9375rem;
+    --fs-md: 1rem;
+    --fs-lg: 1.125rem;
+    --fs-xl: 1.375rem;
+    --fs-2xl: 1.75rem;
+    --fs-3xl: 2.25rem;
+    --fs-4xl: 3rem;
+
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+
+    --lh-tight: 1.15;
+    --lh-snug: 1.35;
+    --lh-normal: 1.6;
+
+    --ls-wide: 0.08em;
+    --ls-wider: 0.12em;
+
+    /* Border radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 999px;
+
+    /* Shadows */
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
+    --shadow-card-hover: 0 12px 40px rgba(124, 58, 237, 0.18);
+    --shadow-btn-purple: 0 4px 18px rgba(139, 92, 246, 0.35);
+    --shadow-btn-blue: 0 4px 18px rgba(59, 130, 246, 0.35);
+    --shadow-btn-green: 0 4px 18px rgba(16, 185, 129, 0.35);
+    --shadow-glow-purple: 0 0 40px rgba(139, 92, 246, 0.25);
+    --shadow-cta: 0 16px 48px rgba(76, 29, 149, 0.35);
+    --shadow-icon: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+    /* Spacing */
+    --space-section-y: 6rem;
+
+    /* Transitions */
+    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: 0.18s var(--ease-default);
+    --transition-base: 0.25s var(--ease-default);
+    --transition-slow: 0.45s var(--ease-default);
+  }
+
+  /* ===================================================================
+   2. RESET
+   =================================================================== */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  /* ===================================================================
+   3. BASE
+   =================================================================== */
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-base);
+    font-size: var(--fs-base);
+    line-height: var(--lh-normal);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-purple-400);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ===================================================================
+   4. TYPOGRAPHY
+   =================================================================== */
+  .section-eyebrow {
+    display: inline-block;
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-wider);
+    text-transform: uppercase;
+    color: var(--color-purple-400);
+    background: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    margin-bottom: 1.25rem;
+  }
+
+  .section-title {
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: -0.01em;
+    line-height: var(--lh-tight);
+    color: var(--color-text-primary);
+    margin-bottom: 0.9rem;
+  }
+
+  .section-subtitle {
+    font-size: var(--fs-md);
+    color: var(--color-text-secondary);
+    line-height: var(--lh-normal);
+    max-width: 38rem;
+  }
+
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ===================================================================
+   5. HERO / SERVICES SECTION
+   =================================================================== */
+  .services-section {
+    position: relative;
+    background-color: var(--color-bg);
+    overflow: hidden;
+    padding-top: 4.5rem;
+    padding-bottom: var(--space-section-y);
+  }
+
+  .services-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-hero-glow);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .services-hero {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .services-hero__title {
+    font-size: var(--fs-4xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: -0.015em;
+    line-height: var(--lh-tight);
+    margin-bottom: 1.1rem;
+  }
+
+  .services-hero__subtitle {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-regular);
+    color: var(--color-text-secondary);
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+
+  /* decorative server stack art */
+  .hero-decor {
+    position: absolute;
+    top: 1rem;
+    z-index: 1;
+    opacity: 0.9;
+    filter: drop-shadow(0 10px 30px rgba(124, 58, 237, 0.25));
+    pointer-events: none;
+  }
+
+  .hero-decor--left {
+    left: -1rem;
+  }
+
+  .hero-decor--right {
+    right: -1rem;
+  }
+
+  /* ===================================================================
+   6. CARDS — Service Cards
+   =================================================================== */
+  .service-cards {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    background: linear-gradient(
+      160deg,
+      var(--color-surface) 0%,
+      var(--color-bg-alt) 100%
+    );
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.75rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition:
+      transform var(--transition-base),
+      box-shadow var(--transition-base),
+      border-color var(--transition-base);
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-border-strong);
+  }
+
+  .service-card__icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.4rem;
+    box-shadow: var(--shadow-icon);
+  }
+
+  .service-card__icon--purple {
+    background: var(--gradient-purple-pink);
+  }
+
+  .service-card__icon--blue {
+    background: var(--gradient-blue);
+  }
+
+  .service-card__icon--violet {
+    background: var(--gradient-purple);
+  }
+
+  .service-card__icon--dark {
+    background: linear-gradient(160deg, #1c2230 0%, #11151f 100%);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+  }
+
+  .service-card__title {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-card__desc {
+    font-size: var(--fs-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--lh-normal);
+    margin-bottom: 1.4rem;
+    min-height: 4.6rem;
+  }
+
+  .service-card__features {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.75rem;
+    text-align: left;
+  }
+
+  .service-card__feature {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--fs-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .service-card__feature-icon {
+    flex-shrink: 0;
+    color: var(--color-green-400);
+  }
+
+  .service-card__cta {
+    width: 100%;
+    margin-top: auto;
+  }
+
+  /* ===================================================================
+   7. BUTTONS
+   =================================================================== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1.25rem;
+    width: 100%;
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast),
+      filter var(--transition-fast);
+  }
+
+  .btn svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .btn:hover svg {
+    transform: translateX(3px);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn--purple {
+    background: var(--gradient-purple-pink);
+    color: #fff;
+    box-shadow: var(--shadow-btn-purple);
+  }
+
+  .btn--blue {
+    background: var(--gradient-blue);
+    color: #fff;
+    box-shadow: var(--shadow-btn-blue);
+  }
+
+  .btn--green {
+    background: var(--gradient-green);
+    color: #fff;
+    box-shadow: var(--shadow-btn-green);
+  }
+
+  .btn--cta {
+    background: #fff;
+    color: var(--color-purple-700);
+    width: auto;
+    padding: 0.85rem 1.6rem;
+    font-size: var(--fs-base);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn--cta:hover {
+    filter: none;
+    background: #f5f3ff;
+  }
+
+  /* ===================================================================
+   8. COMPARISON TABLE
+   =================================================================== */
+  .compare-section {
+    position: relative;
+    z-index: 2;
+    padding-bottom: var(--space-section-y);
+  }
+
+  .compare-section__head {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .compare-table-wrap {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+  }
+
+  .compare-table th,
+  .compare-table td {
+    padding: 1.1rem 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+  }
+
+  .compare-table tr:last-child th,
+  .compare-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .compare-table thead th {
+    font-size: var(--fs-base);
+    font-weight: var(--fw-bold);
+    color: var(--color-text-primary);
+  }
+
+  .compare-table thead th:first-child {
+    text-align: left;
+    color: var(--color-purple-400);
+    font-weight: var(--fw-semibold);
+  }
+
+  .compare-table tbody th {
+    text-align: left;
+    font-weight: var(--fw-medium);
+    color: var(--color-text-secondary);
+    font-size: var(--fs-sm);
+  }
+
+  .compare-table tbody td {
+    font-size: var(--fs-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .compare-table__head-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .compare-table__head-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .compare-table__head-icon--purple {
+    background: var(--gradient-purple-pink);
+  }
+
+  .compare-table__head-icon--blue {
+    background: var(--gradient-blue);
+  }
+
+  .compare-table__head-icon--violet {
+    background: var(--gradient-purple);
+  }
+
+  .compare-table__head-icon--dark {
+    background: linear-gradient(160deg, #1c2230 0%, #11151f 100%);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.01em;
+  }
+
+  .tag--green {
+    background: rgba(16, 185, 129, 0.14);
+    color: var(--color-green-400);
+  }
+
+  .tag--amber {
+    background: rgba(245, 158, 11, 0.14);
+    color: var(--color-amber-400);
+  }
+
+  .price-cell {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-bold);
+  }
+
+  .price-cell--purple {
+    color: var(--color-purple-400);
+  }
+
+  .price-cell--blue {
+    color: var(--color-blue-400);
+  }
+
+  .price-cell--violet {
+    color: #c084fc;
+  }
+
+  .price-cell--green {
+    color: var(--color-green-400);
+  }
+
+  .price-cell__period {
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-regular);
+    color: var(--color-text-muted);
+  }
+
+  /* ===================================================================
+   9. FEATURE STRIP
+   =================================================================== */
+  .feature-strip {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 1.5rem;
+    margin-bottom: var(--space-section-y);
+  }
+
+  .feature-strip__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .feature-strip__icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feature-strip__icon--blue {
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--color-blue-400);
+  }
+
+  .feature-strip__icon--white {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-text-primary);
+  }
+
+  .feature-strip__icon--green {
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--color-green-400);
+  }
+
+  .feature-strip__icon--purple {
+    background: rgba(139, 92, 246, 0.12);
+    color: var(--color-purple-400);
+  }
+
+  .feature-strip__title {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-bold);
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .feature-strip__desc {
+    font-size: var(--fs-xs);
+    color: var(--color-text-muted);
+    line-height: var(--lh-snug);
+  }
+
+  /* ===================================================================
+   10. FAQ SECTION
+   =================================================================== */
+  .faq-section {
+    position: relative;
+    z-index: 2;
+    padding-bottom: var(--space-section-y);
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .faq-grid__head {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color var(--transition-base);
+  }
+
+  .faq-item:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  .faq-item.is-open {
+    border-color: rgba(139, 92, 246, 0.35);
+  }
+
+  .faq-item__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1.1rem 1.4rem;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--color-text-primary);
+    text-align: left;
+  }
+
+  .faq-item__chevron-open {
+    color: var(--color-purple-400);
+    flex-shrink: 0;
+  }
+
+  .faq-item__question-text {
+    flex: 1;
+  }
+
+  .faq-item__caret {
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+    transition: transform var(--transition-base);
+  }
+
+  .faq-item.is-open .faq-item__caret {
+    transform: rotate(180deg);
+    color: var(--color-purple-400);
+  }
+
+  .faq-item__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-slow);
+  }
+
+  .faq-item__answer-inner {
+    padding: 0 1.4rem 1.1rem 3.2rem;
+    font-size: var(--fs-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  .faq-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* ===================================================================
+   11. CTA BANNER
+   =================================================================== */
+  .cta-banner {
+    position: relative;
+    z-index: 2;
+    background: var(--gradient-cta);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-cta);
+    padding: 2.75rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .cta-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 85% 20%,
+      rgba(255, 255, 255, 0.12),
+      transparent 55%
+    );
+    pointer-events: none;
+  }
+
+  .cta-banner__left {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-banner__icon {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+  }
+
+  .cta-banner__title {
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-extrabold);
+    color: #fff;
+    margin-bottom: 0.3rem;
+  }
+
+  .cta-banner__desc {
+    font-size: var(--fs-base);
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .cta-banner__action {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+
+  /* ===================================================================
+   12. UTILITIES
+   =================================================================== */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .star-field {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+
+  /* ===================================================================
+   13. RESPONSIVE
+   =================================================================== */
+  @media (max-width: 1024px) {
+    .service-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .feature-strip {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .faq-visual {
+      display: none;
+    }
+
+    .hero-decor {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .compare-table-wrap {
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .feature-strip {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cta-banner {
+      flex-direction: column;
+      text-align: center;
+      padding: 2.25rem 1.75rem;
+    }
+
+    .cta-banner__left {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .cta-banner__action {
+      width: 100%;
+    }
+
+    .cta-banner__action .btn--cta {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .service-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .services-hero__title {
+      font-size: var(--fs-3xl);
+    }
+
+    .section-title {
+      font-size: var(--fs-2xl);
+    }
+  }
+</style>
+
+<main>
+  <!-- =================== OUR SERVICES =================== -->
+  <section class="services-section" aria-labelledby="services-heading">
+    <div class="star-field" aria-hidden="true" id="starField"></div>
+
+    <svg
+      class="hero-decor hero-decor--left"
+      width="220"
+      height="200"
+      viewBox="0 0 220 200"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g opacity="0.85">
+        <rect
+          x="20"
+          y="60"
+          width="90"
+          height="120"
+          rx="4"
+          fill="#1c1830"
+          stroke="#3a3160"
+          stroke-width="1.5"
+        />
+        <rect
+          x="30"
+          y="72"
+          width="70"
+          height="6"
+          rx="2"
+          fill="#8b5cf6"
+          opacity="0.7"
+        />
+        <rect x="30" y="86" width="50" height="4" rx="2" fill="#4c4470" />
+        <rect x="30" y="96" width="60" height="4" rx="2" fill="#4c4470" />
+        <circle cx="92" cy="72" r="3" fill="#a78bfa" />
+        <rect
+          x="0"
+          y="90"
+          width="90"
+          height="110"
+          rx="4"
+          fill="#211c3a"
+          stroke="#3a3160"
+          stroke-width="1.5"
+        />
+        <rect
+          x="10"
+          y="102"
+          width="70"
+          height="6"
+          rx="2"
+          fill="#60a5fa"
+          opacity="0.7"
+        />
+        <rect x="10" y="116" width="45" height="4" rx="2" fill="#4c4470" />
+        <rect x="10" y="126" width="55" height="4" rx="2" fill="#4c4470" />
+        <circle cx="72" cy="102" r="3" fill="#93c5fd" />
+      </g>
+    </svg>
+
+    <svg
+      class="hero-decor hero-decor--right"
+      width="240"
+      height="200"
+      viewBox="0 0 240 200"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g opacity="0.85">
+        <rect
+          x="120"
+          y="55"
+          width="95"
+          height="125"
+          rx="4"
+          fill="#1c1830"
+          stroke="#3a3160"
+          stroke-width="1.5"
+        />
+        <rect
+          x="130"
+          y="68"
+          width="75"
+          height="6"
+          rx="2"
+          fill="#8b5cf6"
+          opacity="0.7"
+        />
+        <rect x="130" y="82" width="55" height="4" rx="2" fill="#4c4470" />
+        <rect x="130" y="92" width="65" height="4" rx="2" fill="#4c4470" />
+        <circle cx="198" cy="68" r="3" fill="#a78bfa" />
+        <rect
+          x="40"
+          y="85"
+          width="92"
+          height="110"
+          rx="4"
+          fill="#211c3a"
+          stroke="#3a3160"
+          stroke-width="1.5"
+        />
+        <rect
+          x="50"
+          y="97"
+          width="72"
+          height="6"
+          rx="2"
+          fill="#60a5fa"
+          opacity="0.7"
+        />
+        <rect x="50" y="111" width="48" height="4" rx="2" fill="#4c4470" />
+        <rect x="50" y="121" width="58" height="4" rx="2" fill="#4c4470" />
+        <circle cx="113" cy="97" r="3" fill="#93c5fd" />
+        <circle cx="20" cy="150" r="22" fill="#2a2350" />
+        <circle cx="12" cy="145" r="3" fill="#34d399" />
+        <circle cx="28" cy="145" r="3" fill="#34d399" />
+        <rect x="6" y="160" width="28" height="6" rx="3" fill="#3a3160" />
+      </g>
+    </svg>
+
+    <div class="container mx-auto px-6">
+      <div class="services-hero">
+        <span class="section-eyebrow">Our Services</span>
+        <h1 id="services-heading" class="services-hero__title">
+          Our Hosting <span class="text-gradient">Solutions</span>
+        </h1>
+        <p class="services-hero__subtitle">
+          Powerful, reliable, and secure hosting solutions designed for
+          developers, businesses, and communities.
+        </p>
+      </div>
+
+      <div class="service-cards">
+        <!-- Web Hosting -->
+        <article class="service-card">
+          <div
+            class="service-card__icon service-card__icon--purple"
+            aria-hidden="true"
+          >
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fff"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <path d="M3 9h18" />
+              <circle cx="6.5" cy="6.5" r="0.6" fill="#fff" />
+              <circle cx="9" cy="6.5" r="0.6" fill="#fff" />
+              <circle cx="11.5" cy="6.5" r="0.6" fill="#fff" />
+              <circle cx="12" cy="14.5" r="4.2" />
+              <path
+                d="M7.8 14.5h8.4M12 10.3c1.6 1.4 1.6 7 0 8.4M12 10.3c-1.6 1.4-1.6 7 0 8.4"
+              />
+            </svg>
+          </div>
+          <h2 class="service-card__title">Web Hosting</h2>
+          <p class="service-card__desc">
+            Perfect for websites, blogs, and business sites. Fast, secure, and
+            easy to use.
+          </p>
+          <ul class="service-card__features">
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Free SSL Certificate
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              One-Click Installations
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Daily Backups
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              24/7 Support
+            </li>
+          </ul>
+          <div class="service-card__cta">
+            <a
+              href="#"
+              class="btn btn--purple"
+              aria-label="Learn more about Web Hosting"
+            >
+              Learn More
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- VPS Hosting -->
+        <article class="service-card">
+          <div
+            class="service-card__icon service-card__icon--blue"
+            aria-hidden="true"
+          >
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fff"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="14" height="5" rx="1.2" />
+              <rect x="3" y="10" width="14" height="5" rx="1.2" />
+              <circle cx="6" cy="5.5" r="0.6" fill="#fff" stroke="none" />
+              <circle cx="6" cy="12.5" r="0.6" fill="#fff" stroke="none" />
+              <path
+                d="M16 18.5a3.5 3.5 0 0 0 .5-7 4.2 4.2 0 0 0-8.1-1.2A3.3 3.3 0 0 0 7 17h9.5z"
+              />
+            </svg>
+          </div>
+          <h2 class="service-card__title">VPS Hosting</h2>
+          <p class="service-card__desc">
+            Full control VPS servers with dedicated resources and unlimited
+            possibilities.
+          </p>
+          <ul class="service-card__features">
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Root Access
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              NVMe SSD Storage
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Scalable Resources
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              DDoS Protection
+            </li>
+          </ul>
+          <div class="service-card__cta">
+            <a
+              href="#"
+              class="btn btn--blue"
+              aria-label="Learn more about VPS Hosting"
+            >
+              Learn More
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Game Servers -->
+        <article class="service-card">
+          <div
+            class="service-card__icon service-card__icon--violet"
+            aria-hidden="true"
+          >
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fff"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="2.5" y="4" width="13" height="16" rx="2" />
+              <path d="M2.5 9h13" />
+              <circle cx="6" cy="6.5" r="0.5" fill="#fff" stroke="none" />
+              <circle cx="8.2" cy="6.5" r="0.5" fill="#fff" stroke="none" />
+              <path
+                d="M16.5 9.5c2.2 0 4 1.5 4.6 4.3.4 1.9-.4 3.7-1.8 3.9-1 .1-1.6-.6-2.3-1.4-.6-.7-1.2-1.3-2-1.3h-1"
+              />
+              <circle cx="16.2" cy="13" r="0.9" fill="#fff" stroke="none" />
+              <circle cx="19.4" cy="14.4" r="0.9" fill="#fff" stroke="none" />
+            </svg>
+          </div>
+          <h2 class="service-card__title">Game Servers</h2>
+          <p class="service-card__desc">
+            High-performance game servers for Minecraft, FiveM, CS2, and many
+            more.
+          </p>
+          <ul class="service-card__features">
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Instant Setup
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Low Latency
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              DDoS Protection
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Mod &amp; Plugin Support
+            </li>
+          </ul>
+          <div class="service-card__cta">
+            <a
+              href="#"
+              class="btn btn--purple"
+              aria-label="Learn more about Game Servers"
+            >
+              Learn More
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Bot Hosting -->
+        <article class="service-card">
+          <div
+            class="service-card__icon service-card__icon--dark"
+            aria-hidden="true"
+          >
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#34d399"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="4" y="8" width="16" height="11" rx="3" />
+              <path d="M12 8V5" />
+              <circle cx="12" cy="3.5" r="1.4" fill="#34d399" stroke="none" />
+              <circle cx="9" cy="13.5" r="1.3" fill="#34d399" stroke="none" />
+              <circle cx="15" cy="13.5" r="1.3" fill="#34d399" stroke="none" />
+              <path d="M9 17h6" />
+              <path d="M2 12v3M22 12v3" />
+            </svg>
+          </div>
+          <h2 class="service-card__title">Bot Hosting</h2>
+          <p class="service-card__desc">
+            Keep your bots online 24/7 with reliable and affordable bot hosting.
+          </p>
+          <ul class="service-card__features">
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Discord Bot Hosting
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Multiple Languages
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              Auto Restart
+            </li>
+            <li class="service-card__feature">
+              <svg
+                class="service-card__feature-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              24/7 Uptime
+            </li>
+          </ul>
+          <div class="service-card__cta">
+            <a
+              href="#"
+              class="btn btn--green"
+              aria-label="Learn more about Bot Hosting"
+            >
+              Learn More
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== COMPARE OUR SERVICES =================== -->
+  <section class="compare-section" aria-labelledby="compare-heading">
+    <div class="container mx-auto px-6">
+      <div class="compare-section__head">
+        <span class="section-eyebrow">Compare Our Services</span>
+        <h2 id="compare-heading" class="section-title">Find the Perfect Fit</h2>
+        <p class="section-subtitle" style="margin-inline: auto">
+          Not sure which service is right for you? Compare our hosting
+          solutions.
+        </p>
+      </div>
+
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <caption class="visually-hidden">
+            Comparison of Web Hosting, VPS Hosting, Game Servers, and Bot
+            Hosting
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Features</th>
+              <th scope="col">
+                <span class="compare-table__head-cell">
+                  <span
+                    class="compare-table__head-icon compare-table__head-icon--purple"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#fff"
+                      stroke-width="2"
+                    >
+                      <rect x="3" y="4" width="18" height="16" rx="2" />
+                      <path d="M3 9h18" />
+                    </svg>
+                  </span>
+                  Web Hosting
+                </span>
+              </th>
+              <th scope="col">
+                <span class="compare-table__head-cell">
+                  <span
+                    class="compare-table__head-icon compare-table__head-icon--blue"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#fff"
+                      stroke-width="2"
+                    >
+                      <rect x="3" y="3" width="14" height="5" rx="1" />
+                      <rect x="3" y="10" width="14" height="5" rx="1" />
+                    </svg>
+                  </span>
+                  VPS Hosting
+                </span>
+              </th>
+              <th scope="col">
+                <span class="compare-table__head-cell">
+                  <span
+                    class="compare-table__head-icon compare-table__head-icon--violet"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#fff"
+                      stroke-width="2"
+                    >
+                      <rect x="2.5" y="4" width="13" height="16" rx="2" />
+                      <path d="M2.5 9h13" />
+                    </svg>
+                  </span>
+                  Game Servers
+                </span>
+              </th>
+              <th scope="col">
+                <span class="compare-table__head-cell">
+                  <span
+                    class="compare-table__head-icon compare-table__head-icon--dark"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#34d399"
+                      stroke-width="2"
+                    >
+                      <rect x="4" y="8" width="16" height="11" rx="3" />
+                      <path d="M12 8V5" />
+                    </svg>
+                  </span>
+                  Bot Hosting
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Ease of Use</th>
+              <td><span class="tag tag--green">Beginner Friendly</span></td>
+              <td><span class="tag tag--amber">Advanced</span></td>
+              <td><span class="tag tag--green">Easy</span></td>
+              <td><span class="tag tag--green">Easy</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Control</th>
+              <td><span class="tag tag--amber">Limited</span></td>
+              <td><span class="tag tag--green">Full Root Access</span></td>
+              <td><span class="tag tag--amber">Limited</span></td>
+              <td><span class="tag tag--amber">Limited</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Performance</th>
+              <td><span class="tag tag--amber">Standard</span></td>
+              <td><span class="tag tag--green">High Performance</span></td>
+              <td><span class="tag tag--green">Optimized</span></td>
+              <td><span class="tag tag--amber">Standard</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Best For</th>
+              <td>Websites &amp; Blogs</td>
+              <td>Developers &amp; Businesses</td>
+              <td>Gamers &amp; Communities</td>
+              <td>Discord Bots &amp; Apps</td>
+            </tr>
+            <tr>
+              <th scope="row">Starting Price</th>
+              <td>
+                <span class="price-cell price-cell--purple">₹149</span>
+                <span class="price-cell__period">/mo</span>
+              </td>
+              <td>
+                <span class="price-cell price-cell--blue">₹399</span>
+                <span class="price-cell__period">/mo</span>
+              </td>
+              <td>
+                <span class="price-cell price-cell--violet">₹249</span>
+                <span class="price-cell__period">/mo</span>
+              </td>
+              <td>
+                <span class="price-cell price-cell--green">₹99</span>
+                <span class="price-cell__period">/mo</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="feature-strip" style="margin-top: 3rem">
+        <div class="feature-strip__item">
+          <div
+            class="feature-strip__icon feature-strip__icon--blue"
+            aria-hidden="true"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3z" />
+            </svg>
+          </div>
+          <div>
+            <p class="feature-strip__title">99.9% Uptime</p>
+            <p class="feature-strip__desc">
+              Reliable infrastructure you can count on.
+            </p>
+          </div>
+        </div>
+        <div class="feature-strip__item">
+          <div
+            class="feature-strip__icon feature-strip__icon--white"
+            aria-hidden="true"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
+            </svg>
+          </div>
+          <div>
+            <p class="feature-strip__title">Instant Setup</p>
+            <p class="feature-strip__desc">
+              Get your service up and running instantly.
+            </p>
+          </div>
+        </div>
+        <div class="feature-strip__item">
+          <div
+            class="feature-strip__icon feature-strip__icon--green"
+            aria-hidden="true"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3z" />
+              <path d="M9.5 12.5l1.8 1.8 3.2-3.6" />
+            </svg>
+          </div>
+          <div>
+            <p class="feature-strip__title">DDoS Protection</p>
+            <p class="feature-strip__desc">
+              Enterprise-grade protection for all services.
+            </p>
+          </div>
+        </div>
+        <div class="feature-strip__item">
+          <div
+            class="feature-strip__icon feature-strip__icon--purple"
+            aria-hidden="true"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+              <path
+                d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z"
+              />
+            </svg>
+          </div>
+          <div>
+            <p class="feature-strip__title">24/7 Support</p>
+            <p class="feature-strip__desc">
+              Our team is always here to help you.
+            </p>
+          </div>
+        </div>
+        <div class="feature-strip__item">
+          <div
+            class="feature-strip__icon feature-strip__icon--green"
+            aria-hidden="true"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <path
+                d="M12 7v10M9.5 9.5h3.2a1.8 1.8 0 1 1 0 3.6H9.5m0 0h3.5a1.8 1.8 0 1 1 0 3.6H9.5"
+              />
+            </svg>
+          </div>
+          <div>
+            <p class="feature-strip__title">Affordable Pricing</p>
+            <p class="feature-strip__desc">
+              High performance doesn't have to be expensive.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== FAQ =================== -->
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <div class="container mx-auto px-6">
+      <div class="faq-grid">
+        <div>
+          <div class="faq-grid__head">
+            <span class="section-eyebrow">Frequently Asked Questions</span>
+            <h2 id="faq-heading" class="section-title">Got Questions?</h2>
+            <p class="section-subtitle">We've got answers.</p>
+          </div>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <h3>
+                <button
+                  type="button"
+                  class="faq-item__question"
+                  aria-expanded="false"
+                  aria-controls="faq-answer-1"
+                  id="faq-trigger-1"
+                >
+                  <svg
+                    class="faq-item__caret faq-item__caret--leading"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M9 6l6 6-6 6" />
+                  </svg>
+                  <span class="faq-item__question-text"
+                    >Which service is right for me?</span
+                  >
+                  <svg
+                    class="faq-item__caret"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+              </h3>
+              <div
+                class="faq-item__answer"
+                id="faq-answer-1"
+                role="region"
+                aria-labelledby="faq-trigger-1"
+              >
+                <p class="faq-item__answer-inner">
+                  It depends on your needs: choose Web Hosting for sites and
+                  blogs, VPS Hosting for full control, Game Servers for
+                  multiplayer gaming, or Bot Hosting for always-on bots.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3>
+                <button
+                  type="button"
+                  class="faq-item__question"
+                  aria-expanded="false"
+                  aria-controls="faq-answer-2"
+                  id="faq-trigger-2"
+                >
+                  <svg
+                    class="faq-item__caret faq-item__caret--leading"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M9 6l6 6-6 6" />
+                  </svg>
+                  <span class="faq-item__question-text"
+                    >Can I upgrade my service later?</span
+                  >
+                  <svg
+                    class="faq-item__caret"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+              </h3>
+              <div
+                class="faq-item__answer"
+                id="faq-answer-2"
+                role="region"
+                aria-labelledby="faq-trigger-2"
+              >
+                <p class="faq-item__answer-inner">
+                  Yes, you can upgrade your plan at any time directly from your
+                  dashboard, and resources scale instantly without any downtime.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3>
+                <button
+                  type="button"
+                  class="faq-item__question"
+                  aria-expanded="false"
+                  aria-controls="faq-answer-3"
+                  id="faq-trigger-3"
+                >
+                  <svg
+                    class="faq-item__caret faq-item__caret--leading"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M9 6l6 6-6 6" />
+                  </svg>
+                  <span class="faq-item__question-text"
+                    >Do you offer refunds?</span
+                  >
+                  <svg
+                    class="faq-item__caret"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+              </h3>
+              <div
+                class="faq-item__answer"
+                id="faq-answer-3"
+                role="region"
+                aria-labelledby="faq-trigger-3"
+              >
+                <p class="faq-item__answer-inner">
+                  We offer a 7-day money-back guarantee on all new hosting
+                  plans, no questions asked, if you're not fully satisfied.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3>
+                <button
+                  type="button"
+                  class="faq-item__question"
+                  aria-expanded="false"
+                  aria-controls="faq-answer-4"
+                  id="faq-trigger-4"
+                >
+                  <svg
+                    class="faq-item__caret faq-item__caret--leading"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M9 6l6 6-6 6" />
+                  </svg>
+                  <span class="faq-item__question-text"
+                    >Is DDoS protection included?</span
+                  >
+                  <svg
+                    class="faq-item__caret"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+              </h3>
+              <div
+                class="faq-item__answer"
+                id="faq-answer-4"
+                role="region"
+                aria-labelledby="faq-trigger-4"
+              >
+                <p class="faq-item__answer-inner">
+                  Yes, enterprise-grade DDoS protection is included by default
+                  on every plan across all of our hosting services.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <h3>
+                <button
+                  type="button"
+                  class="faq-item__question"
+                  aria-expanded="false"
+                  aria-controls="faq-answer-5"
+                  id="faq-trigger-5"
+                >
+                  <svg
+                    class="faq-item__caret faq-item__caret--leading"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M9 6l6 6-6 6" />
+                  </svg>
+                  <span class="faq-item__question-text"
+                    >How fast is the setup process?</span
+                  >
+                  <svg
+                    class="faq-item__caret"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+              </h3>
+              <div
+                class="faq-item__answer"
+                id="faq-answer-5"
+                role="region"
+                aria-labelledby="faq-trigger-5"
+              >
+                <p class="faq-item__answer-inner">
+                  Most services are deployed automatically within minutes of
+                  checkout, so you can start using your server right away.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-visual" aria-hidden="true">
+          <svg width="320" height="320" viewBox="0 0 320 320" fill="none">
+            <ellipse
+              cx="160"
+              cy="290"
+              rx="90"
+              ry="14"
+              fill="#6d28d9"
+              opacity="0.15"
+            />
+            <g>
+              <rect
+                x="95"
+                y="170"
+                width="130"
+                height="50"
+                rx="6"
+                fill="#241e3d"
+                stroke="#3a3160"
+                stroke-width="1.5"
+              />
+              <circle cx="112" cy="195" r="3" fill="#a78bfa" />
+              <circle cx="124" cy="195" r="3" fill="#60a5fa" />
+              <rect
+                x="95"
+                y="120"
+                width="130"
+                height="50"
+                rx="6"
+                fill="#1e1933"
+                stroke="#3a3160"
+                stroke-width="1.5"
+              />
+              <circle cx="112" cy="145" r="3" fill="#a78bfa" />
+              <circle cx="124" cy="145" r="3" fill="#60a5fa" />
+              <rect
+                x="95"
+                y="70"
+                width="130"
+                height="50"
+                rx="6"
+                fill="#241e3d"
+                stroke="#3a3160"
+                stroke-width="1.5"
+              />
+              <circle cx="112" cy="95" r="3" fill="#a78bfa" />
+              <circle cx="124" cy="95" r="3" fill="#60a5fa" />
+            </g>
+            <g>
+              <rect
+                x="142"
+                y="20"
+                width="36"
+                height="58"
+                rx="18"
+                fill="#8b5cf6"
+              />
+              <circle cx="160" cy="20" r="20" fill="#a855f7" />
+              <rect
+                x="152"
+                y="2"
+                width="16"
+                height="16"
+                rx="3"
+                fill="#1e1933"
+              />
+            </g>
+            <g opacity="0.7">
+              <rect
+                x="30"
+                y="60"
+                width="34"
+                height="24"
+                rx="6"
+                fill="#241e3d"
+                stroke="#3a3160"
+              />
+              <path
+                d="M38 84l-4 8M58 84l4 8"
+                stroke="#3a3160"
+                stroke-width="2"
+              />
+              <circle cx="40" cy="70" r="1.6" fill="#a78bfa" />
+              <circle cx="48" cy="70" r="1.6" fill="#a78bfa" />
+              <circle cx="56" cy="70" r="1.6" fill="#a78bfa" />
+            </g>
+            <g opacity="0.7">
+              <rect
+                x="256"
+                y="90"
+                width="34"
+                height="24"
+                rx="6"
+                fill="#241e3d"
+                stroke="#3a3160"
+              />
+              <path
+                d="M264 114l-4 8M284 114l4 8"
+                stroke="#3a3160"
+                stroke-width="2"
+              />
+              <circle cx="266" cy="100" r="1.6" fill="#a78bfa" />
+              <circle cx="274" cy="100" r="1.6" fill="#a78bfa" />
+              <circle cx="282" cy="100" r="1.6" fill="#a78bfa" />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== CTA BANNER =================== -->
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="container mx-auto px-6">
+      <div class="cta-banner">
+        <div class="cta-banner__left">
+          <svg
+            class="cta-banner__icon"
+            viewBox="0 0 64 64"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M32 4c8 6 12 16 10 30-4 2-8 3-10 3s-6-1-10-3c-2-14 2-24 10-30z"
+              fill="#fff"
+              opacity="0.95"
+            />
+            <circle cx="32" cy="22" r="5" fill="#7c3aed" />
+            <path d="M22 34c-6 2-9 8-9 14 5-1 10-3 13-7l-4-7z" fill="#e9d5ff" />
+            <path d="M42 34c6 2 9 8 9 14-5-1-10-3-13-7l4-7z" fill="#e9d5ff" />
+            <path d="M27 48c-1 4-1 8 1 12 3-2 5-5 6-9l-7-3z" fill="#fb923c" />
+            <path d="M37 48c1 4 1 8-1 12-3-2-5-5-6-9l7-3z" fill="#fdba74" />
+          </svg>
+          <div>
+            <h2 id="cta-heading" class="cta-banner__title">
+              Ready to Get Started?
+            </h2>
+            <p class="cta-banner__desc">
+              Choose your service and deploy in minutes.
+            </p>
+          </div>
+        </div>
+        <div class="cta-banner__action">
+          <a href="#" class="btn btn--cta">
+            View All Plans
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  function initFaqAccordion() {
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach((item) => {
+      const trigger = item.querySelector(".faq-item__question");
+      const answer = item.querySelector(".faq-item__answer");
+
+      if (!trigger || !answer) return;
+
+      trigger.addEventListener("click", () => {
+        const isOpen = item.classList.contains("is-open");
+
+        // Close all other open items first
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item && otherItem.classList.contains("is-open")) {
+            closeFaqItem(otherItem);
+          }
+        });
+
+        if (isOpen) {
+          closeFaqItem(item);
+        } else {
+          openFaqItem(item);
+        }
+      });
+
+      // Keyboard support beyond default button behavior (Enter/Space already work)
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && item.classList.contains("is-open")) {
+          closeFaqItem(item);
+          trigger.blur();
+        }
+      });
+    });
+  }
+
+  function openFaqItem(item) {
+    const trigger = item.querySelector(".faq-item__question");
+    const answer = item.querySelector(".faq-item__answer");
+
+    item.classList.add("is-open");
+    trigger.setAttribute("aria-expanded", "true");
+    answer.style.maxHeight = `${answer.scrollHeight}px`;
+  }
+
+  function closeFaqItem(item) {
+    const trigger = item.querySelector(".faq-item__question");
+    const answer = item.querySelector(".faq-item__answer");
+
+    item.classList.remove("is-open");
+    trigger.setAttribute("aria-expanded", "false");
+    answer.style.maxHeight = "0px";
+  }
+
+  /**
+   * Ambient star field
+   * Generates a sprinkle of small static "stars" inside the hero section
+   * background for atmosphere, matching the reference design's night-sky feel.
+   */
+  function initStarField() {
+    const field = document.getElementById("starField");
+    if (!field) return;
+
+    const STAR_COUNT = 40;
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < STAR_COUNT; i++) {
+      const star = document.createElement("span");
+      star.className = "star";
+      star.style.top = `${Math.random() * 60}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.opacity = (Math.random() * 0.5 + 0.15).toFixed(2);
+      star.style.width = star.style.height = `${Math.random() * 2 + 1}px`;
+      fragment.appendChild(star);
+    }
+
+    field.appendChild(fragment);
+  }
+</script>
+
+{% endblock %}
