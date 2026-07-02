@@ -4,157 +4,6 @@
 {% block content %}
 
 {% comment %} <style>
-  /* ===================================================================
-   InPixel Cloud — Hosting Solutions Section
-   =================================================================== */
-
-  /* ===================================================================
-   1. VARIABLES
-   =================================================================== */
-  :root {
-    /* Colors — base */
-    --color-bg: #0a0a14;
-    --color-bg-alt: #0d0c18;
-    --color-surface: #12111e;
-    --color-surface-alt: #15141f;
-    --color-border: rgba(255, 255, 255, 0.08);
-    --color-border-strong: rgba(255, 255, 255, 0.14);
-
-    /* Colors — text */
-    --color-text-primary: #f5f5f9;
-    --color-text-secondary: #a3a1b5;
-    --color-text-muted: #7d7b91;
-
-    /* Colors — brand */
-    --color-purple-400: #a78bfa;
-    --color-purple-500: #8b5cf6;
-    --color-purple-600: #7c3aed;
-    --color-purple-700: #6d28d9;
-    --color-blue-400: #60a5fa;
-    --color-blue-500: #3b82f6;
-    --color-blue-600: #2563eb;
-    --color-green-400: #34d399;
-    --color-green-500: #10b981;
-    --color-green-600: #059669;
-    --color-amber-400: #fbbf24;
-    --color-amber-500: #f59e0b;
-    --color-red-400: #f87171;
-
-    /* Gradients */
-    --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-    --gradient-blue: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-    --gradient-purple-pink: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
-    --gradient-green: linear-gradient(135deg, #34d399 0%, #059669 100%);
-    --gradient-text: linear-gradient(
-      135deg,
-      #c084fc 0%,
-      #8b5cf6 60%,
-      #6d28d9 100%
-    );
-    --gradient-cta: linear-gradient(
-      120deg,
-      #6d28d9 0%,
-      #7c3aed 45%,
-      #4338ca 100%
-    );
-    --gradient-hero-glow: radial-gradient(
-      ellipse 60% 50% at 50% 0%,
-      rgba(124, 58, 237, 0.25),
-      transparent 70%
-    );
-
-    /* Typography */
-    --font-base:
-      "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --fs-xs: 0.75rem;
-    --fs-sm: 0.8125rem;
-    --fs-base: 0.9375rem;
-    --fs-md: 1rem;
-    --fs-lg: 1.125rem;
-    --fs-xl: 1.375rem;
-    --fs-2xl: 1.75rem;
-    --fs-3xl: 2.25rem;
-    --fs-4xl: 3rem;
-
-    --fw-regular: 400;
-    --fw-medium: 500;
-    --fw-semibold: 600;
-    --fw-bold: 700;
-    --fw-extrabold: 800;
-
-    --lh-tight: 1.15;
-    --lh-snug: 1.35;
-    --lh-normal: 1.6;
-
-    --ls-wide: 0.08em;
-    --ls-wider: 0.12em;
-
-    /* Border radius */
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
-    --radius-full: 999px;
-
-    /* Shadows */
-    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
-    --shadow-card-hover: 0 12px 40px rgba(124, 58, 237, 0.18);
-    --shadow-btn-purple: 0 4px 18px rgba(139, 92, 246, 0.35);
-    --shadow-btn-blue: 0 4px 18px rgba(59, 130, 246, 0.35);
-    --shadow-btn-green: 0 4px 18px rgba(16, 185, 129, 0.35);
-    --shadow-glow-purple: 0 0 40px rgba(139, 92, 246, 0.25);
-    --shadow-cta: 0 16px 48px rgba(76, 29, 149, 0.35);
-    --shadow-icon: 0 8px 24px rgba(0, 0, 0, 0.4);
-
-    /* Spacing */
-    --space-section-y: 6rem;
-
-    /* Transitions */
-    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: 0.18s var(--ease-default);
-    --transition-base: 0.25s var(--ease-default);
-    --transition-slow: 0.45s var(--ease-default);
-  }
-
-  /* ===================================================================
-   2. RESET
-   =================================================================== */
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
-  }
-
-  img,
-  svg {
-    display: block;
-    max-width: 100%;
-  }
-
-  button {
-    font: inherit;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: inherit;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  ul {
-    list-style: none;
-  }
 
   /* ===================================================================
    3. BASE
@@ -1048,7 +897,7 @@
 
       <div class="service-cards">
         <!-- Web Hosting -->
-        <article class="service-card">
+        <article class="service-card" id="web-hosting">
           <div
             class="service-card__icon service-card__icon--purple"
             aria-hidden="true"
@@ -1174,7 +1023,7 @@
         </article>
 
         <!-- VPS Hosting -->
-        <article class="service-card">
+        <article class="service-card" id="vps-hosting">
           <div
             class="service-card__icon service-card__icon--blue"
             aria-hidden="true"
@@ -1298,7 +1147,7 @@
         </article>
 
         <!-- Game Servers -->
-        <article class="service-card">
+        <article class="service-card" id="game-servers">
           <div
             class="service-card__icon service-card__icon--violet"
             aria-hidden="true"
@@ -1424,7 +1273,7 @@
         </article>
 
         <!-- Bot Hosting -->
-        <article class="service-card">
+        <article class="service-card" id="bot-hosting">
           <div
             class="service-card__icon service-card__icon--dark"
             aria-hidden="true"
@@ -2379,6 +2228,11 @@
 
     field.appendChild(fragment);
   }
+
+  // These were defined above but never called — nothing on the page
+  // (FAQ accordion, star field) actually ran without these.
+  initFaqAccordion();
+  initStarField();
 </script> {% endcomment %}
 
 {% endblock %}
