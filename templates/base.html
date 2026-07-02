@@ -2,687 +2,426 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %} InPixel Cloud {% endblock %}</title>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-    <script>
-      // Apply saved/preferred theme before first paint, to avoid a flash
-      // of the wrong theme. Default is dark; light is opt-in.
-      (function () {
-        var saved = localStorage.getItem("theme");
-        var theme = saved === "light" || saved === "dark" ? saved : "dark";
-        if (theme === "light") {
-          document.documentElement.setAttribute("data-theme", "light");
-        }
-      })();
-    </script>
-  </head>
 
-  <body class="min-h-screen">
-    <!-- ===================== HEADER / NAVBAR ===================== -->
-    <header
-      id="site-header"
-      class="site-header-bg sticky top-0 z-50 backdrop-blur-md"
-    >
-      <div
-        class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
-      >
-        <div class="flex items-center gap-2">
-          <div
-            class="w-8 h-8 rounded-md flex items-center justify-center icon-badge font-bold"
-          >
-            iP
-          </div>
-          <div class="leading-tight">
-            <p class="font-bold text-sm tracking-tight">INPIXEL</p>
-            <p class="text-[10px] text-faint tracking-widest -mt-1">CLOUD</p>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %} InPixel Cloud {% endblock %}</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/site-global.css' %}" />
+  <script>
+    // Apply saved/preferred theme before first paint, to avoid a flash
+    // of the wrong theme. Default is dark; light is opt-in.
+    (function () {
+      var saved = localStorage.getItem("theme");
+      var theme = saved === "light" || saved === "dark" ? saved : "dark";
+      if (theme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+</head>
+
+<body class="min-h-screen">
+  <!-- ===================== HEADER / NAVBAR ===================== -->
+  <header id="site-header" class="site-header-bg sticky top-0 z-50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-md flex items-center justify-center icon-badge font-bold">
+          iP
         </div>
-
-        <nav class="hidden md:flex items-center gap-8 text-sm">
-          <a href="#" class="nav-link flex items-center gap-1"
-            >Services <span class="text-[10px]">▾</span></a
-          >
-          <a href="#pricing-section" class="nav-link">Pricing</a>
-          <a href="#" class="nav-link">About</a>
-          <a href="#" class="nav-link">Docs</a>
-          <a href="#" class="nav-link">Contact</a>
-        </nav>
-
-        <div class="hidden md:flex items-center gap-4 text-sm">
-          <button
-            id="themeToggle"
-            type="button"
-            aria-label="Toggle light/dark theme"
-            class="w-9 h-9 rounded-lg flex items-center justify-center text-text-dim hover:text-primary hover:bg-surface transition-all"
-          >
-            <i
-              data-lucide="sun"
-              class="w-[18px] h-[18px] theme-icon-light hidden"
-            ></i>
-            <i data-lucide="moon" class="w-[18px] h-[18px] theme-icon-dark"></i>
-          </button>
-          <a href="#" class="nav-link">Login</a>
-          <button
-            class="btn-primary text-white text-sm font-medium px-4 py-2 rounded-lg"
-          >
-            Get Started
-          </button>
+        <div class="leading-tight">
+          <p class="font-bold text-sm tracking-tight">INPIXEL</p>
+          <p class="text-[10px] text-faint tracking-widest -mt-1">CLOUD</p>
         </div>
+      </div>
 
-        <button
-          id="mobileMenuBtn"
-          class="md:hidden w-10 h-10 rounded-lg flex items-center justify-center text-text-dim hover:text-primary hover:bg-surface transition-all"
-        >
-          <i data-lucide="menu" class="w-5 h-5"></i>
+      <nav class="hidden md:flex items-center gap-8 text-sm">
+        <a href="{% url 'website:service' %}" class="nav-link flex items-center gap-1">Services <span
+            class="text-[10px]">▾</span></a>
+        <a href="#pricing-section" class="nav-link">Pricing</a>
+        <a href="#" class="nav-link">About</a>
+        <a href="#" class="nav-link">Docs</a>
+        <a href="{% url 'website:contact' %}" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="hidden md:flex items-center gap-4 text-sm">
+        <button id="themeToggle" type="button" aria-label="Toggle light/dark theme"
+          class="w-9 h-9 rounded-lg flex items-center justify-center text-text-dim hover:text-primary hover:bg-surface transition-all">
+          <i data-lucide="sun" class="w-[18px] h-[18px] theme-icon-light hidden"></i>
+          <i data-lucide="moon" class="w-[18px] h-[18px] theme-icon-dark"></i>
+        </button>
+        <a href="#" class="nav-link">Login</a>
+        <button class="btn-primary text-white text-sm font-medium px-4 py-2 rounded-lg">
+          Get Started
         </button>
       </div>
-    </header>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] md:hidden">
-      <div class="absolute inset-0 bg-black/60" id="mobileMenuOverlay"></div>
-      <div
-        class="absolute right-0 top-0 bottom-0 w-[300px] panel border-l-0 overflow-y-auto"
-        style="border-left: 1px solid var(--border-subtle)"
-      >
-        <div class="p-6">
-          <div class="flex items-center justify-between mb-8">
-            <div class="flex items-center gap-2">
-              <div
-                class="w-7 h-7 rounded-md flex items-center justify-center icon-badge font-bold text-xs"
-              >
-                iP
-              </div>
-              <span class="text-sm font-bold"
-                >INPIXEL <span class="text-violet-400">CLOUD</span></span
-              >
+      <button id="mobileMenuBtn"
+        class="md:hidden w-10 h-10 rounded-lg flex items-center justify-center text-text-dim hover:text-primary hover:bg-surface transition-all">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] md:hidden">
+    <div class="absolute inset-0 bg-black/60" id="mobileMenuOverlay"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-[300px] panel border-l-0 overflow-y-auto"
+      style="border-left: 1px solid var(--border-subtle)">
+      <div class="p-6">
+        <div class="flex items-center justify-between mb-8">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-md flex items-center justify-center icon-badge font-bold text-xs">
+              iP
             </div>
-            <div class="flex items-center gap-2">
-              <button
-                id="themeToggleMobile"
-                type="button"
-                aria-label="Toggle light/dark theme"
-                class="w-9 h-9 rounded-lg flex items-center justify-center text-text-dim hover:text-primary hover:bg-surface transition-all"
-              >
-                <i
-                  data-lucide="sun"
-                  class="w-[18px] h-[18px] theme-icon-light hidden"
-                ></i>
-                <i
-                  data-lucide="moon"
-                  class="w-[18px] h-[18px] theme-icon-dark"
-                ></i>
-              </button>
-              <button
-                id="mobileMenuClose"
-                class="w-9 h-9 rounded-lg flex items-center justify-center text-text-dim hover:text-primary hover:bg-surface transition-all"
-              >
-                <i data-lucide="x" class="w-5 h-5"></i>
-              </button>
-            </div>
+            <span class="text-sm font-bold">INPIXEL <span class="text-violet-400">CLOUD</span></span>
           </div>
-          <div class="space-y-1">
-            <a
-              href="#"
-              class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium"
-              >Services</a
-            >
-            <a
-              href="#pricing-section"
-              class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium"
-              >Pricing</a
-            >
-            <a
-              href="#"
-              class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium"
-              >About</a
-            >
-            <a
-              href="#"
-              class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium"
-              >Docs</a
-            >
-            <a
-              href="#"
-              class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium"
-              >Contact</a
-            >
+          <div class="flex items-center gap-2">
+            <button id="themeToggleMobile" type="button" aria-label="Toggle light/dark theme"
+              class="w-9 h-9 rounded-lg flex items-center justify-center text-text-dim hover:text-primary hover:bg-surface transition-all">
+              <i data-lucide="sun" class="w-[18px] h-[18px] theme-icon-light hidden"></i>
+              <i data-lucide="moon" class="w-[18px] h-[18px] theme-icon-dark"></i>
+            </button>
+            <button id="mobileMenuClose"
+              class="w-9 h-9 rounded-lg flex items-center justify-center text-text-dim hover:text-primary hover:bg-surface transition-all">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
           </div>
-          <div class="mt-8 space-y-3">
-            <a
-              href="#"
-              class="block w-full text-center px-5 py-3 text-sm font-medium btn-outline rounded-lg"
-              >Login</a
-            >
-            <a
-              href="#"
-              class="block w-full text-center px-5 py-3 text-sm font-semibold btn-primary text-white rounded-lg"
-              >Get Started</a
-            >
-          </div>
+        </div>
+        <div class="space-y-1">
+          <a href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">Services</a>
+          <a href="#pricing-section"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">Pricing</a>
+          <a href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">About</a>
+          <a href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">Docs</a>
+          <a href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">Contact</a>
+        </div>
+        <div class="mt-8 space-y-3">
+          <a href="#" class="block w-full text-center px-5 py-3 text-sm font-medium btn-outline rounded-lg">Login</a>
+          <a href="#"
+            class="block w-full text-center px-5 py-3 text-sm font-semibold btn-primary text-white rounded-lg">Get
+            Started</a>
         </div>
       </div>
     </div>
+  </div>
 
+  <main>{% block content %} {% endblock %}</main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <main>
-      {% block content %} 
-      
-      {% endblock %}
-    </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <footer class="relative border-t border-border-dim pt-20 pb-8">
-      <div class="absolute inset-0 gradient-bg opacity-30"></div>
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
-          <!-- Brand -->
-          <div class="col-span-2 md:col-span-3 lg:col-span-2">
-            <a href="#" class="flex items-center gap-3 mb-5">
-              <div
-                class="w-10 h-10 rounded-xl2 gradient-accent flex items-center justify-center font-bold text-white"
-              >
-                iP
-              </div>
-              <span class="text-xl font-bold"
-                >InPixel<span class="text-accent"> Cloud</span></span
-              >
-            </a>
-            <p class="text-sm text-text-muted leading-relaxed mb-6 max-w-sm">
-              High-performance hosting solutions built for speed, security, and
-              reliability. Trusted by 50,000+ customers worldwide.
-            </p>
-            <div class="flex gap-3">
-              <a
-                href="#"
-                class="w-9 h-9 rounded-lg glass flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all"
-              >
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="#"
-                class="w-9 h-9 rounded-lg glass flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all"
-              >
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="#"
-                class="w-9 h-9 rounded-lg glass flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all"
-              >
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="#"
-                class="w-9 h-9 rounded-lg glass flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all"
-              >
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
-                  />
-                </svg>
-              </a>
+  <footer class="relative border-t border-border-dim pt-20 pb-8">
+    <div class="absolute inset-0 gradient-bg opacity-30"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
+        <!-- Brand -->
+        <div class="col-span-2 md:col-span-3 lg:col-span-2">
+          <a href="#" class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-xl2 gradient-accent flex items-center justify-center font-bold text-white">
+              iP
             </div>
-          </div>
-
-          <!-- Services -->
-          <div>
-            <h4 class="text-sm font-semibold mb-4">Services</h4>
-            <ul class="space-y-2.5">
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Web Hosting</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >VPS Hosting</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Dedicated Servers</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Game Servers</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Bot Hosting</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Cloud Hosting</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Resources -->
-          <div>
-            <h4 class="text-sm font-semibold mb-4">Resources</h4>
-            <ul class="space-y-2.5">
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Knowledge Base</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Blog</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >System Status</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >API Docs</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Tutorials</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Support -->
-          <div>
-            <h4 class="text-sm font-semibold mb-4">Support</h4>
-            <ul class="space-y-2.5">
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Help Center</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Contact Us</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Live Chat</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Submit Ticket</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Client Login</a
-                >
-              </li>
-            </ul>
-          </div>
-
-          <!-- Legal -->
-          <div>
-            <h4 class="text-sm font-semibold mb-4">Legal</h4>
-            <ul class="space-y-2.5">
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Privacy Policy</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Terms of Service</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >SLA</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >Cookie Policy</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-text-muted hover:text-accent transition-colors"
-                  >GDPR</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Newsletter -->
-        <div class="glass rounded-xl2 p-6 sm:p-8 mb-12">
-          <div
-            class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
-          >
-            <div>
-              <h4 class="text-sm font-semibold mb-1">
-                Subscribe to our newsletter
-              </h4>
-              <p class="text-xs text-text-muted">
-                Get the latest hosting tips, deals, and news delivered to your
-                inbox.
-              </p>
-            </div>
-            <div class="flex gap-3 w-full sm:w-auto">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                class="flex-1 sm:w-64 px-4 py-2.5 bg-bg border border-border-dim rounded-xl text-sm text-primary placeholder-text-muted focus:outline-none focus:border-accent/50 transition-all"
-              />
-              <button
-                id="subscribeBtn"
-                class="px-5 py-2.5 gradient-accent rounded-xl text-sm font-semibold btn-ripple flex-shrink-0 hover:shadow-lg hover:shadow-secondary/25 transition-all"
-              >
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bottom bar -->
-        <div
-          class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border-dim"
-        >
-          <p class="text-xs text-text-muted">
-            &copy; 2024 InPixel Cloud. All rights reserved.
+            <span class="text-xl font-bold">InPixel<span class="text-accent"> Cloud</span></span>
+          </a>
+          <p class="text-sm text-text-muted leading-relaxed mb-6 max-w-sm">
+            High-performance hosting solutions built for speed, security, and
+            reliability. Trusted by 50,000+ customers worldwide.
           </p>
-          <div class="flex items-center gap-4">
-            <!-- Payment methods -->
-            <div class="flex items-center gap-3">
-              <div
-                class="px-2 py-1 rounded bg-surface border border-border-dim"
-              >
-                <svg class="w-8 h-5" viewBox="0 0 48 32" fill="none">
-                  <rect width="48" height="32" rx="4" fill="#1A1F71" />
-                  <path
-                    d="M18 21h-3l2-10h3l-2 10zm11.5-9.7c-.6-.2-1.5-.5-2.7-.5-3 0-5.1 1.5-5.1 3.7 0 1.6 1.5 2.5 2.6 3.1 1.2.6 1.6.9 1.6 1.5 0 .8-1 1.1-1.9 1.1-1.3 0-2-.2-3-.6l-.4-.2-.5 2.9c.7.3 2.1.6 3.5.6 3.2 0 5.2-1.5 5.2-3.8 0-1.3-.8-2.2-2.5-3-1-.5-1.7-.9-1.7-1.4 0-.5.5-1 1.7-1 1 0 1.8.2 2.4.5l.3.1.4-2.8zm7.7-.3h-2.3c-.7 0-1.3.2-1.6.9l-4.6 10.1h3.4l.7-1.9h4.1l.4 1.9H40l-2.8-10zm-3.9 6.5l1.7-4.5 1 4.5h-2.7zM14.5 11.1L11.6 18l-.3-1.7c-.6-2-2.4-4.2-4.4-5.3l2.6 9.7h3.4l5-10h-3.4z"
-                    fill="white"
-                  />
-                  <path
-                    d="M9 11h-5l-.1.3c3.9.9 6.5 3.2 7.6 5.9l-1.1-5.2c-.2-.7-.7-.9-1.4-1z"
-                    fill="#F9A51A"
-                  />
-                </svg>
-              </div>
-              <div
-                class="px-2 py-1 rounded bg-surface border border-border-dim"
-              >
-                <svg class="w-8 h-5" viewBox="0 0 48 32" fill="none">
-                  <rect width="48" height="32" rx="4" fill="#252525" />
-                  <circle
-                    cx="17"
-                    cy="16"
-                    r="8"
-                    stroke="#EB001B"
-                    stroke-width="2.5"
-                    fill="none"
-                  />
-                  <circle
-                    cx="31"
-                    cy="16"
-                    r="8"
-                    stroke="#F79E1B"
-                    stroke-width="2.5"
-                    fill="none"
-                  />
-                  <path
-                    d="M24 10.5a8 8 0 0 1 0 11 8 8 0 0 1 0-11z"
-                    fill="#FF5F00"
-                  />
-                </svg>
-              </div>
-              <div
-                class="px-2 py-1 rounded bg-surface border border-border-dim"
-              >
-                <svg class="w-8 h-5" viewBox="0 0 48 32" fill="none">
-                  <rect width="48" height="32" rx="4" fill="#003087" />
-                  <path
-                    d="M20.5 22V10h4.2c1.1 0 2 .3 2.7.9.7.6 1 1.4 1 2.5 0 .7-.2 1.3-.6 1.8-.4.5-.9.8-1.5 1l2.5 5.8h-2.6l-2.2-5.3h-1.6V22h-1.9zm1.9-6.9h2c.6 0 1.1-.1 1.4-.4.3-.3.5-.7.5-1.2s-.2-.9-.5-1.2c-.3-.3-.8-.4-1.4-.4h-2v3.2z"
-                    fill="white"
-                  />
-                  <path
-                    d="M32.5 22h-1.9V10h4.4c1.1 0 2 .3 2.7.8.7.6 1 1.4 1 2.4 0 1-.4 1.8-1.1 2.3-.7.5-1.6.8-2.7.8h-2.4V22zm0-6.8h2.2c.6 0 1.1-.1 1.4-.4.3-.3.5-.7.5-1.1 0-.5-.2-.8-.5-1.1-.3-.3-.8-.4-1.4-.4h-2.2v3z"
-                    fill="white"
-                  />
-                </svg>
-              </div>
-              <div
-                class="px-2 py-1 rounded bg-surface border border-border-dim text-[10px] font-bold text-text-muted flex items-center px-3"
-              >
-                PayPal
-              </div>
-              <div
-                class="px-2 py-1 rounded bg-surface border border-border-dim text-[10px] font-bold text-text-muted flex items-center px-3"
-              >
-                Crypto
-              </div>
-            </div>
+          <div class="flex gap-3">
+            <a href="#"
+              class="w-9 h-9 rounded-lg glass flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-9 h-9 rounded-lg glass flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-9 h-9 rounded-lg glass flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+            <a href="#"
+              class="w-9 h-9 rounded-lg glass flex items-center justify-center text-text-muted hover:text-accent hover:border-accent/30 transition-all">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h4 class="text-sm font-semibold mb-4">Services</h4>
+          <ul class="space-y-2.5">
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Web Hosting</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">VPS Hosting</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Dedicated Servers</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Game Servers</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Bot Hosting</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Cloud Hosting</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div>
+          <h4 class="text-sm font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2.5">
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Knowledge Base</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Blog</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">System Status</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">API Docs</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Tutorials</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h4 class="text-sm font-semibold mb-4">Support</h4>
+          <ul class="space-y-2.5">
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Help Center</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Contact Us</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Live Chat</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Submit Ticket</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Client Login</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h4 class="text-sm font-semibold mb-4">Legal</h4>
+          <ul class="space-y-2.5">
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Terms of Service</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">SLA</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Cookie Policy</a>
+            </li>
+            <li>
+              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">GDPR</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="glass rounded-xl2 p-6 sm:p-8 mb-12">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div>
+            <h4 class="text-sm font-semibold mb-1">
+              Subscribe to our newsletter
+            </h4>
+            <p class="text-xs text-text-muted">
+              Get the latest hosting tips, deals, and news delivered to your
+              inbox.
+            </p>
+          </div>
+          <div class="flex gap-3 w-full sm:w-auto">
+            <input type="email" placeholder="your@email.com"
+              class="flex-1 sm:w-64 px-4 py-2.5 bg-bg border border-border-dim rounded-xl text-sm text-primary placeholder-text-muted focus:outline-none focus:border-accent/50 transition-all" />
+            <button id="subscribeBtn"
+              class="px-5 py-2.5 gradient-accent rounded-xl text-sm font-semibold btn-ripple flex-shrink-0 hover:shadow-lg hover:shadow-secondary/25 transition-all">
+              Subscribe
+            </button>
           </div>
         </div>
       </div>
-    </footer>
 
-    <!-- ==================== COOKIE NOTICE ==================== -->
-    <div
-      id="cookieNotice"
-      class="fixed bottom-6 left-6 right-6 sm:left-auto sm:right-6 sm:max-w-md z-50 cookie-notice"
-    >
-      <div class="glass rounded-xl2 p-6 shadow-2xl">
-        <div class="flex items-start gap-4">
-          <div
-            class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0"
-          >
-            <i data-lucide="cookie" class="w-5 h-5 text-accent"></i>
-          </div>
-          <div class="flex-1">
-            <h4 class="text-sm font-semibold mb-1">We value your privacy</h4>
-            <p class="text-xs text-text-muted leading-relaxed mb-4">
-              We use cookies to enhance your browsing experience, serve
-              personalized content, and analyze our traffic.
-            </p>
-            <div class="flex gap-3">
-              <button
-                id="acceptCookies"
-                class="px-4 py-2 gradient-accent rounded-lg text-xs font-semibold btn-ripple"
-              >
-                Accept All
-              </button>
-              <button
-                id="declineCookies"
-                class="px-4 py-2 glass rounded-lg text-xs font-medium text-text-dim hover:text-primary transition-colors"
-              >
-                Decline
-              </button>
+      <!-- Bottom bar -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border-dim">
+        <p class="text-xs text-text-muted">
+          &copy; 2024 InPixel Cloud. All rights reserved.
+        </p>
+        <div class="flex items-center gap-4">
+          <!-- Payment methods -->
+          <div class="flex items-center gap-3">
+            <div class="px-2 py-1 rounded bg-surface border border-border-dim">
+              <svg class="w-8 h-5" viewBox="0 0 48 32" fill="none">
+                <rect width="48" height="32" rx="4" fill="#1A1F71" />
+                <path
+                  d="M18 21h-3l2-10h3l-2 10zm11.5-9.7c-.6-.2-1.5-.5-2.7-.5-3 0-5.1 1.5-5.1 3.7 0 1.6 1.5 2.5 2.6 3.1 1.2.6 1.6.9 1.6 1.5 0 .8-1 1.1-1.9 1.1-1.3 0-2-.2-3-.6l-.4-.2-.5 2.9c.7.3 2.1.6 3.5.6 3.2 0 5.2-1.5 5.2-3.8 0-1.3-.8-2.2-2.5-3-1-.5-1.7-.9-1.7-1.4 0-.5.5-1 1.7-1 1 0 1.8.2 2.4.5l.3.1.4-2.8zm7.7-.3h-2.3c-.7 0-1.3.2-1.6.9l-4.6 10.1h3.4l.7-1.9h4.1l.4 1.9H40l-2.8-10zm-3.9 6.5l1.7-4.5 1 4.5h-2.7zM14.5 11.1L11.6 18l-.3-1.7c-.6-2-2.4-4.2-4.4-5.3l2.6 9.7h3.4l5-10h-3.4z"
+                  fill="white" />
+                <path d="M9 11h-5l-.1.3c3.9.9 6.5 3.2 7.6 5.9l-1.1-5.2c-.2-.7-.7-.9-1.4-1z" fill="#F9A51A" />
+              </svg>
+            </div>
+            <div class="px-2 py-1 rounded bg-surface border border-border-dim">
+              <svg class="w-8 h-5" viewBox="0 0 48 32" fill="none">
+                <rect width="48" height="32" rx="4" fill="#252525" />
+                <circle cx="17" cy="16" r="8" stroke="#EB001B" stroke-width="2.5" fill="none" />
+                <circle cx="31" cy="16" r="8" stroke="#F79E1B" stroke-width="2.5" fill="none" />
+                <path d="M24 10.5a8 8 0 0 1 0 11 8 8 0 0 1 0-11z" fill="#FF5F00" />
+              </svg>
+            </div>
+            <div class="px-2 py-1 rounded bg-surface border border-border-dim">
+              <svg class="w-8 h-5" viewBox="0 0 48 32" fill="none">
+                <rect width="48" height="32" rx="4" fill="#003087" />
+                <path
+                  d="M20.5 22V10h4.2c1.1 0 2 .3 2.7.9.7.6 1 1.4 1 2.5 0 .7-.2 1.3-.6 1.8-.4.5-.9.8-1.5 1l2.5 5.8h-2.6l-2.2-5.3h-1.6V22h-1.9zm1.9-6.9h2c.6 0 1.1-.1 1.4-.4.3-.3.5-.7.5-1.2s-.2-.9-.5-1.2c-.3-.3-.8-.4-1.4-.4h-2v3.2z"
+                  fill="white" />
+                <path
+                  d="M32.5 22h-1.9V10h4.4c1.1 0 2 .3 2.7.8.7.6 1 1.4 1 2.4 0 1-.4 1.8-1.1 2.3-.7.5-1.6.8-2.7.8h-2.4V22zm0-6.8h2.2c.6 0 1.1-.1 1.4-.4.3-.3.5-.7.5-1.1 0-.5-.2-.8-.5-1.1-.3-.3-.8-.4-1.4-.4h-2.2v3z"
+                  fill="white" />
+              </svg>
+            </div>
+            <div
+              class="px-2 py-1 rounded bg-surface border border-border-dim text-[10px] font-bold text-text-muted flex items-center px-3">
+              PayPal
+            </div>
+            <div
+              class="px-2 py-1 rounded bg-surface border border-border-dim text-[10px] font-bold text-text-muted flex items-center px-3">
+              Crypto
             </div>
           </div>
         </div>
       </div>
     </div>
+  </footer>
 
-    <!-- ==================== LIVE CHAT BUTTON ==================== -->
-    <button
-      id="liveChatBtn"
-      class="fixed bottom-20 right-1 z-40 w-14 h-14 gradient-accent rounded-full flex items-center justify-center shadow-lg shadow-secondary/30 hover:shadow-xl hover:shadow-secondary/40 hover:scale-110 transition-all chat-pulse"
-      title="Live Chat"
-    >
-      <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
-    </button>
-
-    <!-- Live Chat Panel -->
-    <div
-      id="chatPanel"
-      class="fixed bottom-24 left-6 z-50 w-80 sm:w-96 hidden"
-      style="animation: scale-in 0.3s ease-out"
-    >
-      <div class="glass rounded-xl2 overflow-hidden shadow-2xl">
-        <div class="gradient-accent p-4 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div
-              class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center"
-            >
-              <i data-lucide="headphones" class="w-4 h-4 text-white"></i>
-            </div>
-            <div>
-              <div class="text-sm font-semibold text-white">
-                InPixel Support
-              </div>
-              <div class="text-xs text-white/70 flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-green-300"></span>
-                Online
-              </div>
-            </div>
-          </div>
-          <button
-            id="closeChat"
-            class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
-          >
-            <i data-lucide="x" class="w-4 h-4"></i>
-          </button>
+  <!-- ==================== COOKIE NOTICE ==================== -->
+  <div id="cookieNotice" class="fixed bottom-6 left-6 right-6 sm:left-auto sm:right-6 sm:max-w-md z-50 cookie-notice">
+    <div class="glass rounded-xl2 p-6 shadow-2xl">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="cookie" class="w-5 h-5 text-accent"></i>
         </div>
-        <div class="p-4 h-64 overflow-y-auto bg-bg-light/50" id="chatMessages">
-          <div class="flex gap-3 mb-4">
-            <div
-              class="w-7 h-7 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0"
-            >
-              <i data-lucide="bot" class="w-3.5 h-3.5 text-secondary"></i>
-            </div>
-            <div
-              class="glass rounded-xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%]"
-            >
-              <p class="text-xs text-text-dim leading-relaxed">
-                Hi there! 👋 Welcome to InPixel Cloud. How can I help you today?
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="p-3 border-t border-border-dim bg-bg-light/30">
-          <div class="flex gap-2">
-            <input
-              id="chatInput"
-              type="text"
-              placeholder="Type a message..."
-              class="flex-1 px-3 py-2 bg-bg border border-border-dim rounded-lg text-xs text-primary placeholder-text-muted focus:outline-none focus:border-accent/50 transition-all"
-            />
-            <button
-              id="chatSend"
-              class="w-9 h-9 gradient-accent rounded-lg flex items-center justify-center flex-shrink-0 hover:shadow-lg hover:shadow-secondary/25 transition-all"
-            >
-              <i data-lucide="send" class="w-4 h-4 text-white"></i>
+        <div class="flex-1">
+          <h4 class="text-sm font-semibold mb-1">We value your privacy</h4>
+          <p class="text-xs text-text-muted leading-relaxed mb-4">
+            We use cookies to enhance your browsing experience, serve
+            personalized content, and analyze our traffic.
+          </p>
+          <div class="flex gap-3">
+            <button id="acceptCookies" class="px-4 py-2 gradient-accent rounded-lg text-xs font-semibold btn-ripple">
+              Accept All
+            </button>
+            <button id="declineCookies"
+              class="px-4 py-2 glass rounded-lg text-xs font-medium text-text-dim hover:text-primary transition-colors">
+              Decline
             </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- ==================== SCROLL TO TOP ==================== -->
-    <button
-      id="scrollTopBtn"
-      class="fixed bottom-6 right-6 z-40 w-12 h-12 glass rounded-full flex items-center justify-center text-text-dim hover:text-accent hover:border-accent/30 transition-all opacity-0 invisible translate-y-4"
-      title="Scroll to top"
-    >
-      <i data-lucide="chevron-up" class="w-5 h-5"></i>
-    </button>
+  <!-- ==================== LIVE CHAT BUTTON ==================== -->
+  <button id="liveChatBtn"
+    class="fixed bottom-20 right-1 z-40 w-14 h-14 gradient-accent rounded-full flex items-center justify-center shadow-lg shadow-secondary/30 hover:shadow-xl hover:shadow-secondary/40 hover:scale-110 transition-all chat-pulse"
+    title="Live Chat">
+    <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
+  </button>
 
-    <!-- ==================== TOAST NOTIFICATION ==================== -->
-    <div id="toastContainer" class="fixed top-24 right-6 z-50 space-y-3"></div>
+  <!-- Live Chat Panel -->
+  <div id="chatPanel" class="fixed bottom-24 left-6 z-50 w-80 sm:w-96 hidden" style="animation: scale-in 0.3s ease-out">
+    <div class="glass rounded-xl2 overflow-hidden shadow-2xl">
+      <div class="gradient-accent p-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+            <i data-lucide="headphones" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-white">
+              InPixel Support
+            </div>
+            <div class="text-xs text-white/70 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-green-300"></span>
+              Online
+            </div>
+          </div>
+        </div>
+        <button id="closeChat"
+          class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="p-4 h-64 overflow-y-auto bg-bg-light/50" id="chatMessages">
+        <div class="flex gap-3 mb-4">
+          <div class="w-7 h-7 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="bot" class="w-3.5 h-3.5 text-secondary"></i>
+          </div>
+          <div class="glass rounded-xl rounded-tl-sm px-3.5 py-2.5 max-w-[80%]">
+            <p class="text-xs text-text-dim leading-relaxed">
+              Hi there! 👋 Welcome to InPixel Cloud. How can I help you today?
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="p-3 border-t border-border-dim bg-bg-light/30">
+        <div class="flex gap-2">
+          <input id="chatInput" type="text" placeholder="Type a message..."
+            class="flex-1 px-3 py-2 bg-bg border border-border-dim rounded-lg text-xs text-primary placeholder-text-muted focus:outline-none focus:border-accent/50 transition-all" />
+          <button id="chatSend"
+            class="w-9 h-9 gradient-accent rounded-lg flex items-center justify-center flex-shrink-0 hover:shadow-lg hover:shadow-secondary/25 transition-all">
+            <i data-lucide="send" class="w-4 h-4 text-white"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <script src="{% static 'js/main.js' %}"></script>
-  </body>
+  <!-- ==================== SCROLL TO TOP ==================== -->
+  <button id="scrollTopBtn"
+    class="fixed bottom-6 right-6 z-40 w-12 h-12 glass rounded-full flex items-center justify-center text-text-dim hover:text-accent hover:border-accent/30 transition-all opacity-0 invisible translate-y-4"
+    title="Scroll to top">
+    <i data-lucide="chevron-up" class="w-5 h-5"></i>
+  </button>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div id="toastContainer" class="fixed top-24 right-6 z-50 space-y-3"></div>
+
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+
 </html>
