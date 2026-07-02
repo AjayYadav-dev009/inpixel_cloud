@@ -1,7 +1,9 @@
-{% extends 'base.html' %} {% block title %} Service {% endblock %} {% block
-content %}
+{% extends 'base.html' %}
+{% block title %} Service {% endblock %} 
+{% load static %}
+{% block content %}
 
-<style>
+{% comment %} <style>
   /* ===================================================================
    InPixel Cloud — Hosting Solutions Section
    =================================================================== */
@@ -2377,6 +2379,6 @@ content %}
 
     field.appendChild(fragment);
   }
-</script>
+</script> {% endcomment %}
 
 {% endblock %}
