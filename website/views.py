@@ -7,3 +7,6 @@ def index(request):
 
 def service(request):
     return render(request, 'website/service.html')
+
+def contact(request):
+    return render(request, 'website/contact.html')
