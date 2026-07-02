@@ -29,7 +29,8 @@
   <!-- ===================== HEADER / NAVBAR ===================== -->
   <header id="site-header" class="site-header-bg sticky top-0 z-50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2" style="cursor: pointer;"
+        onclick="window.location.href='{% url 'website:index' %}'">
         <div class="w-8 h-8 rounded-md flex items-center justify-center icon-badge font-bold">
           iP
         </div>
@@ -40,8 +41,8 @@
       </div>
 
       <nav class="hidden md:flex items-center gap-8 text-sm">
-        
-        
+
+
         <div class="relative group">
           <a href="{% url 'website:service' %}" class="nav-link flex items-center gap-1">
             Services
@@ -70,9 +71,9 @@
           </div>
         </div>
 
-        
+
         <a href="#pricing-section" class="nav-link">Pricing</a>
-        <a href="#" class="nav-link">About</a>
+        <a href="{% url 'website:about' %}" class="nav-link">About</a>
         <a href="#" class="nav-link">Docs</a>
         <a href="{% url 'website:contact' %}" class="nav-link">Contact</a>
       </nav>
@@ -386,11 +387,13 @@
   </div>
 
   <!-- ==================== LIVE CHAT BUTTON ==================== -->
-  <button id="liveChatBtn"
-    class="fixed bottom-20 right-1 z-40 w-14 h-14 gradient-accent rounded-full flex items-center justify-center shadow-lg shadow-secondary/30 hover:shadow-xl hover:shadow-secondary/40 hover:scale-110 transition-all chat-pulse"
-    title="Live Chat">
-    <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
-  </button>
+  <div style="position: relative;">
+    <button id="liveChatBtn"
+      class="fixed bottom-20 right-1 z-40 w-14 h-14 gradient-accent rounded-full flex items-center justify-center shadow-lg shadow-secondary/30 hover:shadow-xl hover:shadow-secondary/40 hover:scale-110 transition-all chat-pulse"
+      title="Live Chat">
+      <i data-lucide="message-circle" class="w-6 h-6 text-white"></i>
+    </button>
+  </div>
 
   <!-- Live Chat Panel -->
   <div id="chatPanel" class="fixed bottom-24 left-6 z-50 w-80 sm:w-96 hidden" style="animation: scale-in 0.3s ease-out">
