@@ -1,0 +1,409 @@
+{% extends 'base.html' %}
+{% block title %} Web Hosting {% endblock %}
+{% block content %}
+
+<main>
+  <!-- =================== HERO =================== -->
+  <section class="hero-bg relative overflow-hidden pt-12 pb-20 lg:pb-28">
+    <div class="absolute inset-0 grid-pattern opacity-40"></div>
+    <div class="absolute top-10 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-float-slow"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left content -->
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent text-xs font-semibold text-accent mb-6">
+            <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+            WEB HOSTING
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+            <span class="gradient-text-white">Fast & Reliable</span><br />
+            <span class="gradient-text-white">Web </span><span class="gradient-text">Hosting</span>
+          </h1>
+
+          <p class="text-lg text-text-dim leading-relaxed mb-8 max-w-lg">
+            Perfect for websites, blogs, and businesses of all sizes. Get
+            everything you need to build, secure, and grow your online
+            presence.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mb-8">
+            <a href="#pricing" class="px-7 py-3.5 gradient-accent rounded-xl text-sm font-semibold btn-ripple hover:shadow-lg hover:shadow-secondary/25 transition-all flex items-center gap-2">
+              View Plans
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#features" class="px-7 py-3.5 glass rounded-xl text-sm font-semibold text-text-dim hover:text-primary hover:border-accent/30 transition-all">
+              All Features
+            </a>
+          </div>
+
+          <div class="flex flex-wrap gap-x-6 gap-y-3 text-xs text-text-muted">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="rocket" class="w-4 h-4 text-accent-light"></i>
+              Instant Setup
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="shield-check" class="w-4 h-4 text-accent-light"></i>
+              Free SSL
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="gauge" class="w-4 h-4 text-accent-light"></i>
+              99.9% Uptime
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="headset" class="w-4 h-4 text-accent-light"></i>
+              24/7 Support
+            </span>
+          </div>
+        </div>
+
+        <!-- Right illustration -->
+        <div class="relative hidden lg:block" style="animation: scale-in 0.8s ease-out 0.2s both">
+          <div class="relative mx-auto w-full max-w-md aspect-square flex items-center justify-center">
+            <div class="absolute w-[320px] h-[320px] border border-secondary/10 rounded-full animate-rotate-slow"></div>
+            <div class="absolute w-[240px] h-[240px] border border-accent/10 rounded-full" style="animation: rotate-slow 20s linear infinite reverse"></div>
+
+            <!-- Browser window card -->
+            <div class="relative w-64 h-44 rounded-2xl gradient-accent p-4 shadow-2xl shadow-secondary/30 animate-pulse-glow">
+              <div class="flex items-center gap-1.5 mb-4">
+                <span class="w-2 h-2 rounded-full bg-white/70"></span>
+                <span class="w-2 h-2 rounded-full bg-white/70"></span>
+                <span class="w-2 h-2 rounded-full bg-white/70"></span>
+              </div>
+              <div class="flex items-center gap-3">
+                <i data-lucide="globe" class="w-10 h-10 text-white/90"></i>
+                <div class="flex-1 space-y-2">
+                  <div class="h-1.5 rounded-full bg-white/40 w-full"></div>
+                  <div class="h-1.5 rounded-full bg-white/40 w-3/4"></div>
+                  <div class="h-1.5 rounded-full bg-white/40 w-5/6"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Server stack peeking behind -->
+            <div class="absolute top-8 right-0 flex flex-col gap-1.5">
+              <div class="w-24 h-6 rounded-md glass"></div>
+              <div class="w-24 h-6 rounded-md glass"></div>
+              <div class="w-24 h-6 rounded-md glass"></div>
+              <div class="w-24 h-6 rounded-md glass"></div>
+            </div>
+
+            <!-- Shield checkmark badge -->
+            <div class="absolute bottom-2 right-6 w-14 h-14 rounded-2xl gradient-accent flex items-center justify-center shadow-xl shadow-secondary/30 animate-float">
+              <i data-lucide="shield-check" class="w-7 h-7 text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== PRICING =================== -->
+  <section id="pricing" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+    <div class="reveal">
+      <p class="eyebrow text-xs font-semibold mb-3">CHOOSE YOUR PLAN</p>
+      <h2 class="text-3xl font-bold mb-3">Simple, Transparent Pricing</h2>
+      <p class="text-muted mb-12">Choose the perfect plan that fits your needs.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 text-left">
+      <!-- Starter -->
+      <div class="pricing-card rounded-2xl p-7">
+        <h3 class="font-semibold mb-1">Starter</h3>
+        <p class="text-faint text-xs mb-5">Perfect for personal websites</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹149</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">1 Website</li>
+          <li class="check-mark">10 GB SSD Storage</li>
+          <li class="check-mark">Free SSL Certificate</li>
+          <li class="check-mark">Unmetered Bandwidth</li>
+          <li class="check-mark">Daily Backups</li>
+          <li class="check-mark">cPanel Control Panel</li>
+          <li class="check-mark">24/7 Support</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+
+      <!-- Business (featured) -->
+      <div class="pricing-card featured rounded-2xl p-7 relative">
+        <span class="absolute -top-3 right-7 btn-primary text-white text-[11px] font-semibold px-3 py-1 rounded-full">Most Popular</span>
+        <h3 class="font-semibold mb-1">Business</h3>
+        <p class="text-faint text-xs mb-5">Ideal for growing websites</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹249</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">Unlimited Websites</li>
+          <li class="check-mark">20 GB SSD Storage</li>
+          <li class="check-mark">Free SSL Certificate</li>
+          <li class="check-mark">Unmetered Bandwidth</li>
+          <li class="check-mark">Daily Backups</li>
+          <li class="check-mark">cPanel Control Panel</li>
+          <li class="check-mark">Priority Support</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-primary block text-center w-full text-white font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card rounded-2xl p-7">
+        <h3 class="font-semibold mb-1">Pro</h3>
+        <p class="text-faint text-xs mb-5">For high traffic websites</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹399</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">Unlimited Websites</li>
+          <li class="check-mark">40 GB SSD Storage</li>
+          <li class="check-mark">Free SSL Certificate</li>
+          <li class="check-mark">Unmetered Bandwidth</li>
+          <li class="check-mark">Daily Backups</li>
+          <li class="check-mark">cPanel Control Panel</li>
+          <li class="check-mark">Priority Support</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== FEATURES =================== -->
+  <section id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+    <div class="reveal">
+      <p class="eyebrow text-xs font-semibold mb-3">POWERFUL FEATURES</p>
+      <h2 class="text-3xl font-bold mb-12">Everything You Need to Succeed</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border text-center reveal reveal-delay-1">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 mx-auto">
+          <i data-lucide="shield" class="w-6 h-6 text-accent-light"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">Free SSL Certificate</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Secure your website with free SSL certificates.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border text-center reveal reveal-delay-2">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 mx-auto">
+          <i data-lucide="zap" class="w-6 h-6 text-accent-light"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">99.9% Uptime</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Reliable infrastructure you can count on.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border text-center reveal reveal-delay-3">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 mx-auto">
+          <i data-lucide="cloud" class="w-6 h-6 text-accent-light"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">Daily Backups</h3>
+        <p class="text-text-dim text-xs leading-relaxed">We backup your data every single day.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border text-center reveal reveal-delay-1">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 mx-auto">
+          <i data-lucide="monitor" class="w-6 h-6 text-accent-light"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">cPanel Control</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Easy-to-use cPanel for managing your site.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border text-center reveal reveal-delay-2">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 mx-auto">
+          <i data-lucide="headset" class="w-6 h-6 text-accent-light"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">24/7 Support</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Our team is available anytime you need help.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border text-center reveal reveal-delay-3">
+        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 mx-auto">
+          <i data-lucide="gauge" class="w-6 h-6 text-accent-light"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">High Performance</h3>
+        <p class="text-text-dim text-xs leading-relaxed">LiteSpeed servers for super fast websites.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== WHO IS IT FOR =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+    <div class="reveal">
+      <p class="eyebrow text-xs font-semibold mb-3">IDEAL FOR</p>
+      <h2 class="text-3xl font-bold mb-12">Who Is It For?</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left">
+      <div class="glass rounded-xl2 p-5 card-hover reveal reveal-delay-1 flex items-start gap-3">
+        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="user" class="w-5 h-5 text-accent-light"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1 text-sm">Personal Websites</h3>
+          <p class="text-text-dim text-xs leading-relaxed">Perfect for portfolios and personal websites.</p>
+        </div>
+      </div>
+
+      <div class="glass rounded-xl2 p-5 card-hover reveal reveal-delay-2 flex items-start gap-3">
+        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="layers" class="w-5 h-5 text-accent-light"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1 text-sm">Blogs</h3>
+          <p class="text-text-dim text-xs leading-relaxed">Great for bloggers and content creators.</p>
+        </div>
+      </div>
+
+      <div class="glass rounded-xl2 p-5 card-hover reveal reveal-delay-3 flex items-start gap-3">
+        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="building-2" class="w-5 h-5 text-accent-light"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1 text-sm">Business Websites</h3>
+          <p class="text-text-dim text-xs leading-relaxed">Build professional sites for your business.</p>
+        </div>
+      </div>
+
+      <div class="glass rounded-xl2 p-5 card-hover reveal reveal-delay-1 flex items-start gap-3">
+        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="shopping-cart" class="w-5 h-5 text-accent-light"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1 text-sm">E-commerce Stores</h3>
+          <p class="text-text-dim text-xs leading-relaxed">Power your online store with ease.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== FAQ + SUPPORT =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+    <div class="text-center reveal mb-12">
+      <p class="eyebrow text-xs font-semibold mb-3">FREQUENTLY ASKED QUESTIONS</p>
+      <h2 class="text-3xl font-bold">Got Questions?</h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 items-start">
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item open rounded-xl p-4 cursor-pointer">
+          <div class="faq-question flex items-center justify-between">
+            <p class="text-sm font-medium flex items-center gap-2">
+              <span class="text-violet-400">»</span> How quickly will my hosting be activated?
+            </p>
+            <span class="faq-toggle text-faint">+</span>
+          </div>
+          <div class="faq-answer">
+            <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+              Your hosting account is activated instantly after checkout, usually within a couple of minutes.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item rounded-xl p-4 cursor-pointer">
+          <div class="faq-question flex items-center justify-between">
+            <p class="text-sm font-medium flex items-center gap-2">
+              <span class="text-violet-400">»</span> Can I upgrade my plan later?
+            </p>
+            <span class="faq-toggle text-faint">+</span>
+          </div>
+          <div class="faq-answer">
+            <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+              Yes, you can upgrade your hosting plan anytime from your dashboard with no downtime.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item rounded-xl p-4 cursor-pointer">
+          <div class="faq-question flex items-center justify-between">
+            <p class="text-sm font-medium flex items-center gap-2">
+              <span class="text-violet-400">»</span> Do you offer a money-back guarantee?
+            </p>
+            <span class="faq-toggle text-faint">+</span>
+          </div>
+          <div class="faq-answer">
+            <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+              Yes, all plans come with a 30-day money-back guarantee, no questions asked.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item rounded-xl p-4 cursor-pointer">
+          <div class="faq-question flex items-center justify-between">
+            <p class="text-sm font-medium flex items-center gap-2">
+              <span class="text-violet-400">»</span> Is a free domain included?
+            </p>
+            <span class="faq-toggle text-faint">+</span>
+          </div>
+          <div class="faq-answer">
+            <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+              Business and Pro plans include a free domain for the first year of service.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item rounded-xl p-4 cursor-pointer">
+          <div class="faq-question flex items-center justify-between">
+            <p class="text-sm font-medium flex items-center gap-2">
+              <span class="text-violet-400">»</span> Do you provide website migration?
+            </p>
+            <span class="faq-toggle text-faint">+</span>
+          </div>
+          <div class="faq-answer">
+            <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+              Yes, our team offers free website migration from your current host.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Still have questions panel -->
+      <div class="glass rounded-2xl p-8 relative overflow-hidden h-full">
+        <div class="absolute inset-0 grid-pattern opacity-20"></div>
+        <div class="relative">
+          <h3 class="text-xl font-bold mb-3">Still have questions?</h3>
+          <p class="text-text-dim text-sm leading-relaxed mb-6 max-w-xs">
+            Our support team is here to help you 24/7. Get in touch with us anytime!
+          </p>
+          <a href="{% url 'website:contact' %}" class="inline-flex items-center gap-2 px-5 py-3 gradient-accent rounded-xl text-sm font-semibold btn-ripple hover:shadow-lg hover:shadow-secondary/25 transition-all">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            Contact Support
+          </a>
+          <div class="absolute -bottom-4 -right-4 w-32 h-32 rounded-3xl gradient-accent opacity-90 flex items-center justify-center animate-float-slow">
+            <i data-lucide="headset" class="w-16 h-16 text-white/90"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== BOTTOM CTA =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+    <div class="gradient-accent rounded-3xl px-8 py-10 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-6 text-white relative overflow-hidden">
+      <div class="absolute inset-0 grid-pattern opacity-10"></div>
+      <div class="absolute -bottom-8 left-4 opacity-25">
+        <i data-lucide="rocket" class="w-28 h-28 -rotate-45"></i>
+      </div>
+      <div class="relative pl-0 sm:pl-24 text-center sm:text-left">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-2">Ready to Launch Your Website?</h2>
+        <p class="text-white/80">Get started in minutes. Fast, secure, and hassle-free.</p>
+      </div>
+      <a href="#pricing" class="relative flex-shrink-0 inline-flex items-center gap-2 px-6 py-3.5 bg-white text-purple-700 rounded-xl text-sm font-semibold hover:opacity-90 transition-all w-fit">
+        View Plans
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </section>
+</main>
+
+<script>
+  // ===== SCROLL REVEAL =====
+  const revealElements = document.querySelectorAll(".reveal");
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+  );
+
+  revealElements.forEach((el) => revealObserver.observe(el));
+</script>
+
+{% endblock %}
