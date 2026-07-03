@@ -674,7 +674,9 @@
 
   /* Live chat pulse */
   .chat-pulse {
-    position: relative;
+    position: fixed;
+    left: 2%;
+    bottom: 2%;
   }
   .chat-pulse::before {
     content: "";
