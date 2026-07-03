@@ -3,7 +3,81 @@
 {% load static %}
 {% block content %}
 
-{% comment %} <style>
+<style>
+
+  /* ===================================================================
+   0. TOKEN BRIDGE
+   This page was built against a different variable-naming convention
+   than the rest of the site (site-global.css / style.css). These names
+   (--color-bg, --fs-base, --fw-semibold, --gradient-text, etc.) were
+   never defined anywhere, so the browser silently ignored them and the
+   page fell back to unstyled defaults. This block maps them onto the
+   real tokens already defined in site-global.css / style.css, so this
+   page now matches index.html and contact.html.
+   =================================================================== */
+  :root {
+    --color-bg: var(--bg-base);
+    --color-bg-alt: var(--bg-panel-light);
+    --color-surface: var(--bg-panel);
+    --color-text-primary: var(--text-primary);
+    --color-text-secondary: var(--text-secondary);
+    --color-border: var(--border-subtle);
+    --color-border-strong: var(--border-tinted);
+
+    --font-base: var(--font-sans);
+    --fs-xs: var(--text-xs);
+    --fs-sm: var(--text-sm);
+    --fs-base: 1rem;
+    --fs-md: 1.0625rem;
+    --fs-lg: var(--text-lg);
+    --fs-xl: var(--text-xl);
+    --fs-2xl: var(--text-2xl);
+    --fs-3xl: var(--text-3xl);
+    --fs-4xl: var(--text-4xl);
+
+    --fw-regular: 400;
+    --fw-medium: var(--font-weight-medium);
+    --fw-semibold: var(--font-weight-semibold);
+    --fw-bold: var(--font-weight-bold);
+    --fw-extrabold: var(--font-weight-extrabold);
+
+    --ls-wider: var(--tracking-widest);
+    --lh-tight: var(--leading-tight);
+    --lh-snug: 1.35;
+    --lh-normal: 1.6;
+
+    --radius-full: 9999px;
+
+    --gradient-text: linear-gradient(
+      135deg,
+      var(--accent-light) 0%,
+      var(--accent) 50%,
+      var(--accent-light) 100%
+    );
+    --gradient-hero-glow: radial-gradient(
+      circle at 50% 0%,
+      var(--hero-glow-strong),
+      transparent 60%
+    );
+    --gradient-purple-pink: linear-gradient(135deg, #a855f7, #ec4899);
+    --gradient-blue: linear-gradient(135deg, #60a5fa, #3b82f6);
+    --gradient-purple: linear-gradient(135deg, #8b5cf6, var(--accent));
+    --gradient-green: linear-gradient(135deg, #34d399, #10b981);
+    --gradient-cta: linear-gradient(135deg, var(--accent), #6d28d9);
+
+    --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.25);
+    --shadow-icon: 0 8px 20px rgba(0, 0, 0, 0.25);
+    --shadow-btn-purple: 0 10px 24px rgba(168, 85, 247, 0.35);
+    --shadow-btn-blue: 0 10px 24px rgba(59, 130, 246, 0.35);
+    --shadow-btn-green: 0 10px 24px rgba(16, 185, 129, 0.35);
+    --shadow-cta: 0 20px 50px rgba(124, 58, 237, 0.35);
+
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.25s ease;
+    --transition-slow: 0.35s ease;
+
+    --space-section-y: 6rem;
+  }
 
   /* ===================================================================
    3. BASE
@@ -71,6 +145,7 @@
     overflow: hidden;
     padding-top: 4.5rem;
     padding-bottom: var(--space-section-y);
+    display: flex;
   }
 
   .services-section::before {
@@ -108,7 +183,7 @@
   /* decorative server stack art */
   .hero-decor {
     position: absolute;
-    top: 1rem;
+    top: -4rem;
     z-index: 1;
     opacity: 0.9;
     filter: drop-shadow(0 10px 30px rgba(124, 58, 237, 0.25));
@@ -116,12 +191,12 @@
   }
 
   .hero-decor--left {
-    left: -1rem;
+    left: 1rem;
   }
 
   .hero-decor--right {
-    right: -1rem;
-  }
+    right: 1rem;
+  } 
 
   /* ===================================================================
    6. CARDS — Service Cards
@@ -615,6 +690,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
+    margin-bottom: var(--space-section-y);
   }
 
   .cta-banner::before {
@@ -694,7 +770,7 @@
    =================================================================== */
   @media (max-width: 1024px) {
     .service-cards {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
     }
 
     .feature-strip {
@@ -708,15 +784,15 @@
     .faq-visual {
       display: none;
     }
-
-    .hero-decor {
-      display: none;
-    }
   }
 
   @media (max-width: 768px) {
     .compare-table-wrap {
       -webkit-overflow-scrolling: touch;
+    }
+
+    .hero-decor {
+      display: none;
     }
 
     .feature-strip {
@@ -767,124 +843,124 @@
   <section class="services-section" aria-labelledby="services-heading">
     <div class="star-field" aria-hidden="true" id="starField"></div>
 
-    <svg
-      class="hero-decor hero-decor--left"
-      width="220"
-      height="200"
-      viewBox="0 0 220 200"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <g opacity="0.85">
-        <rect
-          x="20"
-          y="60"
-          width="90"
-          height="120"
-          rx="4"
-          fill="#1c1830"
-          stroke="#3a3160"
-          stroke-width="1.5"
-        />
-        <rect
-          x="30"
-          y="72"
-          width="70"
-          height="6"
-          rx="2"
-          fill="#8b5cf6"
-          opacity="0.7"
-        />
-        <rect x="30" y="86" width="50" height="4" rx="2" fill="#4c4470" />
-        <rect x="30" y="96" width="60" height="4" rx="2" fill="#4c4470" />
-        <circle cx="92" cy="72" r="3" fill="#a78bfa" />
-        <rect
-          x="0"
-          y="90"
-          width="90"
-          height="110"
-          rx="4"
-          fill="#211c3a"
-          stroke="#3a3160"
-          stroke-width="1.5"
-        />
-        <rect
-          x="10"
-          y="102"
-          width="70"
-          height="6"
-          rx="2"
-          fill="#60a5fa"
-          opacity="0.7"
-        />
-        <rect x="10" y="116" width="45" height="4" rx="2" fill="#4c4470" />
-        <rect x="10" y="126" width="55" height="4" rx="2" fill="#4c4470" />
-        <circle cx="72" cy="102" r="3" fill="#93c5fd" />
-      </g>
-    </svg>
-
-    <svg
-      class="hero-decor hero-decor--right"
-      width="240"
-      height="200"
-      viewBox="0 0 240 200"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <g opacity="0.85">
-        <rect
-          x="120"
-          y="55"
-          width="95"
-          height="125"
-          rx="4"
-          fill="#1c1830"
-          stroke="#3a3160"
-          stroke-width="1.5"
-        />
-        <rect
-          x="130"
-          y="68"
-          width="75"
-          height="6"
-          rx="2"
-          fill="#8b5cf6"
-          opacity="0.7"
-        />
-        <rect x="130" y="82" width="55" height="4" rx="2" fill="#4c4470" />
-        <rect x="130" y="92" width="65" height="4" rx="2" fill="#4c4470" />
-        <circle cx="198" cy="68" r="3" fill="#a78bfa" />
-        <rect
-          x="40"
-          y="85"
-          width="92"
-          height="110"
-          rx="4"
-          fill="#211c3a"
-          stroke="#3a3160"
-          stroke-width="1.5"
-        />
-        <rect
-          x="50"
-          y="97"
-          width="72"
-          height="6"
-          rx="2"
-          fill="#60a5fa"
-          opacity="0.7"
-        />
-        <rect x="50" y="111" width="48" height="4" rx="2" fill="#4c4470" />
-        <rect x="50" y="121" width="58" height="4" rx="2" fill="#4c4470" />
-        <circle cx="113" cy="97" r="3" fill="#93c5fd" />
-        <circle cx="20" cy="150" r="22" fill="#2a2350" />
-        <circle cx="12" cy="145" r="3" fill="#34d399" />
-        <circle cx="28" cy="145" r="3" fill="#34d399" />
-        <rect x="6" y="160" width="28" height="6" rx="3" fill="#3a3160" />
-      </g>
-    </svg>
-
+    
     <div class="container mx-auto px-6">
       <div class="services-hero">
+        <svg
+          class="hero-decor hero-decor--left"
+          width="220"
+          height="200"
+          viewBox="0 0 220 200"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g opacity="0.85">
+            <rect
+              x="20"
+              y="60"
+              width="90"
+              height="120"
+              rx="4"
+              fill="#1c1830"
+              stroke="#3a3160"
+              stroke-width="1.5"
+            />
+            <rect
+              x="30"
+              y="72"
+              width="70"
+              height="6"
+              rx="2"
+              fill="#8b5cf6"
+              opacity="0.7"
+            />
+            <rect x="30" y="86" width="50" height="4" rx="2" fill="#4c4470" />
+            <rect x="30" y="96" width="60" height="4" rx="2" fill="#4c4470" />
+            <circle cx="92" cy="72" r="3" fill="#a78bfa" />
+            <rect
+              x="0"
+              y="90"
+              width="90"
+              height="110"
+              rx="4"
+              fill="#211c3a"
+              stroke="#3a3160"
+              stroke-width="1.5"
+            />
+            <rect
+              x="10"
+              y="102"
+              width="70"
+              height="6"
+              rx="2"
+              fill="#60a5fa"
+              opacity="0.7"
+            />
+            <rect x="10" y="116" width="45" height="4" rx="2" fill="#4c4470" />
+            <rect x="10" y="126" width="55" height="4" rx="2" fill="#4c4470" />
+            <circle cx="72" cy="102" r="3" fill="#93c5fd" />
+          </g>
+        </svg>
+    
+        <svg
+          class="hero-decor hero-decor--right"
+          width="240"
+          height="200"
+          viewBox="0 0 240 200"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g opacity="0.85">
+            <rect
+              x="120"
+              y="55"
+              width="95"
+              height="125"
+              rx="4"
+              fill="#1c1830"
+              stroke="#3a3160"
+              stroke-width="1.5"
+            />
+            <rect
+              x="130"
+              y="68"
+              width="75"
+              height="6"
+              rx="2"
+              fill="#8b5cf6"
+              opacity="0.7"
+            />
+            <rect x="130" y="82" width="55" height="4" rx="2" fill="#4c4470" />
+            <rect x="130" y="92" width="65" height="4" rx="2" fill="#4c4470" />
+            <circle cx="198" cy="68" r="3" fill="#a78bfa" />
+            <rect
+              x="40"
+              y="85"
+              width="92"
+              height="110"
+              rx="4"
+              fill="#211c3a"
+              stroke="#3a3160"
+              stroke-width="1.5"
+            />
+            <rect
+              x="50"
+              y="97"
+              width="72"
+              height="6"
+              rx="2"
+              fill="#60a5fa"
+              opacity="0.7"
+            />
+            <rect x="50" y="111" width="48" height="4" rx="2" fill="#4c4470" />
+            <rect x="50" y="121" width="58" height="4" rx="2" fill="#4c4470" />
+            <circle cx="113" cy="97" r="3" fill="#93c5fd" />
+            <circle cx="20" cy="150" r="22" fill="#2a2350" />
+            <circle cx="12" cy="145" r="3" fill="#34d399" />
+            <circle cx="28" cy="145" r="3" fill="#34d399" />
+            <rect x="6" y="160" width="28" height="6" rx="3" fill="#3a3160" />
+          </g>
+        </svg>
         <span class="section-eyebrow">Our Services</span>
         <h1 id="services-heading" class="services-hero__title">
           Our Hosting <span class="text-gradient">Solutions</span>
@@ -2233,6 +2309,6 @@
   // (FAQ accordion, star field) actually ran without these.
   initFaqAccordion();
   initStarField();
-</script> {% endcomment %}
+</script>
 
 {% endblock %}
