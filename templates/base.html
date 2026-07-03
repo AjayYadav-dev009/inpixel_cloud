@@ -47,24 +47,21 @@
             <span class="text-[10px] transition-transform duration-200 group-hover:rotate-180">▾</span>
           </a>
           <div class="nav-dropdown glass rounded-xl2">
-            <a href="{% url 'website:service' %}#web-hosting" class="nav-dropdown__item">
+            <a href="{% url 'website:web_hosting' %}" class="nav-dropdown__item">
               <span class="nav-dropdown__item-title">Web Hosting</span>
               <span class="nav-dropdown__item-desc">Fast, secure shared hosting</span>
             </a>
-            <a href="{% url 'website:service' %}#vps-hosting" class="nav-dropdown__item">
+            <a href="#" class="nav-dropdown__item">
               <span class="nav-dropdown__item-title">VPS Hosting</span>
               <span class="nav-dropdown__item-desc">Full root access, scalable</span>
             </a>
-            <a href="{% url 'website:service' %}#game-servers" class="nav-dropdown__item">
+            <a href="{% url 'website:game_server' %}" class="nav-dropdown__item">
               <span class="nav-dropdown__item-title">Game Servers</span>
               <span class="nav-dropdown__item-desc">Low-latency game hosting</span>
             </a>
-            <a href="{% url 'website:service' %}#bot-hosting" class="nav-dropdown__item">
+            <a href="#" class="nav-dropdown__item">
               <span class="nav-dropdown__item-title">Bot Hosting</span>
               <span class="nav-dropdown__item-desc">24/7 uptime for your bots</span>
-            </a>
-            <a href="{% url 'website:service' %}" class="nav-dropdown__item nav-dropdown__item--all">
-              View all services →
             </a>
           </div>
         </div>

@@ -733,7 +733,7 @@
   }
 
   .nav-dropdown__item:hover {
-    background: var(--surface-tint);
+    background: var(--bg-base);
     color: var(--text-primary);
   }
 
