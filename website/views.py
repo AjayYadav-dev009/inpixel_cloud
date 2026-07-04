@@ -8,6 +8,9 @@ def index(request):
 def service(request):
     return render(request, 'website/service.html')
 
+def game_server(request):
+    return render(request, 'website/game-server.html')
+
 def contact(request):
     return render(request, 'website/contact.html')
 

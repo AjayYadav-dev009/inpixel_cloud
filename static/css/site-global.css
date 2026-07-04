@@ -674,7 +674,9 @@
 
   /* Live chat pulse */
   .chat-pulse {
-    position: relative;
+    position: fixed;
+    left: 2%;
+    bottom: 2%;
   }
   .chat-pulse::before {
     content: "";
@@ -731,7 +733,7 @@
   }
 
   .nav-dropdown__item:hover {
-    background: var(--surface-tint);
+    background: var(--bg-base);
     color: var(--text-primary);
   }
 
