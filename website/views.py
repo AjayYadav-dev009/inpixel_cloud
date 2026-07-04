@@ -19,3 +19,9 @@ def about(request):
 
 def web_hosting(request):
     return render(request, 'website/web-hosting.html')
+
+def vps_hosting(request):
+    return render(request, 'website/vps-hosting.html')
+
+def bot_hosting(request):
+    return render(request, 'website/bot-hosting.html')

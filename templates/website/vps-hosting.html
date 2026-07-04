@@ -1,0 +1,524 @@
+{% extends 'base.html' %}
+{% block title %} VPS Hosting {% endblock %}
+{% block content %}
+
+<main>
+  <!-- =================== HERO =================== -->
+  <section class="hero-bg relative overflow-hidden pt-12 pb-20 lg:pb-28">
+    <div class="absolute inset-0 grid-pattern opacity-40"></div>
+    <div class="absolute top-10 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-float-slow"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left content -->
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent text-xs font-semibold text-accent mb-6">
+            <i data-lucide="server-cog" class="w-3.5 h-3.5"></i>
+            VPS HOSTING
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+            <span class="gradient-text-white">Powerful VPS Hosting</span><br />
+            <span class="gradient-text-white">Built for </span><span class="gradient-text">Performance</span>
+          </h1>
+
+          <p class="text-lg text-text-dim leading-relaxed mb-8 max-w-lg">
+            Get full control, dedicated resources, and unmatched
+            performance with our lightning-fast VPS servers.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mb-8">
+            <a href="#pricing" class="px-7 py-3.5 gradient-accent rounded-xl text-sm font-semibold btn-ripple hover:shadow-lg hover:shadow-secondary/25 transition-all flex items-center gap-2">
+              View Plans
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#infrastructure" class="px-7 py-3.5 glass rounded-xl text-sm font-semibold text-text-dim hover:text-primary hover:border-accent/30 transition-all">
+              All Features
+            </a>
+          </div>
+
+          <div class="flex flex-wrap gap-x-6 gap-y-3 text-xs text-text-muted">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="key-round" class="w-4 h-4 text-accent-light"></i>
+              Full Root Access
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="database" class="w-4 h-4 text-accent-light"></i>
+              NVMe SSD Storage
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="gauge" class="w-4 h-4 text-accent-light"></i>
+              99.9% Uptime
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="headset" class="w-4 h-4 text-accent-light"></i>
+              24/7 Support
+            </span>
+          </div>
+        </div>
+
+        <!-- Right illustration -->
+        <div class="relative hidden lg:block" style="animation: scale-in 0.8s ease-out 0.2s both">
+          <div class="relative mx-auto w-full max-w-md aspect-square flex items-center justify-center">
+            <div class="absolute w-[320px] h-[320px] border border-secondary/10 rounded-full animate-rotate-slow"></div>
+            <div class="absolute w-[240px] h-[240px] border border-accent/10 rounded-full" style="animation: rotate-slow 20s linear infinite reverse"></div>
+
+            <!-- Stacked server module -->
+            <div class="relative flex flex-col gap-1.5">
+              <div class="w-20 h-9 rounded-lg gradient-accent flex items-center justify-center shadow-xl shadow-secondary/40 animate-pulse-glow mx-auto text-[10px] font-bold text-white tracking-wider">
+                VPS
+              </div>
+              <div class="w-40 h-9 rounded-lg glass"></div>
+              <div class="w-40 h-9 rounded-lg glass"></div>
+              <div class="w-40 h-9 rounded-lg glass"></div>
+              <div class="w-40 h-4 bg-secondary/20 rounded-full blur-xl mx-auto"></div>
+            </div>
+
+            <!-- Terminal badge -->
+            <div class="absolute top-2 left-0 glass rounded-xl p-3 animate-float">
+              <i data-lucide="terminal" class="w-5 h-5 text-accent-light"></i>
+            </div>
+            <!-- Gauge badge -->
+            <div class="absolute top-4 right-0 glass rounded-xl p-3 animate-float-slow">
+              <i data-lucide="gauge" class="w-5 h-5 text-accent-light"></i>
+            </div>
+            <!-- Shield badge -->
+            <div class="absolute bottom-10 left-0 glass rounded-xl p-3 animate-float-reverse">
+              <i data-lucide="shield" class="w-5 h-5 text-accent-light"></i>
+            </div>
+            <!-- Cloud badge -->
+            <div class="absolute bottom-10 right-0 glass rounded-xl p-3 animate-float">
+              <i data-lucide="cloud" class="w-5 h-5 text-accent-light"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== PRICING =================== -->
+  <section id="pricing" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
+    <div class="reveal">
+      <p class="eyebrow text-xs font-semibold mb-3">CHOOSE YOUR PLAN</p>
+      <h2 class="text-3xl font-bold mb-3">Simple, Transparent Pricing</h2>
+      <p class="text-muted mb-12">All plans include the features you need to succeed.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+      <!-- VPS 1 -->
+      <div class="pricing-card rounded-2xl p-7">
+        <h3 class="font-semibold mb-1">VPS 1</h3>
+        <p class="text-faint text-xs mb-5">Perfect for getting started</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹299</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">1 vCPU Core</li>
+          <li class="check-mark">2 GB RAM</li>
+          <li class="check-mark">20 GB NVMe SSD</li>
+          <li class="check-mark">1 TB Bandwidth</li>
+          <li class="check-mark">Full Root Access</li>
+          <li class="check-mark">1 IPv4 Included</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+
+      <!-- VPS 2 (featured) -->
+      <div class="pricing-card featured rounded-2xl p-7 relative">
+        <span class="absolute -top-3 right-7 btn-primary text-white text-[11px] font-semibold px-3 py-1 rounded-full">Most Popular</span>
+        <h3 class="font-semibold mb-1">VPS 2</h3>
+        <p class="text-faint text-xs mb-5">Ideal for growing projects</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹499</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">2 vCPU Cores</li>
+          <li class="check-mark">4 GB RAM</li>
+          <li class="check-mark">50 GB NVMe SSD</li>
+          <li class="check-mark">2 TB Bandwidth</li>
+          <li class="check-mark">Full Root Access</li>
+          <li class="check-mark">1 IPv4 Included</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-primary block text-center w-full text-white font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+
+      <!-- VPS 3 -->
+      <div class="pricing-card rounded-2xl p-7">
+        <h3 class="font-semibold mb-1">VPS 3</h3>
+        <p class="text-faint text-xs mb-5">For high performance needs</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹799</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">4 vCPU Cores</li>
+          <li class="check-mark">8 GB RAM</li>
+          <li class="check-mark">100 GB NVMe SSD</li>
+          <li class="check-mark">3 TB Bandwidth</li>
+          <li class="check-mark">Full Root Access</li>
+          <li class="check-mark">1 IPv4 Included</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+
+      <!-- VPS 4 -->
+      <div class="pricing-card rounded-2xl p-7">
+        <h3 class="font-semibold mb-1">VPS 4</h3>
+        <p class="text-faint text-xs mb-5">Maximum power & speed</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹1299</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">6 vCPU Cores</li>
+          <li class="check-mark">16 GB RAM</li>
+          <li class="check-mark">200 GB NVMe SSD</li>
+          <li class="check-mark">5 TB Bandwidth</li>
+          <li class="check-mark">Full Root Access</li>
+          <li class="check-mark">1 IPv4 Included</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+    </div>
+
+    <p class="text-xs text-text-muted mt-8 flex items-center justify-center gap-1.5">
+      <i data-lucide="shield-check" class="w-4 h-4 text-accent-light"></i>
+      All plans are fully customizable. Need something specific?
+      <a href="{% url 'website:contact' %}" class="text-accent-light font-medium hover:underline">Contact our sales team.</a>
+    </p>
+  </section>
+
+  <!-- =================== WHY CHOOSE =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center mt-24">
+    <div class="reveal">
+      <p class="eyebrow text-xs font-semibold mb-3">WHY CHOOSE OUR VPS HOSTING</p>
+      <h2 class="text-3xl font-bold mb-12">Built for Developers. Perfect for Businesses.</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5 text-left">
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-1">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="terminal" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">Full Root Access</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Complete control over your server environment.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-2">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="zap" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">Blazing Fast NVMe</h3>
+        <p class="text-text-dim text-xs leading-relaxed">NVMe SSD storage for ultra-fast performance.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-3">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="layers" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">Scalable Resources</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Easily upgrade or downgrade your VPS anytime.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-1">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="shield" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">DDoS Protection</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Enterprise-grade protection to keep you safe.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-2">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="cloud-upload" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">Automatic Backups</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Optional automated backups for peace of mind.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-3">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="headset" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">24/7 Expert Support</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Our team is always here to help you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== INFRASTRUCTURE + DATA CENTERS =================== -->
+  <section id="infrastructure" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+    <div class="grid lg:grid-cols-2 gap-10">
+      <!-- Left: Infrastructure -->
+      <div class="reveal">
+        <p class="eyebrow text-xs font-semibold mb-3">ADVANCED VPS INFRASTRUCTURE</p>
+        <h2 class="text-2xl font-bold mb-6">Enterprise-Grade Infrastructure</h2>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="gs-region-card rounded-xl p-4">
+            <i data-lucide="box" class="w-5 h-5 text-accent-light mb-2"></i>
+            <div class="text-sm font-medium">Virtualization</div>
+            <div class="text-xs text-text-muted">KVM</div>
+          </div>
+          <div class="gs-region-card rounded-xl p-4">
+            <i data-lucide="server" class="w-5 h-5 text-accent-light mb-2"></i>
+            <div class="text-sm font-medium">Storage</div>
+            <div class="text-xs text-text-muted">NVMe SSD</div>
+          </div>
+          <div class="gs-region-card rounded-xl p-4">
+            <i data-lucide="network" class="w-5 h-5 text-accent-light mb-2"></i>
+            <div class="text-sm font-medium">Network</div>
+            <div class="text-xs text-text-muted">1 Gbps Port</div>
+          </div>
+          <div class="gs-region-card rounded-xl p-4">
+            <i data-lucide="power" class="w-5 h-5 text-accent-light mb-2"></i>
+            <div class="text-sm font-medium">Uptime</div>
+            <div class="text-xs text-text-muted">99.9%</div>
+          </div>
+          <div class="gs-region-card rounded-xl p-4">
+            <i data-lucide="monitor" class="w-5 h-5 text-accent-light mb-2"></i>
+            <div class="text-sm font-medium">Operating Systems</div>
+            <div class="text-xs text-text-muted">24+ Templates</div>
+          </div>
+          <div class="gs-region-card rounded-xl p-4">
+            <i data-lucide="layout-dashboard" class="w-5 h-5 text-accent-light mb-2"></i>
+            <div class="text-sm font-medium">Control Panel</div>
+            <div class="text-xs text-text-muted">cPanel / Plesk / None</div>
+          </div>
+          <div class="gs-region-card rounded-xl p-4">
+            <i data-lucide="map-pin" class="w-5 h-5 text-accent-light mb-2"></i>
+            <div class="text-sm font-medium">IPv4 Address</div>
+            <div class="text-xs text-text-muted">1 Included</div>
+          </div>
+          <div class="gs-region-card rounded-xl p-4">
+            <i data-lucide="database-backup" class="w-5 h-5 text-accent-light mb-2"></i>
+            <div class="text-sm font-medium">Backups</div>
+            <div class="text-xs text-text-muted">Optional</div>
+          </div>
+        </div>
+
+        <p class="text-sm font-medium mb-3">Available Operating Systems</p>
+        <div class="grid grid-cols-4 sm:grid-cols-7 gap-3">
+          <div class="gs-region-card rounded-xl p-3 flex flex-col items-center gap-2 text-center">
+            <i data-lucide="circle" class="w-5 h-5 text-orange-400"></i>
+            <span class="text-xs">Ubuntu</span>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex flex-col items-center gap-2 text-center">
+            <i data-lucide="circle" class="w-5 h-5 text-pink-400"></i>
+            <span class="text-xs">Debian</span>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex flex-col items-center gap-2 text-center">
+            <i data-lucide="circle" class="w-5 h-5 text-purple-400"></i>
+            <span class="text-xs">CentOS</span>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex flex-col items-center gap-2 text-center">
+            <i data-lucide="circle" class="w-5 h-5 text-red-400"></i>
+            <span class="text-xs">AlmaLinux</span>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex flex-col items-center gap-2 text-center">
+            <i data-lucide="circle" class="w-5 h-5 text-green-400"></i>
+            <span class="text-xs">Rocky Linux</span>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex flex-col items-center gap-2 text-center">
+            <i data-lucide="app-window" class="w-5 h-5 text-sky-400"></i>
+            <span class="text-xs">Windows</span>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex flex-col items-center justify-center gap-2 text-center">
+            <span class="text-xs font-medium text-accent">+ More</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Data centers -->
+      <div class="reveal reveal-delay-1">
+        <p class="eyebrow text-xs font-semibold mb-3">GLOBAL DATA CENTERS</p>
+        <h2 class="text-2xl font-bold mb-2">Deploy Your VPS Where You Need It</h2>
+        <p class="text-muted text-sm mb-6">Low latency. High performance. Worldwide.</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+          <div class="gs-region-card rounded-xl p-3 flex items-center gap-2">
+            <span class="text-xl" aria-hidden="true">🇺🇸</span>
+            <div class="text-left">
+              <div class="text-xs font-medium">New York</div>
+              <div class="text-[10px] text-text-muted">USA</div>
+            </div>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex items-center gap-2">
+            <span class="text-xl" aria-hidden="true">🇬🇧</span>
+            <div class="text-left">
+              <div class="text-xs font-medium">London</div>
+              <div class="text-[10px] text-text-muted">UK</div>
+            </div>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex items-center gap-2">
+            <span class="text-xl" aria-hidden="true">🇩🇪</span>
+            <div class="text-left">
+              <div class="text-xs font-medium">Frankfurt</div>
+              <div class="text-[10px] text-text-muted">Germany</div>
+            </div>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex items-center gap-2">
+            <span class="text-xl" aria-hidden="true">🇸🇬</span>
+            <div class="text-left">
+              <div class="text-xs font-medium">Singapore</div>
+              <div class="text-[10px] text-text-muted">Singapore</div>
+            </div>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex items-center gap-2">
+            <span class="text-xl" aria-hidden="true">🇮🇳</span>
+            <div class="text-left">
+              <div class="text-xs font-medium">Mumbai</div>
+              <div class="text-[10px] text-text-muted">India</div>
+            </div>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex items-center gap-2">
+            <span class="text-xl" aria-hidden="true">🇧🇷</span>
+            <div class="text-left">
+              <div class="text-xs font-medium">São Paulo</div>
+              <div class="text-[10px] text-text-muted">Brazil</div>
+            </div>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex items-center gap-2">
+            <span class="text-xl" aria-hidden="true">🇯🇵</span>
+            <div class="text-left">
+              <div class="text-xs font-medium">Tokyo</div>
+              <div class="text-[10px] text-text-muted">Japan</div>
+            </div>
+          </div>
+          <div class="gs-region-card rounded-xl p-3 flex items-center gap-2">
+            <i data-lucide="globe" class="w-5 h-5 text-accent-light"></i>
+            <div class="text-left">
+              <div class="text-xs font-medium text-accent">+ More</div>
+              <div class="text-[10px] text-text-muted">Locations</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decorative world map -->
+        <div class="relative glass rounded-2xl h-40 overflow-hidden">
+          <div class="absolute inset-0 opacity-30" style="background-image: radial-gradient(circle, var(--tw-color-accent-light, #a78bfa) 1px, transparent 1px); background-size: 14px 14px;"></div>
+          <span class="absolute w-2 h-2 rounded-full bg-accent-light animate-pulse-glow" style="top: 35%; left: 18%;"></span>
+          <span class="absolute w-2 h-2 rounded-full bg-accent-light animate-pulse-glow" style="top: 28%; left: 46%;"></span>
+          <span class="absolute w-2 h-2 rounded-full bg-accent-light animate-pulse-glow" style="top: 32%; left: 52%;"></span>
+          <span class="absolute w-2 h-2 rounded-full bg-accent-light animate-pulse-glow" style="top: 55%; left: 62%;"></span>
+          <span class="absolute w-2 h-2 rounded-full bg-accent-light animate-pulse-glow" style="top: 45%; left: 72%;"></span>
+          <span class="absolute w-2 h-2 rounded-full bg-accent-light animate-pulse-glow" style="top: 65%; left: 30%;"></span>
+          <span class="absolute w-2 h-2 rounded-full bg-accent-light animate-pulse-glow" style="top: 40%; left: 85%;"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== FAQ + CTA =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+    <div class="grid lg:grid-cols-2 gap-8 items-start">
+      <div>
+        <div class="reveal mb-6">
+          <p class="eyebrow text-xs font-semibold mb-3">FREQUENTLY ASKED QUESTIONS</p>
+          <h2 class="text-2xl font-bold">Got Questions? We've Got Answers.</h2>
+        </div>
+        <div class="space-y-3" id="faq-list">
+          <div class="faq-item open rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> What is VPS hosting?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                A Virtual Private Server gives you dedicated resources and full root access on isolated virtualized hardware.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> Can I upgrade my VPS later?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Yes, you can scale your resources up anytime from your dashboard with minimal downtime.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> Do you offer managed VPS?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Yes, managed VPS support is available as an add-on if you'd rather we handle server maintenance for you.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> Is DDoS protection included?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Yes, enterprise-grade DDoS protection is included on every VPS plan by default.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> Do you provide backups?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Optional automated backups are available for every VPS plan, giving you peace of mind.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA panel -->
+      <div class="gradient-accent rounded-3xl p-10 h-full text-white relative overflow-hidden">
+        <div class="absolute inset-0 grid-pattern opacity-10"></div>
+        <div class="absolute -bottom-8 -right-8 flex flex-col gap-1.5 opacity-90">
+          <div class="w-9 h-9 rounded-full bg-white/20 mx-auto mb-1"></div>
+          <div class="w-28 h-8 rounded-lg bg-white/15"></div>
+          <div class="w-28 h-8 rounded-lg bg-white/15"></div>
+          <div class="w-28 h-8 rounded-lg bg-white/15"></div>
+        </div>
+        <div class="relative max-w-xs">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-3">Ready to Deploy Your VPS?</h2>
+          <p class="text-white/80 mb-6">
+            Get started in minutes and take full control of your server today.
+          </p>
+          <a href="{% url 'website:contact' %}" class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-purple-700 rounded-xl text-sm font-semibold hover:opacity-90 transition-all w-fit">
+            Get Started Now
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  // ===== SCROLL REVEAL =====
+  const revealElements = document.querySelectorAll(".reveal");
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+  );
+
+  revealElements.forEach((el) => revealObserver.observe(el));
+</script>
+
+{% endblock %}
