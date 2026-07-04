@@ -1,0 +1,467 @@
+{% extends 'base.html' %}
+{% block title %} Bot Hosting {% endblock %}
+{% block content %}
+
+<main>
+  <!-- =================== HERO =================== -->
+  <section class="hero-bg relative overflow-hidden pt-12 pb-20 lg:pb-28">
+    <div class="absolute inset-0 grid-pattern opacity-40"></div>
+    <div class="absolute top-10 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-float-slow"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left content -->
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent text-xs font-semibold text-accent mb-6">
+            <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+            BOT HOSTING
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+            <span class="gradient-text-white">Reliable Bot Hosting</span><br />
+            <span class="gradient-text-white">For </span><span class="gradient-text">Discord & Beyond</span>
+          </h1>
+
+          <p class="text-lg text-text-dim leading-relaxed mb-8 max-w-lg">
+            Keep your bots online 24/7 with reliable performance, automatic
+            restarts, and powerful features developers love.
+          </p>
+
+          <div class="flex flex-wrap gap-4 mb-8">
+            <a href="#pricing" class="px-7 py-3.5 gradient-accent rounded-xl text-sm font-semibold btn-ripple hover:shadow-lg hover:shadow-secondary/25 transition-all flex items-center gap-2">
+              View Plans
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#features" class="px-7 py-3.5 glass rounded-xl text-sm font-semibold text-text-dim hover:text-primary hover:border-accent/30 transition-all">
+              All Features
+            </a>
+          </div>
+
+          <div class="flex flex-wrap gap-x-6 gap-y-3 text-xs text-text-muted">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="clock" class="w-4 h-4 text-accent-light"></i>
+              24/7 Uptime
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="rocket" class="w-4 h-4 text-accent-light"></i>
+              Instant Setup
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="refresh-cw" class="w-4 h-4 text-accent-light"></i>
+              Auto Restart
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="headset" class="w-4 h-4 text-accent-light"></i>
+              24/7 Support
+            </span>
+          </div>
+        </div>
+
+        <!-- Right illustration -->
+        <div class="relative hidden lg:block" style="animation: scale-in 0.8s ease-out 0.2s both">
+          <div class="relative mx-auto w-full max-w-md aspect-square flex items-center justify-center">
+            <div class="absolute w-[320px] h-[320px] border border-secondary/10 rounded-full animate-rotate-slow"></div>
+            <div class="absolute w-[240px] h-[240px] border border-accent/10 rounded-full" style="animation: rotate-slow 20s linear infinite reverse"></div>
+
+            <!-- Robot -->
+            <div class="relative w-44 h-44 rounded-3xl gradient-accent flex items-center justify-center shadow-2xl shadow-secondary/30 animate-pulse-glow">
+              <i data-lucide="bot" class="w-20 h-20 text-white/90"></i>
+            </div>
+            <div class="absolute -bottom-2 w-56 h-4 bg-secondary/20 rounded-full blur-xl"></div>
+
+            <!-- Terminal badge -->
+            <div class="absolute top-2 left-0 glass rounded-xl p-3 animate-float">
+              <i data-lucide="terminal" class="w-5 h-5 text-accent-light"></i>
+            </div>
+
+            <!-- Node badge -->
+            <div class="absolute top-20 -left-6 glass rounded-xl p-3 animate-float-slow">
+              <i data-lucide="hexagon" class="w-5 h-5 text-green-400"></i>
+            </div>
+
+            <!-- Python badge -->
+            <div class="absolute bottom-6 right-0 glass rounded-xl p-3 animate-float-reverse">
+              <i data-lucide="code-2" class="w-5 h-5 text-purple-400"></i>
+            </div>
+
+            <!-- Code snippet card -->
+            <div class="absolute top-4 right-0 glass rounded-xl p-3 font-mono text-[9px] leading-tight text-text-muted w-36">
+              <div class="flex gap-1 mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-white/30"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-white/30"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-white/30"></span>
+              </div>
+              <p>const bot = new Client();</p>
+              <p>bot.login(token);</p>
+              <p>bot.on('ready', () =></p>
+              <p>&nbsp;&nbsp;console.log('online'));</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== PRICING =================== -->
+  <section id="pricing" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+    <div class="reveal">
+      <p class="eyebrow text-xs font-semibold mb-3">CHOOSE YOUR PLAN</p>
+      <h2 class="text-3xl font-bold mb-3">Simple, Transparent Pricing</h2>
+      <p class="text-muted mb-12">All plans include the tools you need to keep your bots running.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+      <!-- Hobby -->
+      <div class="pricing-card rounded-2xl p-7">
+        <h3 class="font-semibold mb-1">Hobby</h3>
+        <p class="text-faint text-xs mb-5">Perfect for small bots</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹99</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">512 MB RAM</li>
+          <li class="check-mark">1 vCPU Core</li>
+          <li class="check-mark">10 GB SSD Storage</li>
+          <li class="check-mark">Unlimited Bandwidth</li>
+          <li class="check-mark">Auto Restart</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+
+      <!-- Pro (featured) -->
+      <div class="pricing-card featured rounded-2xl p-7 relative">
+        <span class="absolute -top-3 right-7 btn-primary text-white text-[11px] font-semibold px-3 py-1 rounded-full">Most Popular</span>
+        <h3 class="font-semibold mb-1">Pro</h3>
+        <p class="text-faint text-xs mb-5">Great for growing bots</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹199</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">1 GB RAM</li>
+          <li class="check-mark">1 vCPU Core</li>
+          <li class="check-mark">20 GB SSD Storage</li>
+          <li class="check-mark">Unlimited Bandwidth</li>
+          <li class="check-mark">Auto Restart</li>
+          <li class="check-mark">Priority Support</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-primary block text-center w-full text-white font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+
+      <!-- Advanced -->
+      <div class="pricing-card rounded-2xl p-7">
+        <h3 class="font-semibold mb-1">Advanced</h3>
+        <p class="text-faint text-xs mb-5">For advanced bots</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹399</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">2 GB RAM</li>
+          <li class="check-mark">2 vCPU Cores</li>
+          <li class="check-mark">40 GB SSD Storage</li>
+          <li class="check-mark">Unlimited Bandwidth</li>
+          <li class="check-mark">Auto Restart</li>
+          <li class="check-mark">Priority Support</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card rounded-2xl p-7">
+        <h3 class="font-semibold mb-1">Enterprise</h3>
+        <p class="text-faint text-xs mb-5">For large scale bots</p>
+        <p class="mb-6"><span class="text-3xl font-extrabold">₹699</span><span class="text-faint text-sm">/mo</span></p>
+        <ul class="text-sm text-muted space-y-2.5 mb-7">
+          <li class="check-mark">4 GB RAM</li>
+          <li class="check-mark">2 vCPU Cores</li>
+          <li class="check-mark">80 GB SSD Storage</li>
+          <li class="check-mark">Unlimited Bandwidth</li>
+          <li class="check-mark">Auto Restart</li>
+          <li class="check-mark">Priority Support</li>
+          <li class="check-mark">Custom Allocations</li>
+        </ul>
+        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== FEATURES =================== -->
+  <section id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+    <div class="reveal">
+      <p class="eyebrow text-xs font-semibold mb-3">POWERFUL FEATURES</p>
+      <h2 class="text-3xl font-bold mb-12">Everything You Need to Power Your Bots</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5 text-left">
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-1">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="server" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">24/7 Uptime</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Your bots stay online around the clock.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-2">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="refresh-cw" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">Auto Restart</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Automatically restarts your bot on crashes.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-3">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="terminal" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">Built-in Console</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Access logs, run commands in real-time.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-1">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="code-2" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">Multi Language</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Supports Node.js, Python, Java & more.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-2">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="database-backup" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">Daily Backups</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Automatic daily backups for safety.</p>
+      </div>
+
+      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-3">
+        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+          <i data-lucide="shield" class="w-6 h-6 text-purple-400"></i>
+        </div>
+        <h3 class="font-semibold mb-2 text-sm">DDoS Protection</h3>
+        <p class="text-text-dim text-xs leading-relaxed">Enterprise-grade DDoS protection.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== BUILT FOR DEVELOPERS =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+    <div class="reveal">
+      <p class="eyebrow text-xs font-semibold mb-3">SUPPORT FOR POPULAR TECHNOLOGIES</p>
+      <h2 class="text-3xl font-bold mb-12">Built for Developers</h2>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="gs-region-card rounded-xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="hexagon" class="w-5 h-5 text-green-400"></i>
+        </div>
+        <div class="text-left">
+          <div class="text-sm font-medium">Node.js</div>
+          <div class="text-xs text-text-muted">14.x - 20.x</div>
+        </div>
+      </div>
+      <div class="gs-region-card rounded-xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="code-2" class="w-5 h-5 text-blue-400"></i>
+        </div>
+        <div class="text-left">
+          <div class="text-sm font-medium">Python</div>
+          <div class="text-xs text-text-muted">3.8 - 3.12</div>
+        </div>
+      </div>
+      <div class="gs-region-card rounded-xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="bot" class="w-5 h-5 text-indigo-400"></i>
+        </div>
+        <div class="text-left">
+          <div class="text-sm font-medium">Discord.js</div>
+          <div class="text-xs text-text-muted">v13, v14</div>
+        </div>
+      </div>
+      <div class="gs-region-card rounded-xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-sky-500/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="file-code" class="w-5 h-5 text-sky-400"></i>
+        </div>
+        <div class="text-left">
+          <div class="text-sm font-medium">Typescript</div>
+          <div class="text-xs text-text-muted">Latest</div>
+        </div>
+      </div>
+      <div class="gs-region-card rounded-xl p-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="coffee" class="w-5 h-5 text-orange-400"></i>
+        </div>
+        <div class="text-left">
+          <div class="text-sm font-medium">Java</div>
+          <div class="text-xs text-text-muted">17, 21</div>
+        </div>
+      </div>
+      <div class="gs-region-card rounded-xl p-4 flex items-center gap-3 justify-center">
+        <div class="text-left">
+          <div class="text-sm font-medium text-accent">+ More</div>
+          <div class="text-xs text-text-muted">Many more runtimes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== WHY CHOOSE =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+    <div class="reveal">
+      <p class="eyebrow text-xs font-semibold mb-3">WHY CHOOSE INPIXEL CLOUD</p>
+      <h2 class="text-3xl font-bold mb-12">Built Reliable. Built for You.</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left">
+      <div class="glass rounded-xl2 p-5 card-hover reveal reveal-delay-1 flex items-start gap-3">
+        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="hexagon" class="w-5 h-5 text-accent-light"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1 text-sm">High Performance</h3>
+          <p class="text-text-dim text-xs leading-relaxed">Powered by high-performance servers for smooth operation.</p>
+        </div>
+      </div>
+
+      <div class="glass rounded-xl2 p-5 card-hover reveal reveal-delay-2 flex items-start gap-3">
+        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="globe" class="w-5 h-5 text-accent-light"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1 text-sm">Global Locations</h3>
+          <p class="text-text-dim text-xs leading-relaxed">Multiple locations worldwide for low latency.</p>
+        </div>
+      </div>
+
+      <div class="glass rounded-xl2 p-5 card-hover reveal reveal-delay-3 flex items-start gap-3">
+        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="check-circle" class="w-5 h-5 text-accent-light"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1 text-sm">Easy to Use</h3>
+          <p class="text-text-dim text-xs leading-relaxed">Simple dashboard to deploy, manage and monitor.</p>
+        </div>
+      </div>
+
+      <div class="glass rounded-xl2 p-5 card-hover reveal reveal-delay-1 flex items-start gap-3">
+        <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="headset" class="w-5 h-5 text-accent-light"></i>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-1 text-sm">24/7 Expert Support</h3>
+          <p class="text-text-dim text-xs leading-relaxed">Our support team is always here to help you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== FAQ + CTA =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+    <div class="grid lg:grid-cols-2 gap-8 items-start">
+      <div>
+        <p class="eyebrow text-xs font-semibold mb-6 reveal">FREQUENTLY ASKED QUESTIONS</p>
+        <div class="space-y-3" id="faq-list">
+          <div class="faq-item open rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> How quickly will my bot be online?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Your bot hosting is provisioned instantly, and your bot can be online within a couple of minutes of upload.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> What languages and frameworks are supported?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                We support Node.js, Python, Java, TypeScript, and most popular Discord bot libraries out of the box.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> What happens if my bot crashes?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Our auto-restart system detects crashes and brings your bot back online automatically within seconds.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> Can I upgrade or downgrade my plan?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Yes, you can change your plan anytime from your dashboard with no downtime.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> Do you offer refunds?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Yes, all plans come with a 30-day money-back guarantee, no questions asked.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA panel -->
+      <div class="gradient-accent rounded-3xl p-10 h-full text-white relative overflow-hidden">
+        <div class="absolute inset-0 grid-pattern opacity-10"></div>
+        <div class="absolute -bottom-6 -right-6 w-36 h-36 rounded-3xl bg-white/10 flex items-center justify-center animate-float-slow">
+          <i data-lucide="bot" class="w-20 h-20 text-white/90"></i>
+        </div>
+        <div class="relative max-w-xs">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-3">Ready to Keep Your Bot Online 24/7?</h2>
+          <p class="text-white/80 mb-6">
+            Join thousands of developers who trust InPixel Cloud for their bot hosting.
+          </p>
+          <a href="{% url 'website:contact' %}" class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-purple-700 rounded-xl text-sm font-semibold hover:opacity-90 transition-all w-fit">
+            Get Started Now
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  // ===== SCROLL REVEAL =====
+  const revealElements = document.querySelectorAll(".reveal");
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+  );
+
+  revealElements.forEach((el) => revealObserver.observe(el));
+</script>
+
+{% endblock %}

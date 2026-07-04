@@ -1,0 +1,19 @@
+* [33m89068d5[m[33m ([m[1;32mmain[m[33m)[m Add bot/Vps hosting pages
+*   [33m7a025c0[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #5 from AjayYadav-dev009/sub-service
+[32m|[m[33m\[m  
+[32m|[m * [33m6c73249[m[33m ([m[1;31morigin/sub-service[m[33m)[m Added sub-service pages
+[32m|[m[32m/[m  
+*   [33m88d8caf[m Merge pull request #4 from AjayYadav-dev009/service
+[34m|[m[35m\[m  
+[34m|[m * [33m474a82c[m[33m ([m[1;31morigin/service[m[33m)[m Fixed service page
+[34m|[m *   [33m5aeb34c[m Merge branch 'main' of https://github.com/AjayYadav-dev009/inpixel_cloud
+[34m|[m [36m|[m[34m\[m  
+[34m|[m [36m|[m[34m/[m  
+[34m|[m[34m/[m[36m|[m   
+* [36m|[m   [33me7d02e1[m Merge pull request #3 from AjayYadav-dev009/cuckoo_1
+[1;32m|[m[1;33m\[m [36m\[m  
+[1;32m|[m * [36m|[m [33m92f5459[m About page add and sucss
+[1;32m|[m[1;32m/[m [36m/[m  
+* [36m|[m   [33md3dcf84[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mpages[m[33m)[m Merge pull request #2 from AjayYadav-dev009/pages
+[1;34m|[m[1;35m\[m [36m\[m  
+[1;34m|[m * [36m|[m [33m8cb3c64[m[33m ([m[1;31morigin/pages[m[33m)[m Fixed contact, and nav dropdowns

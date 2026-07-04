@@ -1,1769 +1,256 @@
 {% extends 'base.html' %}
-{% block title %} Service {% endblock %} 
-{% load static %}
+{% block title %} Our Services {% endblock %}
 {% block content %}
 
-<style>
-
-  /* ===================================================================
-   0. TOKEN BRIDGE
-   This page was built against a different variable-naming convention
-   than the rest of the site (site-global.css / style.css). These names
-   (--color-bg, --fs-base, --fw-semibold, --gradient-text, etc.) were
-   never defined anywhere, so the browser silently ignored them and the
-   page fell back to unstyled defaults. This block maps them onto the
-   real tokens already defined in site-global.css / style.css, so this
-   page now matches index.html and contact.html.
-   =================================================================== */
-  :root {
-    --color-bg: var(--bg-base);
-    --color-bg-alt: var(--bg-panel-light);
-    --color-surface: var(--bg-panel);
-    --color-text-primary: var(--text-primary);
-    --color-text-secondary: var(--text-secondary);
-    --color-border: var(--border-subtle);
-    --color-border-strong: var(--border-tinted);
-
-    --font-base: var(--font-sans);
-    --fs-xs: var(--text-xs);
-    --fs-sm: var(--text-sm);
-    --fs-base: 1rem;
-    --fs-md: 1.0625rem;
-    --fs-lg: var(--text-lg);
-    --fs-xl: var(--text-xl);
-    --fs-2xl: var(--text-2xl);
-    --fs-3xl: var(--text-3xl);
-    --fs-4xl: var(--text-4xl);
-
-    --fw-regular: 400;
-    --fw-medium: var(--font-weight-medium);
-    --fw-semibold: var(--font-weight-semibold);
-    --fw-bold: var(--font-weight-bold);
-    --fw-extrabold: var(--font-weight-extrabold);
-
-    --ls-wider: var(--tracking-widest);
-    --lh-tight: var(--leading-tight);
-    --lh-snug: 1.35;
-    --lh-normal: 1.6;
-
-    --radius-full: 9999px;
-
-    --gradient-text: linear-gradient(
-      135deg,
-      var(--accent-light) 0%,
-      var(--accent) 50%,
-      var(--accent-light) 100%
-    );
-    --gradient-hero-glow: radial-gradient(
-      circle at 50% 0%,
-      var(--hero-glow-strong),
-      transparent 60%
-    );
-    --gradient-purple-pink: linear-gradient(135deg, #a855f7, #ec4899);
-    --gradient-blue: linear-gradient(135deg, #60a5fa, #3b82f6);
-    --gradient-purple: linear-gradient(135deg, #8b5cf6, var(--accent));
-    --gradient-green: linear-gradient(135deg, #34d399, #10b981);
-    --gradient-cta: linear-gradient(135deg, var(--accent), #6d28d9);
-
-    --shadow-card-hover: 0 20px 40px rgba(0, 0, 0, 0.25);
-    --shadow-icon: 0 8px 20px rgba(0, 0, 0, 0.25);
-    --shadow-btn-purple: 0 10px 24px rgba(168, 85, 247, 0.35);
-    --shadow-btn-blue: 0 10px 24px rgba(59, 130, 246, 0.35);
-    --shadow-btn-green: 0 10px 24px rgba(16, 185, 129, 0.35);
-    --shadow-cta: 0 20px 50px rgba(124, 58, 237, 0.35);
-
-    --transition-fast: 0.15s ease;
-    --transition-base: 0.25s ease;
-    --transition-slow: 0.35s ease;
-
-    --space-section-y: 6rem;
-  }
-
-  /* ===================================================================
-   3. BASE
-   =================================================================== */
-  body {
-    background-color: var(--color-bg);
-    color: var(--color-text-primary);
-    font-family: var(--font-base);
-    font-size: var(--fs-base);
-    line-height: var(--lh-normal);
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--color-purple-400);
-    outline-offset: 3px;
-    border-radius: var(--radius-sm);
-  }
-
-  /* ===================================================================
-   4. TYPOGRAPHY
-   =================================================================== */
-  .section-eyebrow {
-    display: inline-block;
-    font-size: var(--fs-xs);
-    font-weight: var(--fw-semibold);
-    letter-spacing: var(--ls-wider);
-    text-transform: uppercase;
-    color: var(--color-purple-400);
-    background: rgba(139, 92, 246, 0.12);
-    border: 1px solid rgba(139, 92, 246, 0.25);
-    padding: 0.35rem 0.9rem;
-    border-radius: var(--radius-full);
-    margin-bottom: 1.25rem;
-  }
-
-  .section-title {
-    font-size: var(--fs-3xl);
-    font-weight: var(--fw-extrabold);
-    letter-spacing: -0.01em;
-    line-height: var(--lh-tight);
-    color: var(--color-text-primary);
-    margin-bottom: 0.9rem;
-  }
-
-  .section-subtitle {
-    font-size: var(--fs-md);
-    color: var(--color-text-secondary);
-    line-height: var(--lh-normal);
-    max-width: 38rem;
-  }
-
-  .text-gradient {
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  /* ===================================================================
-   5. HERO / SERVICES SECTION
-   =================================================================== */
-  .services-section {
-    position: relative;
-    background-color: var(--color-bg);
-    overflow: hidden;
-    padding-top: 4.5rem;
-    padding-bottom: var(--space-section-y);
-    display: flex;
-  }
-
-  .services-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-hero-glow);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .services-hero {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    margin-bottom: 3.5rem;
-  }
-
-  .services-hero__title {
-    font-size: var(--fs-4xl);
-    font-weight: var(--fw-extrabold);
-    letter-spacing: -0.015em;
-    line-height: var(--lh-tight);
-    margin-bottom: 1.1rem;
-  }
-
-  .services-hero__subtitle {
-    font-size: var(--fs-lg);
-    font-weight: var(--fw-regular);
-    color: var(--color-text-secondary);
-    max-width: 34rem;
-    margin: 0 auto;
-  }
-
-  /* decorative server stack art */
-  .hero-decor {
-    position: absolute;
-    top: -4rem;
-    z-index: 1;
-    opacity: 0.9;
-    filter: drop-shadow(0 10px 30px rgba(124, 58, 237, 0.25));
-    pointer-events: none;
-  }
-
-  .hero-decor--left {
-    left: 1rem;
-  }
-
-  .hero-decor--right {
-    right: 1rem;
-  } 
-
-  /* ===================================================================
-   6. CARDS — Service Cards
-   =================================================================== */
-  .service-cards {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-  }
-
-  .service-card {
-    background: linear-gradient(
-      160deg,
-      var(--color-surface) 0%,
-      var(--color-bg-alt) 100%
-    );
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 2rem 1.75rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition:
-      transform var(--transition-base),
-      box-shadow var(--transition-base),
-      border-color var(--transition-base);
-  }
-
-  .service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-card-hover);
-    border-color: var(--color-border-strong);
-  }
-
-  .service-card__icon {
-    width: 64px;
-    height: 64px;
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.4rem;
-    box-shadow: var(--shadow-icon);
-  }
-
-  .service-card__icon--purple {
-    background: var(--gradient-purple-pink);
-  }
-
-  .service-card__icon--blue {
-    background: var(--gradient-blue);
-  }
-
-  .service-card__icon--violet {
-    background: var(--gradient-purple);
-  }
-
-  .service-card__icon--dark {
-    background: linear-gradient(160deg, #1c2230 0%, #11151f 100%);
-    border: 1px solid rgba(52, 211, 153, 0.3);
-  }
-
-  .service-card__title {
-    font-size: var(--fs-xl);
-    font-weight: var(--fw-bold);
-    margin-bottom: 0.75rem;
-  }
-
-  .service-card__desc {
-    font-size: var(--fs-sm);
-    color: var(--color-text-secondary);
-    line-height: var(--lh-normal);
-    margin-bottom: 1.4rem;
-    min-height: 4.6rem;
-  }
-
-  .service-card__features {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
-    margin-bottom: 1.75rem;
-    text-align: left;
-  }
-
-  .service-card__feature {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: var(--fs-sm);
-    color: var(--color-text-secondary);
-  }
-
-  .service-card__feature-icon {
-    flex-shrink: 0;
-    color: var(--color-green-400);
-  }
-
-  .service-card__cta {
-    width: 100%;
-    margin-top: auto;
-  }
-
-  /* ===================================================================
-   7. BUTTONS
-   =================================================================== */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: var(--fs-sm);
-    font-weight: var(--fw-semibold);
-    border-radius: var(--radius-md);
-    padding: 0.75rem 1.25rem;
-    width: 100%;
-    transition:
-      transform var(--transition-fast),
-      box-shadow var(--transition-fast),
-      filter var(--transition-fast);
-  }
-
-  .btn svg {
-    transition: transform var(--transition-fast);
-  }
-
-  .btn:hover svg {
-    transform: translateX(3px);
-  }
-
-  .btn:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.08);
-  }
-
-  .btn:active {
-    transform: translateY(0);
-  }
-
-  .btn--purple {
-    background: var(--gradient-purple-pink);
-    color: #fff;
-    box-shadow: var(--shadow-btn-purple);
-  }
-
-  .btn--blue {
-    background: var(--gradient-blue);
-    color: #fff;
-    box-shadow: var(--shadow-btn-blue);
-  }
-
-  .btn--green {
-    background: var(--gradient-green);
-    color: #fff;
-    box-shadow: var(--shadow-btn-green);
-  }
-
-  .btn--cta {
-    background: #fff;
-    color: var(--color-purple-700);
-    width: auto;
-    padding: 0.85rem 1.6rem;
-    font-size: var(--fs-base);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  }
-
-  .btn--cta:hover {
-    filter: none;
-    background: #f5f3ff;
-  }
-
-  /* ===================================================================
-   8. COMPARISON TABLE
-   =================================================================== */
-  .compare-section {
-    position: relative;
-    z-index: 2;
-    padding-bottom: var(--space-section-y);
-  }
-
-  .compare-section__head {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-
-  .compare-table-wrap {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    overflow-x: auto;
-  }
-
-  .compare-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 760px;
-  }
-
-  .compare-table th,
-  .compare-table td {
-    padding: 1.1rem 1.5rem;
-    text-align: center;
-    border-bottom: 1px solid var(--color-border);
-    white-space: nowrap;
-  }
-
-  .compare-table tr:last-child th,
-  .compare-table tr:last-child td {
-    border-bottom: none;
-  }
-
-  .compare-table thead th {
-    font-size: var(--fs-base);
-    font-weight: var(--fw-bold);
-    color: var(--color-text-primary);
-  }
-
-  .compare-table thead th:first-child {
-    text-align: left;
-    color: var(--color-purple-400);
-    font-weight: var(--fw-semibold);
-  }
-
-  .compare-table tbody th {
-    text-align: left;
-    font-weight: var(--fw-medium);
-    color: var(--color-text-secondary);
-    font-size: var(--fs-sm);
-  }
-
-  .compare-table tbody td {
-    font-size: var(--fs-sm);
-    color: var(--color-text-secondary);
-  }
-
-  .compare-table__head-cell {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    justify-content: center;
-  }
-
-  .compare-table__head-icon {
-    width: 26px;
-    height: 26px;
-    border-radius: var(--radius-sm);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .compare-table__head-icon--purple {
-    background: var(--gradient-purple-pink);
-  }
-
-  .compare-table__head-icon--blue {
-    background: var(--gradient-blue);
-  }
-
-  .compare-table__head-icon--violet {
-    background: var(--gradient-purple);
-  }
-
-  .compare-table__head-icon--dark {
-    background: linear-gradient(160deg, #1c2230 0%, #11151f 100%);
-    border: 1px solid rgba(52, 211, 153, 0.3);
-  }
-
-  .tag {
-    display: inline-block;
-    font-size: var(--fs-xs);
-    font-weight: var(--fw-semibold);
-    padding: 0.25rem 0.7rem;
-    border-radius: var(--radius-full);
-    letter-spacing: 0.01em;
-  }
-
-  .tag--green {
-    background: rgba(16, 185, 129, 0.14);
-    color: var(--color-green-400);
-  }
-
-  .tag--amber {
-    background: rgba(245, 158, 11, 0.14);
-    color: var(--color-amber-400);
-  }
-
-  .price-cell {
-    font-size: var(--fs-lg);
-    font-weight: var(--fw-bold);
-  }
-
-  .price-cell--purple {
-    color: var(--color-purple-400);
-  }
-
-  .price-cell--blue {
-    color: var(--color-blue-400);
-  }
-
-  .price-cell--violet {
-    color: #c084fc;
-  }
-
-  .price-cell--green {
-    color: var(--color-green-400);
-  }
-
-  .price-cell__period {
-    font-size: var(--fs-xs);
-    font-weight: var(--fw-regular);
-    color: var(--color-text-muted);
-  }
-
-  /* ===================================================================
-   9. FEATURE STRIP
-   =================================================================== */
-  .feature-strip {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 1.75rem 1.5rem;
-    margin-bottom: var(--space-section-y);
-  }
-
-  .feature-strip__item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
-  }
-
-  .feature-strip__icon {
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .feature-strip__icon--blue {
-    background: rgba(59, 130, 246, 0.12);
-    color: var(--color-blue-400);
-  }
-
-  .feature-strip__icon--white {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--color-text-primary);
-  }
-
-  .feature-strip__icon--green {
-    background: rgba(16, 185, 129, 0.12);
-    color: var(--color-green-400);
-  }
-
-  .feature-strip__icon--purple {
-    background: rgba(139, 92, 246, 0.12);
-    color: var(--color-purple-400);
-  }
-
-  .feature-strip__title {
-    font-size: var(--fs-sm);
-    font-weight: var(--fw-bold);
-    color: var(--color-text-primary);
-    margin-bottom: 0.25rem;
-  }
-
-  .feature-strip__desc {
-    font-size: var(--fs-xs);
-    color: var(--color-text-muted);
-    line-height: var(--lh-snug);
-  }
-
-  /* ===================================================================
-   10. FAQ SECTION
-   =================================================================== */
-  .faq-section {
-    position: relative;
-    z-index: 2;
-    padding-bottom: var(--space-section-y);
-  }
-
-  .faq-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
-
-  .faq-grid__head {
-    text-align: left;
-    margin-bottom: 2rem;
-  }
-
-  .faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .faq-item {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    transition: border-color var(--transition-base);
-  }
-
-  .faq-item:hover {
-    border-color: var(--color-border-strong);
-  }
-
-  .faq-item.is-open {
-    border-color: rgba(139, 92, 246, 0.35);
-  }
-
-  .faq-item__question {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    padding: 1.1rem 1.4rem;
-    font-size: var(--fs-sm);
-    font-weight: var(--fw-medium);
-    color: var(--color-text-primary);
-    text-align: left;
-  }
-
-  .faq-item__chevron-open {
-    color: var(--color-purple-400);
-    flex-shrink: 0;
-  }
-
-  .faq-item__question-text {
-    flex: 1;
-  }
-
-  .faq-item__caret {
-    flex-shrink: 0;
-    color: var(--color-text-muted);
-    transition: transform var(--transition-base);
-  }
-
-  .faq-item.is-open .faq-item__caret {
-    transform: rotate(180deg);
-    color: var(--color-purple-400);
-  }
-
-  .faq-item__answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height var(--transition-slow);
-  }
-
-  .faq-item__answer-inner {
-    padding: 0 1.4rem 1.1rem 3.2rem;
-    font-size: var(--fs-sm);
-    color: var(--color-text-secondary);
-    line-height: var(--lh-normal);
-  }
-
-  .faq-visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  /* ===================================================================
-   11. CTA BANNER
-   =================================================================== */
-  .cta-banner {
-    position: relative;
-    z-index: 2;
-    background: var(--gradient-cta);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-cta);
-    padding: 2.75rem 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-bottom: var(--space-section-y);
-  }
-
-  .cta-banner::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at 85% 20%,
-      rgba(255, 255, 255, 0.12),
-      transparent 55%
-    );
-    pointer-events: none;
-  }
-
-  .cta-banner__left {
-    display: flex;
-    align-items: center;
-    gap: 1.75rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .cta-banner__icon {
-    flex-shrink: 0;
-    width: 64px;
-    height: 64px;
-  }
-
-  .cta-banner__title {
-    font-size: var(--fs-2xl);
-    font-weight: var(--fw-extrabold);
-    color: #fff;
-    margin-bottom: 0.3rem;
-  }
-
-  .cta-banner__desc {
-    font-size: var(--fs-base);
-    color: rgba(255, 255, 255, 0.78);
-  }
-
-  .cta-banner__action {
-    position: relative;
-    z-index: 1;
-    flex-shrink: 0;
-  }
-
-  /* ===================================================================
-   12. UTILITIES
-   =================================================================== */
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-  }
-
-  .star-field {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .star {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: #fff;
-    border-radius: 50%;
-    opacity: 0.5;
-  }
-
-  /* ===================================================================
-   13. RESPONSIVE
-   =================================================================== */
-  @media (max-width: 1024px) {
-    .service-cards {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .feature-strip {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .faq-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .faq-visual {
-      display: none;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .compare-table-wrap {
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .hero-decor {
-      display: none;
-    }
-
-    .feature-strip {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .cta-banner {
-      flex-direction: column;
-      text-align: center;
-      padding: 2.25rem 1.75rem;
-    }
-
-    .cta-banner__left {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .cta-banner__action {
-      width: 100%;
-    }
-
-    .cta-banner__action .btn--cta {
-      width: 100%;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .service-cards {
-      grid-template-columns: 1fr;
-    }
-
-    .feature-strip {
-      grid-template-columns: 1fr;
-    }
-
-    .services-hero__title {
-      font-size: var(--fs-3xl);
-    }
-
-    .section-title {
-      font-size: var(--fs-2xl);
-    }
-  }
-</style>
-
 <main>
-  <!-- =================== OUR SERVICES =================== -->
-  <section class="services-section" aria-labelledby="services-heading">
-    <div class="star-field" aria-hidden="true" id="starField"></div>
+  <!-- =================== HERO =================== -->
+  <section class="hero-bg relative overflow-hidden pt-16 pb-16 text-center">
+    <div class="absolute inset-0 grid-pattern opacity-40"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-secondary/5 rounded-full blur-[120px]"></div>
 
-    
-    <div class="container mx-auto px-6">
-      <div class="services-hero">
-        <svg
-          class="hero-decor hero-decor--left"
-          width="220"
-          height="200"
-          viewBox="0 0 220 200"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <g opacity="0.85">
-            <rect
-              x="20"
-              y="60"
-              width="90"
-              height="120"
-              rx="4"
-              fill="#1c1830"
-              stroke="#3a3160"
-              stroke-width="1.5"
-            />
-            <rect
-              x="30"
-              y="72"
-              width="70"
-              height="6"
-              rx="2"
-              fill="#8b5cf6"
-              opacity="0.7"
-            />
-            <rect x="30" y="86" width="50" height="4" rx="2" fill="#4c4470" />
-            <rect x="30" y="96" width="60" height="4" rx="2" fill="#4c4470" />
-            <circle cx="92" cy="72" r="3" fill="#a78bfa" />
-            <rect
-              x="0"
-              y="90"
-              width="90"
-              height="110"
-              rx="4"
-              fill="#211c3a"
-              stroke="#3a3160"
-              stroke-width="1.5"
-            />
-            <rect
-              x="10"
-              y="102"
-              width="70"
-              height="6"
-              rx="2"
-              fill="#60a5fa"
-              opacity="0.7"
-            />
-            <rect x="10" y="116" width="45" height="4" rx="2" fill="#4c4470" />
-            <rect x="10" y="126" width="55" height="4" rx="2" fill="#4c4470" />
-            <circle cx="72" cy="102" r="3" fill="#93c5fd" />
-          </g>
-        </svg>
-    
-        <svg
-          class="hero-decor hero-decor--right"
-          width="240"
-          height="200"
-          viewBox="0 0 240 200"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <g opacity="0.85">
-            <rect
-              x="120"
-              y="55"
-              width="95"
-              height="125"
-              rx="4"
-              fill="#1c1830"
-              stroke="#3a3160"
-              stroke-width="1.5"
-            />
-            <rect
-              x="130"
-              y="68"
-              width="75"
-              height="6"
-              rx="2"
-              fill="#8b5cf6"
-              opacity="0.7"
-            />
-            <rect x="130" y="82" width="55" height="4" rx="2" fill="#4c4470" />
-            <rect x="130" y="92" width="65" height="4" rx="2" fill="#4c4470" />
-            <circle cx="198" cy="68" r="3" fill="#a78bfa" />
-            <rect
-              x="40"
-              y="85"
-              width="92"
-              height="110"
-              rx="4"
-              fill="#211c3a"
-              stroke="#3a3160"
-              stroke-width="1.5"
-            />
-            <rect
-              x="50"
-              y="97"
-              width="72"
-              height="6"
-              rx="2"
-              fill="#60a5fa"
-              opacity="0.7"
-            />
-            <rect x="50" y="111" width="48" height="4" rx="2" fill="#4c4470" />
-            <rect x="50" y="121" width="58" height="4" rx="2" fill="#4c4470" />
-            <circle cx="113" cy="97" r="3" fill="#93c5fd" />
-            <circle cx="20" cy="150" r="22" fill="#2a2350" />
-            <circle cx="12" cy="145" r="3" fill="#34d399" />
-            <circle cx="28" cy="145" r="3" fill="#34d399" />
-            <rect x="6" y="160" width="28" height="6" rx="3" fill="#3a3160" />
-          </g>
-        </svg>
-        <span class="section-eyebrow">Our Services</span>
-        <h1 id="services-heading" class="services-hero__title">
-          Our Hosting <span class="text-gradient">Solutions</span>
-        </h1>
-        <p class="services-hero__subtitle">
-          Powerful, reliable, and secure hosting solutions designed for
-          developers, businesses, and communities.
-        </p>
+    <!-- Decorative server stacks -->
+    <div class="absolute top-10 left-6 hidden md:block opacity-70 animate-float-slow">
+      <div class="w-28 space-y-1">
+        <div class="h-8 rounded-md glass"></div>
+        <div class="h-8 rounded-md glass ml-3"></div>
+        <div class="h-8 rounded-md glass ml-6"></div>
+      </div>
+    </div>
+    <div class="absolute top-10 right-6 hidden md:block opacity-70 animate-float-reverse">
+      <div class="w-28 space-y-1 ml-auto">
+        <div class="h-8 rounded-md glass"></div>
+        <div class="h-8 rounded-md glass mr-3"></div>
+        <div class="h-8 rounded-md glass mr-6"></div>
+      </div>
+    </div>
+
+    <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold text-text-dim mb-6">
+        OUR SERVICES
       </div>
 
-      <div class="service-cards">
-        <!-- Web Hosting -->
-        <article class="service-card" id="web-hosting">
-          <div
-            class="service-card__icon service-card__icon--purple"
-            aria-hidden="true"
-          >
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#fff"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="4" width="18" height="16" rx="2" />
-              <path d="M3 9h18" />
-              <circle cx="6.5" cy="6.5" r="0.6" fill="#fff" />
-              <circle cx="9" cy="6.5" r="0.6" fill="#fff" />
-              <circle cx="11.5" cy="6.5" r="0.6" fill="#fff" />
-              <circle cx="12" cy="14.5" r="4.2" />
-              <path
-                d="M7.8 14.5h8.4M12 10.3c1.6 1.4 1.6 7 0 8.4M12 10.3c-1.6 1.4-1.6 7 0 8.4"
-              />
-            </svg>
-          </div>
-          <h2 class="service-card__title">Web Hosting</h2>
-          <p class="service-card__desc">
-            Perfect for websites, blogs, and business sites. Fast, secure, and
-            easy to use.
-          </p>
-          <ul class="service-card__features">
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Free SSL Certificate
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              One-Click Installations
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Daily Backups
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              24/7 Support
-            </li>
-          </ul>
-          <div class="service-card__cta">
-            <a
-              href="#"
-              class="btn btn--purple"
-              aria-label="Learn more about Web Hosting"
-            >
-              Learn More
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+        <span class="gradient-text-white">Our Hosting</span>
+        <span class="gradient-text">Solutions</span>
+      </h1>
 
-        <!-- VPS Hosting -->
-        <article class="service-card" id="vps-hosting">
-          <div
-            class="service-card__icon service-card__icon--blue"
-            aria-hidden="true"
-          >
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#fff"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="3" width="14" height="5" rx="1.2" />
-              <rect x="3" y="10" width="14" height="5" rx="1.2" />
-              <circle cx="6" cy="5.5" r="0.6" fill="#fff" stroke="none" />
-              <circle cx="6" cy="12.5" r="0.6" fill="#fff" stroke="none" />
-              <path
-                d="M16 18.5a3.5 3.5 0 0 0 .5-7 4.2 4.2 0 0 0-8.1-1.2A3.3 3.3 0 0 0 7 17h9.5z"
-              />
-            </svg>
-          </div>
-          <h2 class="service-card__title">VPS Hosting</h2>
-          <p class="service-card__desc">
-            Full control VPS servers with dedicated resources and unlimited
-            possibilities.
-          </p>
-          <ul class="service-card__features">
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Root Access
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              NVMe SSD Storage
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Scalable Resources
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              DDoS Protection
-            </li>
-          </ul>
-          <div class="service-card__cta">
-            <a
-              href="#"
-              class="btn btn--blue"
-              aria-label="Learn more about VPS Hosting"
-            >
-              Learn More
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
+      <p class="text-lg text-text-dim leading-relaxed max-w-2xl mx-auto">
+        Powerful, reliable, and secure hosting solutions designed for
+        developers, businesses, and communities.
+      </p>
+    </div>
+  </section>
 
-        <!-- Game Servers -->
-        <article class="service-card" id="game-servers">
-          <div
-            class="service-card__icon service-card__icon--violet"
-            aria-hidden="true"
-          >
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#fff"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="2.5" y="4" width="13" height="16" rx="2" />
-              <path d="M2.5 9h13" />
-              <circle cx="6" cy="6.5" r="0.5" fill="#fff" stroke="none" />
-              <circle cx="8.2" cy="6.5" r="0.5" fill="#fff" stroke="none" />
-              <path
-                d="M16.5 9.5c2.2 0 4 1.5 4.6 4.3.4 1.9-.4 3.7-1.8 3.9-1 .1-1.6-.6-2.3-1.4-.6-.7-1.2-1.3-2-1.3h-1"
-              />
-              <circle cx="16.2" cy="13" r="0.9" fill="#fff" stroke="none" />
-              <circle cx="19.4" cy="14.4" r="0.9" fill="#fff" stroke="none" />
-            </svg>
-          </div>
-          <h2 class="service-card__title">Game Servers</h2>
-          <p class="service-card__desc">
-            High-performance game servers for Minecraft, FiveM, CS2, and many
-            more.
-          </p>
-          <ul class="service-card__features">
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Instant Setup
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Low Latency
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              DDoS Protection
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Mod &amp; Plugin Support
-            </li>
-          </ul>
-          <div class="service-card__cta">
-            <a
-              href=""
-              class="btn btn--purple"
-              aria-label="Learn more about Game Servers"
-            >
-              Learn More
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
+  <!-- =================== SERVICE CARDS =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+      <!-- Web Hosting -->
+      <div class="glass rounded-xl2 p-7 card-hover gradient-border reveal reveal-delay-1 flex flex-col">
+        <div class="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-5">
+          <i data-lucide="globe" class="w-8 h-8 text-secondary"></i>
+        </div>
+        <h3 class="text-lg font-bold mb-2">Web Hosting</h3>
+        <p class="text-text-dim text-sm leading-relaxed mb-5">
+          Perfect for websites, blogs, and business sites. Fast, secure, and easy to use.
+        </p>
+        <ul class="text-sm text-muted space-y-2 mb-6">
+          <li class="check-mark">Free SSL Certificate</li>
+          <li class="check-mark">One-Click Installations</li>
+          <li class="check-mark">Daily Backups</li>
+          <li class="check-mark">24/7 Support</li>
+        </ul>
+        <a href="/web-hosting/" class="mt-auto btn-primary block text-center w-full text-white font-medium py-2.5 rounded-lg text-sm flex items-center justify-center gap-2">
+          Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
 
-        <!-- Bot Hosting -->
-        <article class="service-card" id="bot-hosting">
-          <div
-            class="service-card__icon service-card__icon--dark"
-            aria-hidden="true"
-          >
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#34d399"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="4" y="8" width="16" height="11" rx="3" />
-              <path d="M12 8V5" />
-              <circle cx="12" cy="3.5" r="1.4" fill="#34d399" stroke="none" />
-              <circle cx="9" cy="13.5" r="1.3" fill="#34d399" stroke="none" />
-              <circle cx="15" cy="13.5" r="1.3" fill="#34d399" stroke="none" />
-              <path d="M9 17h6" />
-              <path d="M2 12v3M22 12v3" />
-            </svg>
-          </div>
-          <h2 class="service-card__title">Bot Hosting</h2>
-          <p class="service-card__desc">
-            Keep your bots online 24/7 with reliable and affordable bot hosting.
-          </p>
-          <ul class="service-card__features">
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Discord Bot Hosting
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Multiple Languages
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              Auto Restart
-            </li>
-            <li class="service-card__feature">
-              <svg
-                class="service-card__feature-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-              24/7 Uptime
-            </li>
-          </ul>
-          <div class="service-card__cta">
-            <a
-              href="#"
-              class="btn btn--green"
-              aria-label="Learn more about Bot Hosting"
-            >
-              Learn More
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
+      <!-- VPS Hosting -->
+      <div class="glass rounded-xl2 p-7 card-hover gradient-border reveal reveal-delay-2 flex flex-col">
+        <div class="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-5">
+          <i data-lucide="server-cog" class="w-8 h-8 text-blue-400"></i>
+        </div>
+        <h3 class="text-lg font-bold mb-2">VPS Hosting</h3>
+        <p class="text-text-dim text-sm leading-relaxed mb-5">
+          Full control VPS servers with dedicated resources and unlimited possibilities.
+        </p>
+        <ul class="text-sm text-muted space-y-2 mb-6">
+          <li class="check-mark">Root Access</li>
+          <li class="check-mark">NVMe SSD Storage</li>
+          <li class="check-mark">Scalable Resources</li>
+          <li class="check-mark">DDoS Protection</li>
+        </ul>
+        <a href="/vps-hosting/" class="mt-auto block text-center w-full text-white font-medium py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 transition-colors">
+          Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- Game Servers -->
+      <div class="glass rounded-xl2 p-7 card-hover gradient-border reveal reveal-delay-3 flex flex-col">
+        <div class="w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-5">
+          <i data-lucide="gamepad-2" class="w-8 h-8 text-purple-400"></i>
+        </div>
+        <h3 class="text-lg font-bold mb-2">Game Servers</h3>
+        <p class="text-text-dim text-sm leading-relaxed mb-5">
+          High-performance game servers for Minecraft, FiveM, CS2, and many more.
+        </p>
+        <ul class="text-sm text-muted space-y-2 mb-6">
+          <li class="check-mark">Instant Setup</li>
+          <li class="check-mark">Low Latency</li>
+          <li class="check-mark">DDoS Protection</li>
+          <li class="check-mark">Mod & Plugin Support</li>
+        </ul>
+        <a href="/game-server/" class="mt-auto btn-primary block text-center w-full text-white font-medium py-2.5 rounded-lg text-sm flex items-center justify-center gap-2">
+          Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- Bot Hosting -->
+      <div class="glass rounded-xl2 p-7 card-hover gradient-border reveal reveal-delay-1 flex flex-col">
+        <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-5">
+          <i data-lucide="bot" class="w-8 h-8 text-emerald-400"></i>
+        </div>
+        <h3 class="text-lg font-bold mb-2">Bot Hosting</h3>
+        <p class="text-text-dim text-sm leading-relaxed mb-5">
+          Keep your bots online 24/7 with reliable and affordable bot hosting.
+        </p>
+        <ul class="text-sm text-muted space-y-2 mb-6">
+          <li class="check-mark">Discord Bot Hosting</li>
+          <li class="check-mark">Multiple Languages</li>
+          <li class="check-mark">Auto Restart</li>
+          <li class="check-mark">24/7 Uptime</li>
+        </ul>
+        <a href="/bot-hosting/" class="mt-auto block text-center w-full text-white font-medium py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 transition-colors">
+          Learn More <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- =================== COMPARE OUR SERVICES =================== -->
-  <section class="compare-section" aria-labelledby="compare-heading">
-    <div class="container mx-auto px-6">
-      <div class="compare-section__head">
-        <span class="section-eyebrow">Compare Our Services</span>
-        <h2 id="compare-heading" class="section-title">Find the Perfect Fit</h2>
-        <p class="section-subtitle" style="margin-inline: auto">
-          Not sure which service is right for you? Compare our hosting
-          solutions.
-        </p>
-      </div>
+  <!-- =================== COMPARE SERVICES =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+    <div class="reveal">
+      <p class="eyebrow text-xs font-semibold mb-3">COMPARE OUR SERVICES</p>
+      <h2 class="text-3xl font-bold mb-3">Find the Perfect Fit</h2>
+      <p class="text-muted mb-12">Not sure which service is right for you? Compare our hosting solutions.</p>
+    </div>
 
-      <div class="compare-table-wrap">
-        <table class="compare-table">
-          <caption class="visually-hidden">
-            Comparison of Web Hosting, VPS Hosting, Game Servers, and Bot
-            Hosting
-          </caption>
+    <div class="pricing-card rounded-2xl overflow-hidden text-left reveal">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm min-w-[760px]">
           <thead>
-            <tr>
-              <th scope="col">Features</th>
-              <th scope="col">
-                <span class="compare-table__head-cell">
-                  <span
-                    class="compare-table__head-icon compare-table__head-icon--purple"
-                    aria-hidden="true"
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#fff"
-                      stroke-width="2"
-                    >
-                      <rect x="3" y="4" width="18" height="16" rx="2" />
-                      <path d="M3 9h18" />
-                    </svg>
-                  </span>
-                  Web Hosting
+            <tr class="border-b border-white/10">
+              <th class="p-5 text-left font-medium text-accent">Features</th>
+              <th class="p-5 text-left font-medium">
+                <span class="inline-flex items-center gap-2">
+                  <i data-lucide="globe" class="w-4 h-4 text-secondary"></i> Web Hosting
                 </span>
               </th>
-              <th scope="col">
-                <span class="compare-table__head-cell">
-                  <span
-                    class="compare-table__head-icon compare-table__head-icon--blue"
-                    aria-hidden="true"
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#fff"
-                      stroke-width="2"
-                    >
-                      <rect x="3" y="3" width="14" height="5" rx="1" />
-                      <rect x="3" y="10" width="14" height="5" rx="1" />
-                    </svg>
-                  </span>
-                  VPS Hosting
+              <th class="p-5 text-left font-medium">
+                <span class="inline-flex items-center gap-2">
+                  <i data-lucide="server-cog" class="w-4 h-4 text-blue-400"></i> VPS Hosting
                 </span>
               </th>
-              <th scope="col">
-                <span class="compare-table__head-cell">
-                  <span
-                    class="compare-table__head-icon compare-table__head-icon--violet"
-                    aria-hidden="true"
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#fff"
-                      stroke-width="2"
-                    >
-                      <rect x="2.5" y="4" width="13" height="16" rx="2" />
-                      <path d="M2.5 9h13" />
-                    </svg>
-                  </span>
-                  Game Servers
+              <th class="p-5 text-left font-medium">
+                <span class="inline-flex items-center gap-2">
+                  <i data-lucide="gamepad-2" class="w-4 h-4 text-purple-400"></i> Game Servers
                 </span>
               </th>
-              <th scope="col">
-                <span class="compare-table__head-cell">
-                  <span
-                    class="compare-table__head-icon compare-table__head-icon--dark"
-                    aria-hidden="true"
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#34d399"
-                      stroke-width="2"
-                    >
-                      <rect x="4" y="8" width="16" height="11" rx="3" />
-                      <path d="M12 8V5" />
-                    </svg>
-                  </span>
-                  Bot Hosting
+              <th class="p-5 text-left font-medium">
+                <span class="inline-flex items-center gap-2">
+                  <i data-lucide="bot" class="w-4 h-4 text-emerald-400"></i> Bot Hosting
                 </span>
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Ease of Use</th>
-              <td><span class="tag tag--green">Beginner Friendly</span></td>
-              <td><span class="tag tag--amber">Advanced</span></td>
-              <td><span class="tag tag--green">Easy</span></td>
-              <td><span class="tag tag--green">Easy</span></td>
+          <tbody class="text-muted">
+            <tr class="border-b border-white/5">
+              <td class="p-5 font-medium text-primary">Ease of Use</td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-green-500/10 text-green-400">Beginner Friendly</span></td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400">Advanced</span></td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-green-500/10 text-green-400">Easy</span></td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-green-500/10 text-green-400">Easy</span></td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="p-5 font-medium text-primary">Control</td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400">Limited</span></td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-green-500/10 text-green-400">Full Root Access</span></td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400">Limited</span></td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400">Limited</span></td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="p-5 font-medium text-primary">Performance</td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400">Standard</span></td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-green-500/10 text-green-400">High Performance</span></td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-green-500/10 text-green-400">Optimized</span></td>
+              <td class="p-5"><span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400">Standard</span></td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="p-5 font-medium text-primary">Best For</td>
+              <td class="p-5">Websites & Blogs</td>
+              <td class="p-5">Developers & Businesses</td>
+              <td class="p-5">Gamers & Communities</td>
+              <td class="p-5">Discord Bots & Apps</td>
             </tr>
             <tr>
-              <th scope="row">Control</th>
-              <td><span class="tag tag--amber">Limited</span></td>
-              <td><span class="tag tag--green">Full Root Access</span></td>
-              <td><span class="tag tag--amber">Limited</span></td>
-              <td><span class="tag tag--amber">Limited</span></td>
-            </tr>
-            <tr>
-              <th scope="row">Performance</th>
-              <td><span class="tag tag--amber">Standard</span></td>
-              <td><span class="tag tag--green">High Performance</span></td>
-              <td><span class="tag tag--green">Optimized</span></td>
-              <td><span class="tag tag--amber">Standard</span></td>
-            </tr>
-            <tr>
-              <th scope="row">Best For</th>
-              <td>Websites &amp; Blogs</td>
-              <td>Developers &amp; Businesses</td>
-              <td>Gamers &amp; Communities</td>
-              <td>Discord Bots &amp; Apps</td>
-            </tr>
-            <tr>
-              <th scope="row">Starting Price</th>
-              <td>
-                <span class="price-cell price-cell--purple">₹149</span>
-                <span class="price-cell__period">/mo</span>
-              </td>
-              <td>
-                <span class="price-cell price-cell--blue">₹399</span>
-                <span class="price-cell__period">/mo</span>
-              </td>
-              <td>
-                <span class="price-cell price-cell--violet">₹249</span>
-                <span class="price-cell__period">/mo</span>
-              </td>
-              <td>
-                <span class="price-cell price-cell--green">₹99</span>
-                <span class="price-cell__period">/mo</span>
-              </td>
+              <td class="p-5 font-medium text-primary">Starting Price</td>
+              <td class="p-5"><span class="font-semibold text-secondary">₹149</span><span class="text-faint text-xs">/mo</span></td>
+              <td class="p-5"><span class="font-semibold text-blue-400">₹399</span><span class="text-faint text-xs">/mo</span></td>
+              <td class="p-5"><span class="font-semibold text-purple-400">₹249</span><span class="text-faint text-xs">/mo</span></td>
+              <td class="p-5"><span class="font-semibold text-emerald-400">₹99</span><span class="text-faint text-xs">/mo</span></td>
             </tr>
           </tbody>
         </table>
       </div>
+    </div>
+  </section>
 
-      <div class="feature-strip" style="margin-top: 3rem">
-        <div class="feature-strip__item">
-          <div
-            class="feature-strip__icon feature-strip__icon--blue"
-            aria-hidden="true"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3z" />
-            </svg>
+  <!-- =================== TRUST STRIP =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+    <div class="pricing-card rounded-2xl p-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4">
+        <div class="flex items-center gap-3 lg:border-r lg:border-white/10 lg:pr-4">
+          <div class="w-11 h-11 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="shield" class="w-5 h-5 text-blue-400"></i>
           </div>
           <div>
-            <p class="feature-strip__title">99.9% Uptime</p>
-            <p class="feature-strip__desc">
-              Reliable infrastructure you can count on.
-            </p>
+            <div class="text-sm font-semibold">99.9% Uptime</div>
+            <div class="text-xs text-text-muted">Reliable infrastructure you can count on.</div>
           </div>
         </div>
-        <div class="feature-strip__item">
-          <div
-            class="feature-strip__icon feature-strip__icon--white"
-            aria-hidden="true"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
-            </svg>
+        <div class="flex items-center gap-3 lg:border-r lg:border-white/10 lg:pr-4">
+          <div class="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="zap" class="w-5 h-5 text-accent-light"></i>
           </div>
           <div>
-            <p class="feature-strip__title">Instant Setup</p>
-            <p class="feature-strip__desc">
-              Get your service up and running instantly.
-            </p>
+            <div class="text-sm font-semibold">Instant Setup</div>
+            <div class="text-xs text-text-muted">Get your service up and running instantly.</div>
           </div>
         </div>
-        <div class="feature-strip__item">
-          <div
-            class="feature-strip__icon feature-strip__icon--green"
-            aria-hidden="true"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3z" />
-              <path d="M9.5 12.5l1.8 1.8 3.2-3.6" />
-            </svg>
+        <div class="flex items-center gap-3 lg:border-r lg:border-white/10 lg:pr-4">
+          <div class="w-11 h-11 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="shield-check" class="w-5 h-5 text-green-400"></i>
           </div>
           <div>
-            <p class="feature-strip__title">DDoS Protection</p>
-            <p class="feature-strip__desc">
-              Enterprise-grade protection for all services.
-            </p>
+            <div class="text-sm font-semibold">DDoS Protection</div>
+            <div class="text-xs text-text-muted">Enterprise-grade protection for all services.</div>
           </div>
         </div>
-        <div class="feature-strip__item">
-          <div
-            class="feature-strip__icon feature-strip__icon--purple"
-            aria-hidden="true"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
-              <path
-                d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z"
-              />
-            </svg>
+        <div class="flex items-center gap-3 lg:border-r lg:border-white/10 lg:pr-4">
+          <div class="w-11 h-11 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="headset" class="w-5 h-5 text-purple-400"></i>
           </div>
           <div>
-            <p class="feature-strip__title">24/7 Support</p>
-            <p class="feature-strip__desc">
-              Our team is always here to help you.
-            </p>
+            <div class="text-sm font-semibold">24/7 Support</div>
+            <div class="text-xs text-text-muted">Our team is always here to help you.</div>
           </div>
         </div>
-        <div class="feature-strip__item">
-          <div
-            class="feature-strip__icon feature-strip__icon--green"
-            aria-hidden="true"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="9" />
-              <path
-                d="M12 7v10M9.5 9.5h3.2a1.8 1.8 0 1 1 0 3.6H9.5m0 0h3.5a1.8 1.8 0 1 1 0 3.6H9.5"
-              />
-            </svg>
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="dollar-sign" class="w-5 h-5 text-emerald-400"></i>
           </div>
           <div>
-            <p class="feature-strip__title">Affordable Pricing</p>
-            <p class="feature-strip__desc">
-              High performance doesn't have to be expensive.
-            </p>
+            <div class="text-sm font-semibold">Affordable Pricing</div>
+            <div class="text-xs text-text-muted">High performance doesn't have to be expensive.</div>
           </div>
         </div>
       </div>
@@ -1771,544 +258,140 @@
   </section>
 
   <!-- =================== FAQ =================== -->
-  <section class="faq-section" aria-labelledby="faq-heading">
-    <div class="container mx-auto px-6">
-      <div class="faq-grid">
-        <div>
-          <div class="faq-grid__head">
-            <span class="section-eyebrow">Frequently Asked Questions</span>
-            <h2 id="faq-heading" class="section-title">Got Questions?</h2>
-            <p class="section-subtitle">We've got answers.</p>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+    <div class="grid lg:grid-cols-2 gap-8 items-center">
+      <div>
+        <div class="reveal mb-8">
+          <p class="eyebrow text-xs font-semibold mb-3">FREQUENTLY ASKED QUESTIONS</p>
+          <h2 class="text-3xl font-bold mb-2">Got Questions?</h2>
+          <p class="text-muted">We've got answers.</p>
+        </div>
+        <div class="space-y-3" id="faq-list">
+          <div class="faq-item open rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> Which service is right for me?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                It depends on your needs — check the comparison table above, or contact our team and we'll help you pick the right fit.
+              </p>
+            </div>
           </div>
 
-          <div class="faq-list">
-            <div class="faq-item">
-              <h3>
-                <button
-                  type="button"
-                  class="faq-item__question"
-                  aria-expanded="false"
-                  aria-controls="faq-answer-1"
-                  id="faq-trigger-1"
-                >
-                  <svg
-                    class="faq-item__caret faq-item__caret--leading"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M9 6l6 6-6 6" />
-                  </svg>
-                  <span class="faq-item__question-text"
-                    >Which service is right for me?</span
-                  >
-                  <svg
-                    class="faq-item__caret"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-              </h3>
-              <div
-                class="faq-item__answer"
-                id="faq-answer-1"
-                role="region"
-                aria-labelledby="faq-trigger-1"
-              >
-                <p class="faq-item__answer-inner">
-                  It depends on your needs: choose Web Hosting for sites and
-                  blogs, VPS Hosting for full control, Game Servers for
-                  multiplayer gaming, or Bot Hosting for always-on bots.
-                </p>
-              </div>
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> Can I upgrade my service later?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
             </div>
-
-            <div class="faq-item">
-              <h3>
-                <button
-                  type="button"
-                  class="faq-item__question"
-                  aria-expanded="false"
-                  aria-controls="faq-answer-2"
-                  id="faq-trigger-2"
-                >
-                  <svg
-                    class="faq-item__caret faq-item__caret--leading"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M9 6l6 6-6 6" />
-                  </svg>
-                  <span class="faq-item__question-text"
-                    >Can I upgrade my service later?</span
-                  >
-                  <svg
-                    class="faq-item__caret"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-              </h3>
-              <div
-                class="faq-item__answer"
-                id="faq-answer-2"
-                role="region"
-                aria-labelledby="faq-trigger-2"
-              >
-                <p class="faq-item__answer-inner">
-                  Yes, you can upgrade your plan at any time directly from your
-                  dashboard, and resources scale instantly without any downtime.
-                </p>
-              </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Yes, you can upgrade any plan or switch services anytime from your dashboard with no downtime.
+              </p>
             </div>
+          </div>
 
-            <div class="faq-item">
-              <h3>
-                <button
-                  type="button"
-                  class="faq-item__question"
-                  aria-expanded="false"
-                  aria-controls="faq-answer-3"
-                  id="faq-trigger-3"
-                >
-                  <svg
-                    class="faq-item__caret faq-item__caret--leading"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M9 6l6 6-6 6" />
-                  </svg>
-                  <span class="faq-item__question-text"
-                    >Do you offer refunds?</span
-                  >
-                  <svg
-                    class="faq-item__caret"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-              </h3>
-              <div
-                class="faq-item__answer"
-                id="faq-answer-3"
-                role="region"
-                aria-labelledby="faq-trigger-3"
-              >
-                <p class="faq-item__answer-inner">
-                  We offer a 7-day money-back guarantee on all new hosting
-                  plans, no questions asked, if you're not fully satisfied.
-                </p>
-              </div>
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> Do you offer refunds?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
             </div>
-
-            <div class="faq-item">
-              <h3>
-                <button
-                  type="button"
-                  class="faq-item__question"
-                  aria-expanded="false"
-                  aria-controls="faq-answer-4"
-                  id="faq-trigger-4"
-                >
-                  <svg
-                    class="faq-item__caret faq-item__caret--leading"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M9 6l6 6-6 6" />
-                  </svg>
-                  <span class="faq-item__question-text"
-                    >Is DDoS protection included?</span
-                  >
-                  <svg
-                    class="faq-item__caret"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-              </h3>
-              <div
-                class="faq-item__answer"
-                id="faq-answer-4"
-                role="region"
-                aria-labelledby="faq-trigger-4"
-              >
-                <p class="faq-item__answer-inner">
-                  Yes, enterprise-grade DDoS protection is included by default
-                  on every plan across all of our hosting services.
-                </p>
-              </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Yes, all our services come with a 30-day money-back guarantee.
+              </p>
             </div>
+          </div>
 
-            <div class="faq-item">
-              <h3>
-                <button
-                  type="button"
-                  class="faq-item__question"
-                  aria-expanded="false"
-                  aria-controls="faq-answer-5"
-                  id="faq-trigger-5"
-                >
-                  <svg
-                    class="faq-item__caret faq-item__caret--leading"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M9 6l6 6-6 6" />
-                  </svg>
-                  <span class="faq-item__question-text"
-                    >How fast is the setup process?</span
-                  >
-                  <svg
-                    class="faq-item__caret"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-              </h3>
-              <div
-                class="faq-item__answer"
-                id="faq-answer-5"
-                role="region"
-                aria-labelledby="faq-trigger-5"
-              >
-                <p class="faq-item__answer-inner">
-                  Most services are deployed automatically within minutes of
-                  checkout, so you can start using your server right away.
-                </p>
-              </div>
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> Is DDoS protection included?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Yes, enterprise-grade DDoS protection is included by default across all of our services.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-xl p-4 cursor-pointer">
+            <div class="faq-question flex items-center justify-between">
+              <p class="text-sm font-medium flex items-center gap-2">
+                <span class="text-violet-400">»</span> How fast is the setup process?
+              </p>
+              <span class="faq-toggle text-faint">⌄</span>
+            </div>
+            <div class="faq-answer">
+              <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
+                Most services are provisioned automatically within 60 seconds of checkout.
+              </p>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="faq-visual" aria-hidden="true">
-          <svg width="320" height="320" viewBox="0 0 320 320" fill="none">
-            <ellipse
-              cx="160"
-              cy="290"
-              rx="90"
-              ry="14"
-              fill="#6d28d9"
-              opacity="0.15"
-            />
-            <g>
-              <rect
-                x="95"
-                y="170"
-                width="130"
-                height="50"
-                rx="6"
-                fill="#241e3d"
-                stroke="#3a3160"
-                stroke-width="1.5"
-              />
-              <circle cx="112" cy="195" r="3" fill="#a78bfa" />
-              <circle cx="124" cy="195" r="3" fill="#60a5fa" />
-              <rect
-                x="95"
-                y="120"
-                width="130"
-                height="50"
-                rx="6"
-                fill="#1e1933"
-                stroke="#3a3160"
-                stroke-width="1.5"
-              />
-              <circle cx="112" cy="145" r="3" fill="#a78bfa" />
-              <circle cx="124" cy="145" r="3" fill="#60a5fa" />
-              <rect
-                x="95"
-                y="70"
-                width="130"
-                height="50"
-                rx="6"
-                fill="#241e3d"
-                stroke="#3a3160"
-                stroke-width="1.5"
-              />
-              <circle cx="112" cy="95" r="3" fill="#a78bfa" />
-              <circle cx="124" cy="95" r="3" fill="#60a5fa" />
-            </g>
-            <g>
-              <rect
-                x="142"
-                y="20"
-                width="36"
-                height="58"
-                rx="18"
-                fill="#8b5cf6"
-              />
-              <circle cx="160" cy="20" r="20" fill="#a855f7" />
-              <rect
-                x="152"
-                y="2"
-                width="16"
-                height="16"
-                rx="3"
-                fill="#1e1933"
-              />
-            </g>
-            <g opacity="0.7">
-              <rect
-                x="30"
-                y="60"
-                width="34"
-                height="24"
-                rx="6"
-                fill="#241e3d"
-                stroke="#3a3160"
-              />
-              <path
-                d="M38 84l-4 8M58 84l4 8"
-                stroke="#3a3160"
-                stroke-width="2"
-              />
-              <circle cx="40" cy="70" r="1.6" fill="#a78bfa" />
-              <circle cx="48" cy="70" r="1.6" fill="#a78bfa" />
-              <circle cx="56" cy="70" r="1.6" fill="#a78bfa" />
-            </g>
-            <g opacity="0.7">
-              <rect
-                x="256"
-                y="90"
-                width="34"
-                height="24"
-                rx="6"
-                fill="#241e3d"
-                stroke="#3a3160"
-              />
-              <path
-                d="M264 114l-4 8M284 114l4 8"
-                stroke="#3a3160"
-                stroke-width="2"
-              />
-              <circle cx="266" cy="100" r="1.6" fill="#a78bfa" />
-              <circle cx="274" cy="100" r="1.6" fill="#a78bfa" />
-              <circle cx="282" cy="100" r="1.6" fill="#a78bfa" />
-            </g>
-          </svg>
+      <!-- Decorative illustration -->
+      <div class="relative hidden lg:flex items-center justify-center reveal reveal-delay-2">
+        <div class="absolute w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div>
+        <div class="relative">
+          <div class="absolute top-2 -left-10 glass rounded-xl p-2 animate-float">
+            <i data-lucide="message-circle" class="w-4 h-4 text-accent-light"></i>
+          </div>
+          <div class="absolute top-10 -right-12 glass rounded-xl p-2 animate-float-slow">
+            <i data-lucide="message-circle" class="w-4 h-4 text-accent-light"></i>
+          </div>
+          <i data-lucide="help-circle" class="w-28 h-28 text-purple-400 mx-auto mb-2 animate-pulse-glow"></i>
+          <div class="w-40 h-16 rounded-2xl gradient-accent flex items-center justify-center shadow-2xl shadow-secondary/30">
+            <i data-lucide="server" class="w-8 h-8 text-white/90"></i>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =================== CTA BANNER =================== -->
-  <section class="cta-section" aria-labelledby="cta-heading">
-    <div class="container mx-auto px-6">
-      <div class="cta-banner">
-        <div class="cta-banner__left">
-          <svg
-            class="cta-banner__icon"
-            viewBox="0 0 64 64"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M32 4c8 6 12 16 10 30-4 2-8 3-10 3s-6-1-10-3c-2-14 2-24 10-30z"
-              fill="#fff"
-              opacity="0.95"
-            />
-            <circle cx="32" cy="22" r="5" fill="#7c3aed" />
-            <path d="M22 34c-6 2-9 8-9 14 5-1 10-3 13-7l-4-7z" fill="#e9d5ff" />
-            <path d="M42 34c6 2 9 8 9 14-5-1-10-3-13-7l4-7z" fill="#e9d5ff" />
-            <path d="M27 48c-1 4-1 8 1 12 3-2 5-5 6-9l-7-3z" fill="#fb923c" />
-            <path d="M37 48c1 4 1 8-1 12-3-2-5-5-6-9l7-3z" fill="#fdba74" />
-          </svg>
-          <div>
-            <h2 id="cta-heading" class="cta-banner__title">
-              Ready to Get Started?
-            </h2>
-            <p class="cta-banner__desc">
-              Choose your service and deploy in minutes.
-            </p>
-          </div>
-        </div>
-        <div class="cta-banner__action">
-          <a href="#" class="btn btn--cta">
-            View All Plans
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </a>
-        </div>
+  <!-- =================== BOTTOM CTA =================== -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+    <div class="gradient-accent rounded-3xl px-8 py-10 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-6 text-white relative overflow-hidden">
+      <div class="absolute inset-0 grid-pattern opacity-10"></div>
+      <div class="absolute -bottom-8 left-4 opacity-25">
+        <i data-lucide="rocket" class="w-28 h-28 -rotate-45"></i>
       </div>
+      <div class="relative pl-0 sm:pl-24 text-center sm:text-left">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-2">Ready to Get Started?</h2>
+        <p class="text-white/80">Choose your service and deploy in minutes.</p>
+      </div>
+      <a href="{% url 'website:contact' %}" class="relative flex-shrink-0 inline-flex items-center gap-2 px-6 py-3.5 bg-white text-purple-700 rounded-xl text-sm font-semibold hover:opacity-90 transition-all w-fit">
+        View All Plans
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
     </div>
   </section>
 </main>
 
 <script>
-  function initFaqAccordion() {
-    const faqItems = document.querySelectorAll(".faq-item");
-
-    faqItems.forEach((item) => {
-      const trigger = item.querySelector(".faq-item__question");
-      const answer = item.querySelector(".faq-item__answer");
-
-      if (!trigger || !answer) return;
-
-      trigger.addEventListener("click", () => {
-        const isOpen = item.classList.contains("is-open");
-
-        // Close all other open items first
-        faqItems.forEach((otherItem) => {
-          if (otherItem !== item && otherItem.classList.contains("is-open")) {
-            closeFaqItem(otherItem);
-          }
-        });
-
-        if (isOpen) {
-          closeFaqItem(item);
-        } else {
-          openFaqItem(item);
+  // ===== SCROLL REVEAL =====
+  const revealElements = document.querySelectorAll(".reveal");
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
         }
       });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+  );
 
-      // Keyboard support beyond default button behavior (Enter/Space already work)
-      trigger.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && item.classList.contains("is-open")) {
-          closeFaqItem(item);
-          trigger.blur();
-        }
-      });
-    });
-  }
-
-  function openFaqItem(item) {
-    const trigger = item.querySelector(".faq-item__question");
-    const answer = item.querySelector(".faq-item__answer");
-
-    item.classList.add("is-open");
-    trigger.setAttribute("aria-expanded", "true");
-    answer.style.maxHeight = `${answer.scrollHeight}px`;
-  }
-
-  function closeFaqItem(item) {
-    const trigger = item.querySelector(".faq-item__question");
-    const answer = item.querySelector(".faq-item__answer");
-
-    item.classList.remove("is-open");
-    trigger.setAttribute("aria-expanded", "false");
-    answer.style.maxHeight = "0px";
-  }
-
-  /**
-   * Ambient star field
-   * Generates a sprinkle of small static "stars" inside the hero section
-   * background for atmosphere, matching the reference design's night-sky feel.
-   */
-  function initStarField() {
-    const field = document.getElementById("starField");
-    if (!field) return;
-
-    const STAR_COUNT = 40;
-    const fragment = document.createDocumentFragment();
-
-    for (let i = 0; i < STAR_COUNT; i++) {
-      const star = document.createElement("span");
-      star.className = "star";
-      star.style.top = `${Math.random() * 60}%`;
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.opacity = (Math.random() * 0.5 + 0.15).toFixed(2);
-      star.style.width = star.style.height = `${Math.random() * 2 + 1}px`;
-      fragment.appendChild(star);
-    }
-
-    field.appendChild(fragment);
-  }
-
-  // These were defined above but never called — nothing on the page
-  // (FAQ accordion, star field) actually ran without these.
-  initFaqAccordion();
-  initStarField();
+  revealElements.forEach((el) => revealObserver.observe(el));
 </script>
 
 {% endblock %}
