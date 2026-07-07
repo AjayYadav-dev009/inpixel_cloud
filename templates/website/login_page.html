@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Registration</title>
+
+
+  {% load static %}
+  <!--===============================================================================================-->
+  <link rel="shotcute icon" type="png" href="{% static 'weblogo/icon.png' %}" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #000000, #434343);
+      color: #ffffff;
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+      background-size: 400% 400%;
+      animation: backgroundShift 18s ease-in-out infinite;
+    }
+
+    @keyframes backgroundShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .form-container {
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      display: none;
+    }
+
+    .form-container.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      display: block;
+    }
+
+    .input-field {
+      transition: all 0.4s ease;
+      border: 2px solid transparent;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    .input-field:focus {
+      border-color: #ffffff;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .glass-effect {
+      backdrop-filter: blur(15px);
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .submit-btn {
+      border: none;
+      border-radius: 25px;
+      transition: all 0.4s ease;
+      font-weight: bold;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Bubbles */
+    .floating-animation {
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: 0.7;
+      animation: floaty 12s ease-in-out infinite;
+      transition: top 1s ease, left 1s ease;
+    }
+
+    @keyframes floaty {
+      0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+
+      25% {
+        transform: translate(30px, -40px) scale(1.1) rotate(10deg);
+      }
+
+      50% {
+        transform: translate(-20px, -80px) scale(0.9) rotate(-15deg);
+      }
+
+      75% {
+        transform: translate(40px, -40px) scale(1.05) rotate(5deg);
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center relative ">
+
+  <!-- Background Bubbles -->
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div class="floating-animation absolute w-24 h-24 bg-gradient-to-r from-pink-500 to-purple-500"></div>
+    <div class="floating-animation absolute w-32 h-32 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
+    <div class="floating-animation absolute w-40 h-40 bg-gradient-to-r from-green-400 to-teal-500"></div>
+    <div class="floating-animation absolute w-28 h-28 bg-gradient-to-r from-yellow-400 to-orange-500"></div>
+    <div class="floating-animation absolute w-20 h-20 bg-gradient-to-r from-red-400 to-pink-600"></div>
+    <div class="floating-animation absolute w-36 h-36 bg-gradient-to-r from-indigo-400 to-blue-600"></div>
+    <div class="floating-animation absolute w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500"></div>
+    <div class="floating-animation absolute w-28 h-28 bg-gradient-to-r from-emerald-400 to-lime-500"></div>
+    <div class="floating-animation absolute w-14 h-14 bg-white/30"></div>
+    <div class="floating-animation absolute w-20 h-20 bg-black/30"></div>
+    <div class="floating-animation absolute w-24 h-24 bg-white/20"></div>
+    <div class="floating-animation absolute w-16 h-16 bg-black/40"></div>
+  </div>
+
+  <!-- Forms -->
+  <div class="container mx-auto px-4 max-w-lg relative z-10">
+    <!-- Login Form -->
+    <div id="login-form" class="form-container glass-effect p-12 active">
+      <h2 class="text-3xl font-bold mb-10 text-center text-white">Login</h2>
+      <span id="show_mess" style="padding: 5px 0;margin: 5px;font-size: 14px;"></span>
+      <form action="{% url 'website:do_login' %}" method="post" id="loginForm">
+
+        {% csrf_token %}
+        <!-- email  -->
+        <div class="mb-8">
+          <label class="block text-sm font-medium mb-2 text-gray-300">Email</label>
+          <input type="email" class="input-field w-full rounded-lg px-4 py-3 text-white placeholder-gray-400"
+            placeholder="Enter your email" name="email" required>
+        </div>
+
+        <!-- password  -->
+        <div class="mb-8 relative">
+          <label class="block text-sm font-medium mb-2 text-gray-300">Password</label>
+          <input type="password" class="input-field w-full rounded-lg px-4 py-3 text-white placeholder-gray-400 pr-12"
+            placeholder="Enter your password" name="password" required>
+          <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-gray-300"
+            style="top:25px !important;">
+
+            <!-- Eye icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="eye h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+
+            <!-- Eye slash (hidden initially) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="eye-slash h-6 w-6 hidden" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.956 9.956 0 012.676-4.223M6.1 6.1A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7a9.953 9.953 0 01-1.07 2.425M15 12a3 3 0 01-3 3m0-6a3 3 0 013 3m-9 9l12-12" />
+            </svg>
+          </button>
+        </div>
+        <button type="submit" class="submit-btn w-full bg-white text-black py-3">Login</button>
+      </form>
+      <p class="mt-8 text-center text-sm text-gray-400">
+        Don't have an account?
+        <a href="" id="switch-to-register-from-login"
+          class="text-white underline hover:text-gray-300 transition">Register here</a>
+      </p>
+      <!-- <a href="">Admin Login</a> -->
+    </div>
+
+    <!----------------------------Registration Form----------------------------->
+    <div id="register-form" class="form-container glass-effect p-12">
+      <h2 class="text-3xl font-bold mb-10 text-center text-white">Join Us</h2>
+      <span style="color: red;padding: 5px 0;margin: 5px;font-size: 14px;">{{ msg }}</span>
+
+      <form action="{% url 'website:registration' %}" method="post" id="registerForm">
+        {% csrf_token %}
+        <!-- username -->
+        <div class="mb-8">
+          <label class="block text-sm font-medium mb-2 text-gray-300">username</label>
+          <input type="text" class="input-field w-full rounded-lg px-4 py-3 text-white placeholder-gray-400"
+            placeholder="Enter your full name" name="name" required>
+        </div>
+
+        <!-- email  -->
+        <div class="mb-8">
+          <label class="block text-sm font-medium mb-2 text-gray-300">Email</label>
+          <input type="email" class="input-field w-full rounded-lg px-4 py-3 text-white placeholder-gray-400"
+            placeholder="Enter your email" name="email" required>
+        </div>
+
+        <!-- phone  -->
+        <div class="mb-8">
+          <label class="block text-sm font-medium mb-2 text-gray-300">Phone</label>
+          <input type="text" class="input-field w-full rounded-lg px-4 py-3 text-white placeholder-gray-400"
+            placeholder="Enter your phone" name="phone" required>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-8 relative">
+          <label class="block text-sm font-medium mb-2 text-gray-300">Password</label>
+          <input type="password" class="input-field w-full rounded-lg px-4 py-3 text-white placeholder-gray-400 pr-12"
+            placeholder="Enter your password" name="password" required>
+          <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-gray-300"
+            style="top:25px !important;">
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="eye h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="eye-slash h-6 w-6 hidden" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.956 9.956 0 012.676-4.223M6.1 6.1A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7a9.953 9.953 0 01-1.07 2.425M15 12a3 3 0 01-3 3m0-6a3 3 0 013 3m-9 9l12-12" />
+            </svg>
+            <!-- <p id="password-strength" class="text-sm mt-2"></p> -->
+            <p id="password-message" class="text-sm mt-2"></p>
+          </button>
+        </div>
+
+        <!-- Confirm password -->
+        <div class="mb-8 relative">
+          <label class="block text-sm font-medium mb-2 text-gray-300">Confirm Password</label>
+          <input type="password" class="input-field w-full rounded-lg px-4 py-3 text-white placeholder-gray-400 pr-12"
+            placeholder="Confirm your password" required>
+          <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-gray-300"
+            style="top:25px !important;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="eye h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="eye-slash h-6 w-6 hidden" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.956 9.956 0 012.676-4.223M6.1 6.1A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7a9.953 9.953 0 01-1.07 2.425M15 12a3 3 0 01-3 3m0-6a3 3 0 013 3m-9 9l12-12" />
+            </svg>
+          </button>
+        </div>
+
+
+
+        <button type="submit" id="submit_btn"
+          class="submit-btn w-full bg-black text-white border-2 border-white py-3">Register</button>
+      </form>
+      <p class="mt-8 text-center text-sm text-gray-400">
+        Already have an account?
+        <a href="#" id="switch-to-login-from-register" class="text-white underline hover:text-gray-300 transition">Login
+          here</a>
+      </p>
+    </div>
+  </div>
+
+
+
+
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get("msg");
+    let show_mess_box = document.getElementById("show_mess");
+
+    let show_mess= "";
+
+    if (msg === "email_exists") {
+      show_mess_box.style.color="red";
+      show_mess_box.innerHTML="Email already exists.";
+    }
+    else if (msg === "success") {
+      alert("Registration successful.");
+      show_mess_box.style.color="Green";
+      show_mess_box.innerHTML="Registration successful.";
+    }
+    else if (msg === "phone_exists") {
+      show_mess_box.style.color="red";
+      show_mess_box.innerHTML="Phone number already exists.";
+    }
+    else if (msg === "email_not_found") {
+      show_mess_box.style.color="red";
+      show_mess_box.innerHTML="This Email Not Exists.";
+    }
+    else if (msg === "password_wrong") {
+      show_mess_box.style.color="red";
+      show_mess_box.innerHTML="This Password Not Exists.";
+    }
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const loginForm = document.getElementById('login-form');
+      const registerForm = document.getElementById('register-form');
+      const switchToRegister = document.getElementById('switch-to-register-from-login');
+      const switchToLogin = document.getElementById('switch-to-login-from-register');
+      const bubbles = document.querySelectorAll('.floating-animation');
+
+      // Bubble random reposition
+      function randomizeBubbles() {
+        bubbles.forEach(bubble => {
+          const randomTop = Math.floor(Math.random() * 80) + 5;
+          const randomLeft = Math.floor(Math.random() * 80) + 5;
+          bubble.style.top = randomTop + "%";
+          bubble.style.left = randomLeft + "%";
+        });
+      }
+
+      function showForm(hideForm, showForm) {
+        hideForm.classList.remove('active');
+        setTimeout(() => {
+          hideForm.style.display = 'none';
+          showForm.style.display = 'block';
+          setTimeout(() => {
+            showForm.classList.add('active');
+          }, 50);
+        }, 600);
+        randomizeBubbles();
+      }
+
+      switchToRegister.addEventListener('click', (e) => {
+        e.preventDefault();
+        showForm(loginForm, registerForm);
+      });
+
+      switchToLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        showForm(registerForm, loginForm);
+      });
+
+      // show / hide password function  -------------------------------------------------------------------------------------------------
+
+      // Show/Hide Password Logic
+      document.querySelectorAll('.toggle-password').forEach(button => {
+        button.addEventListener('click', () => {
+          const input = button.previousElementSibling;
+          const eye = button.querySelector('.eye');
+          const eyeSlash = button.querySelector('.eye-slash');
+          if (input.type === "password") {
+            input.type = "text";
+            eye.classList.add('hidden');
+            eyeSlash.classList.remove('hidden');
+          } else {
+            input.type = "password";
+            eye.classList.remove('hidden');
+            eyeSlash.classList.add('hidden');
+          }
+        });
+      });
+
+      // Initial bubble positions
+      randomizeBubbles();
+    });
+
+
+
+
+
+    // strong password maker -------------------------------------------------------------------------------------------------
+
+    const passwordInput = document.querySelector('#register-form input[name="password"]');
+
+    // Create a strength message element after the input
+    const strengthText = document.createElement("div");
+    strengthText.id = "password-strength";
+    strengthText.className = "mt-2 text-sm font-medium";
+    passwordInput.parentNode.appendChild(strengthText);
+
+    passwordInput.addEventListener("input", () => {
+      const val = passwordInput.value;
+      let strength = 0;
+
+      if (val.length >= 8) strength++;          // length check
+      if (/[A-Z]/.test(val)) strength++;        // uppercase
+      if (/[a-z]/.test(val)) strength++;        // lowercase
+      if (/[0-9]/.test(val)) strength++;        // number
+      if (/[^A-Za-z0-9]/.test(val)) strength++; // special char
+
+      switch (strength) {
+        case 0:
+        case 1:
+          strengthText.textContent = "Weak password ❌";
+          strengthText.className = "mt-2 text-sm font-medium text-red-500";
+          break;
+        case 2:
+        case 3:
+          strengthText.textContent = "Medium password ⚠️";
+          strengthText.className = "mt-2 text-sm font-medium text-yellow-400";
+          break;
+        case 4:
+        case 5:
+          strengthText.textContent = "Strong password ✅";
+          strengthText.className = "mt-2 text-sm font-medium text-green-500";
+          break;
+      }
+    });
+
+
+
+    // confirm password mach to password   -------------------------------------------------------------------------------------------------
+
+    // Confirm Password Match Logic
+    // Confirm Password Match Logic
+    const confirmPasswordInput = document.querySelector('#register-form input[placeholder="Confirm your password"]');
+    const registerBtn = document.querySelector('#register-form button[type="submit"]');
+
+    // Create message element
+    const matchMsg = document.createElement("div");
+    matchMsg.id = "password-match-msg";
+    matchMsg.className = "mt-2 text-sm font-medium";
+    confirmPasswordInput.parentNode.appendChild(matchMsg);
+
+    function checkPasswordMatch() {
+      if (confirmPasswordInput.value.length === 0) {
+        matchMsg.textContent = "";
+        registerBtn.disabled = true; // disable if empty
+        registerBtn.classList.add("opacity-50", "cursor-not-allowed");
+        return;
+      }
+
+      if (confirmPasswordInput.value === passwordInput.value) {
+        matchMsg.textContent = "Passwords match ✅";
+        matchMsg.className = "mt-2 text-sm font-medium text-green-500";
+        registerBtn.disabled = false; // enable button
+        registerBtn.classList.remove("opacity-50", "cursor-not-allowed");
+      } else {
+        matchMsg.textContent = "Passwords do not match ❌";
+        matchMsg.className = "mt-2 text-sm font-medium text-red-500";
+        registerBtn.disabled = true; // disable if not matching
+        registerBtn.classList.add("opacity-50", "cursor-not-allowed");
+      }
+    }
+
+    passwordInput.addEventListener("input", checkPasswordMatch);
+    confirmPasswordInput.addEventListener("input", checkPasswordMatch);
+
+    // Initial state: disable button until passwords match
+    registerBtn.disabled = true;
+    registerBtn.classList.add("opacity-50", "cursor-not-allowed");
+
+
+
+
+
+  </script>
+</body>
+
+</html>

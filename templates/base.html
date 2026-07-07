@@ -81,7 +81,11 @@
           <i data-lucide="sun" class="w-[18px] h-[18px] theme-icon-light hidden"></i>
           <i data-lucide="moon" class="w-[18px] h-[18px] theme-icon-dark"></i>
         </button>
-        <a href="#" class="nav-link">Login</a>
+        {% if login_status %}
+        <a href="{% url 'website:logout' %}" class="nav-link">Logout</a>
+        {% else %}
+        <a href="{% url 'website:login_page' %}" class="nav-link">Login</a>
+        {% endif %}
         <button class="btn-primary text-white text-sm font-medium px-4 py-2 rounded-lg">
           Get Started
         </button>
@@ -126,7 +130,13 @@
             class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">Contact</a>
         </div>
         <div class="mt-8 space-y-3">
-          <a href="#" class="block w-full text-center px-5 py-3 text-sm font-medium btn-outline rounded-lg">Login</a>
+          {% if login_status %}
+          <a href="{% url 'website:logout' %}"
+            class="block w-full text-center px-5 py-3 text-sm font-medium btn-outline rounded-lg">Logout</a>
+          {% else %}
+          <a href="{% url 'website:login_page' %}"
+            class="block w-full text-center px-5 py-3 text-sm font-medium btn-outline rounded-lg">Login</a>
+          {% endif %}
           <a href="#"
             class="block w-full text-center px-5 py-3 text-sm font-semibold btn-primary text-white rounded-lg">Get
             Started</a>
@@ -241,7 +251,13 @@
               <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Submit Ticket</a>
             </li>
             <li>
-              <a href="#" class="text-sm text-text-muted hover:text-accent transition-colors">Client Login</a>
+              {% if login_status %}
+              <a href="{% url 'website:logout' %}"
+                class="text-sm text-text-muted hover:text-accent transition-colors">Client Logout</a>
+              {% else %}
+              <a href="{% url 'website:login_page' %}"
+                class="text-sm text-text-muted hover:text-accent transition-colors">Client Login</a>
+              {% endif %}
             </li>
           </ul>
         </div>
