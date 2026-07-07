@@ -1,23 +1,147 @@
-{% extends 'base.html' %}
-{% block title %} Game Servers {% endblock %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} 
+{% block title %} Game Servers {% endblock %} 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/game-cursor.css' %}" />
+{% endblock %} {% block content %}
+
+<div class="cursor-dot"></div>
+<div class="cursor">
+  <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+  <g transform="translate(512,0) scale(-1,1)">
+    <rect x="128" y="0" width="32" height="32" fill="#229CEF"/>
+    <rect x="160" y="0" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="192" y="0" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="224" y="0" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="256" y="0" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="288" y="0" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="320" y="0" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="352" y="0" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="384" y="0" width="32" height="32" fill="#0E88E2"/>
+    <rect x="416" y="0" width="32" height="32" fill="#323538"/>
+    <rect x="448" y="0" width="32" height="32" fill="#323538"/>
+    <rect x="480" y="0" width="32" height="32" fill="#BC6215"/>
+    <rect x="160" y="32" width="32" height="32" fill="#229CEF"/>
+    <rect x="192" y="32" width="32" height="32" fill="#229CEF"/>
+    <rect x="224" y="32" width="32" height="32" fill="#229CEF"/>
+    <rect x="256" y="32" width="32" height="32" fill="#229CEF"/>
+    <rect x="288" y="32" width="32" height="32" fill="#229CEF"/>
+    <rect x="320" y="32" width="32" height="32" fill="#229CEF"/>
+    <rect x="352" y="32" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="384" y="32" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="416" y="32" width="32" height="32" fill="#BC6215"/>
+    <rect x="448" y="32" width="32" height="32" fill="#BC6215"/>
+    <rect x="480" y="32" width="32" height="32" fill="#323538"/>
+    <rect x="160" y="64" width="32" height="32" fill="#229CEF"/>
+    <rect x="192" y="64" width="32" height="32" fill="#229CEF"/>
+    <rect x="224" y="64" width="32" height="32" fill="#229CEF"/>
+    <rect x="256" y="64" width="32" height="32" fill="#229CEF"/>
+    <rect x="288" y="64" width="32" height="32" fill="#229CEF"/>
+    <rect x="320" y="64" width="32" height="32" fill="#229CEF"/>
+    <rect x="352" y="64" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="384" y="64" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="416" y="64" width="32" height="32" fill="#BC6215"/>
+    <rect x="448" y="64" width="32" height="32" fill="#BC6215"/>
+    <rect x="480" y="64" width="32" height="32" fill="#323538"/>
+    <rect x="352" y="96" width="32" height="32" fill="#323538"/>
+    <rect x="384" y="96" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="416" y="96" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="448" y="96" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="480" y="96" width="32" height="32" fill="#0E88E2"/>
+    <rect x="288" y="128" width="32" height="32" fill="#323538"/>
+    <rect x="320" y="128" width="32" height="32" fill="#323538"/>
+    <rect x="352" y="128" width="32" height="32" fill="#BC6215"/>
+    <rect x="384" y="128" width="32" height="32" fill="#323538"/>
+    <rect x="416" y="128" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="448" y="128" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="480" y="128" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="256" y="160" width="32" height="32" fill="#323538"/>
+    <rect x="288" y="160" width="32" height="32" fill="#BC6215"/>
+    <rect x="320" y="160" width="32" height="32" fill="#CC874C"/>
+    <rect x="352" y="160" width="32" height="32" fill="#323538"/>
+    <rect x="416" y="160" width="32" height="32" fill="#0E88E2"/>
+    <rect x="448" y="160" width="32" height="32" fill="#0E88E2"/>
+    <rect x="480" y="160" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="256" y="192" width="32" height="32" fill="#323538"/>
+    <rect x="288" y="192" width="32" height="32" fill="#BC6215"/>
+    <rect x="320" y="192" width="32" height="32" fill="#BC6215"/>
+    <rect x="352" y="192" width="32" height="32" fill="#323538"/>
+    <rect x="416" y="192" width="32" height="32" fill="#0E88E2"/>
+    <rect x="448" y="192" width="32" height="32" fill="#0E88E2"/>
+    <rect x="480" y="192" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="224" y="224" width="32" height="32" fill="#323538"/>
+    <rect x="256" y="224" width="32" height="32" fill="#BC6215"/>
+    <rect x="288" y="224" width="32" height="32" fill="#323538"/>
+    <rect x="320" y="224" width="32" height="32" fill="#323538"/>
+    <rect x="416" y="224" width="32" height="32" fill="#0E88E2"/>
+    <rect x="448" y="224" width="32" height="32" fill="#0E88E2"/>
+    <rect x="480" y="224" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="160" y="256" width="32" height="32" fill="#323538"/>
+    <rect x="192" y="256" width="32" height="32" fill="#323538"/>
+    <rect x="224" y="256" width="32" height="32" fill="#CC874C"/>
+    <rect x="256" y="256" width="32" height="32" fill="#323538"/>
+    <rect x="416" y="256" width="32" height="32" fill="#0E88E2"/>
+    <rect x="448" y="256" width="32" height="32" fill="#0E88E2"/>
+    <rect x="480" y="256" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="128" y="288" width="32" height="32" fill="#323538"/>
+    <rect x="160" y="288" width="32" height="32" fill="#BC6215"/>
+    <rect x="192" y="288" width="32" height="32" fill="#CC874C"/>
+    <rect x="224" y="288" width="32" height="32" fill="#5D5F61"/>
+    <rect x="416" y="288" width="32" height="32" fill="#0E88E2"/>
+    <rect x="448" y="288" width="32" height="32" fill="#0E88E2"/>
+    <rect x="480" y="288" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="128" y="320" width="32" height="32" fill="#323538"/>
+    <rect x="160" y="320" width="32" height="32" fill="#BC6215"/>
+    <rect x="192" y="320" width="32" height="32" fill="#BC6215"/>
+    <rect x="224" y="320" width="32" height="32" fill="#323538"/>
+    <rect x="416" y="320" width="32" height="32" fill="#229CEF"/>
+    <rect x="448" y="320" width="32" height="32" fill="#0E88E2"/>
+    <rect x="480" y="320" width="32" height="32" fill="#5AC6ED"/>
+    <rect x="96" y="352" width="32" height="32" fill="#323538"/>
+    <rect x="128" y="352" width="32" height="32" fill="#BC6215"/>
+    <rect x="160" y="352" width="32" height="32" fill="#323538"/>
+    <rect x="192" y="352" width="32" height="32" fill="#323538"/>
+    <rect x="480" y="352" width="32" height="32" fill="#0E88E2"/>
+    <rect x="32" y="384" width="32" height="32" fill="#323538"/>
+    <rect x="64" y="384" width="32" height="32" fill="#323538"/>
+    <rect x="96" y="384" width="32" height="32" fill="#BC6215"/>
+    <rect x="128" y="384" width="32" height="32" fill="#323538"/>
+    <rect x="0" y="416" width="32" height="32" fill="#323538"/>
+    <rect x="32" y="416" width="32" height="32" fill="#BC6215"/>
+    <rect x="64" y="416" width="32" height="32" fill="#BC6215"/>
+    <rect x="96" y="416" width="32" height="32" fill="#323538"/>
+    <rect x="0" y="448" width="32" height="32" fill="#323538"/>
+    <rect x="32" y="448" width="32" height="32" fill="#BC6215"/>
+    <rect x="64" y="448" width="32" height="32" fill="#BC6215"/>
+    <rect x="96" y="448" width="32" height="32" fill="#323538"/>
+    <rect x="0" y="480" width="32" height="32" fill="#323538"/>
+    <rect x="32" y="480" width="32" height="32" fill="#323538"/>
+    <rect x="64" y="480" width="32" height="32" fill="#323538"/>
+  </g>
+</svg>
+</div>
 
 <main>
   <!-- =================== HERO =================== -->
   <section class="hero-bg relative overflow-hidden pt-12 pb-20 lg:pb-28">
     <div class="absolute inset-0 grid-pattern opacity-40"></div>
-    <div class="absolute top-10 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-float-slow"></div>
+    <div
+      class="absolute top-10 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-float-slow"
+    ></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <!-- Left content -->
         <div>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent text-xs font-semibold text-accent mb-6">
+          <div
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-accent text-xs font-semibold text-accent mb-6"
+          >
             <i data-lucide="zap" class="w-3.5 h-3.5"></i>
             GAME SERVERS
           </div>
 
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+          <h1
+            class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6"
+          >
             <span class="gradient-text-white">High Performance</span><br />
             <span class="gradient-text">Game Servers</span>
           </h1>
@@ -28,11 +152,17 @@
           </p>
 
           <div class="flex flex-wrap gap-4 mb-8">
-            <a href="#pricing" class="px-7 py-3.5 gradient-accent rounded-xl text-sm font-semibold btn-ripple hover:shadow-lg hover:shadow-secondary/25 transition-all flex items-center gap-2">
+            <a
+              href="#pricing"
+              class="px-7 py-3.5 gradient-accent rounded-xl text-sm font-semibold btn-ripple hover:shadow-lg hover:shadow-secondary/25 transition-all flex items-center gap-2"
+            >
               View Plans
               <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </a>
-            <a href="#features" class="px-7 py-3.5 glass rounded-xl text-sm font-semibold text-text-dim hover:text-primary hover:border-accent/30 transition-all">
+            <a
+              href="#features"
+              class="px-7 py-3.5 glass rounded-xl text-sm font-semibold text-text-dim hover:text-primary hover:border-accent/30 transition-all"
+            >
               All Features
             </a>
           </div>
@@ -47,7 +177,10 @@
               Low Latency
             </span>
             <span class="flex items-center gap-1.5">
-              <i data-lucide="shield-check" class="w-4 h-4 text-accent-light"></i>
+              <i
+                data-lucide="shield-check"
+                class="w-4 h-4 text-accent-light"
+              ></i>
               DDoS Protection
             </span>
             <span class="flex items-center gap-1.5">
@@ -58,30 +191,52 @@
         </div>
 
         <!-- Right illustration -->
-        <div class="relative hidden lg:block" style="animation: scale-in 0.8s ease-out 0.2s both">
-          <div class="relative mx-auto w-full max-w-md aspect-square flex items-center justify-center">
-            <div class="absolute w-[320px] h-[320px] border border-secondary/10 rounded-full animate-rotate-slow"></div>
-            <div class="absolute w-[240px] h-[240px] border border-accent/10 rounded-full" style="animation: rotate-slow 20s linear infinite reverse"></div>
+        <div
+          class="relative hidden lg:block"
+          style="animation: scale-in 0.8s ease-out 0.2s both"
+        >
+          <div
+            class="relative mx-auto w-full max-w-md aspect-square flex items-center justify-center"
+          >
+            <div
+              class="absolute w-[320px] h-[320px] border border-secondary/10 rounded-full animate-rotate-slow"
+            ></div>
+            <div
+              class="absolute w-[240px] h-[240px] border border-accent/10 rounded-full"
+              style="animation: rotate-slow 20s linear infinite reverse"
+            ></div>
 
-            <div class="w-40 h-52 rounded-2xl gradient-accent flex items-center justify-center shadow-2xl shadow-secondary/30 animate-pulse-glow">
+            <div
+              class="w-40 h-52 rounded-2xl gradient-accent flex items-center justify-center shadow-2xl shadow-secondary/30 animate-pulse-glow"
+            >
               <i data-lucide="server" class="w-16 h-16 text-white/90"></i>
             </div>
 
-            <div class="absolute top-4 left-0 glass rounded-xl p-3 animate-float">
+            <div
+              class="absolute top-4 left-0 glass rounded-xl p-3 animate-float"
+            >
               <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center">
+                <div
+                  class="w-8 h-8 rounded-lg bg-green-500/10 flex items-center justify-center"
+                >
                   <i data-lucide="users" class="w-4 h-4 text-green-400"></i>
                 </div>
                 <div>
                   <div class="text-[10px] text-text-muted">Players Online</div>
-                  <div class="text-xs font-semibold text-green-400">128 / 200</div>
+                  <div class="text-xs font-semibold text-green-400">
+                    128 / 200
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="absolute top-16 right-0 glass rounded-xl p-3 animate-float-slow">
+            <div
+              class="absolute top-16 right-0 glass rounded-xl p-3 animate-float-slow"
+            >
               <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                <div
+                  class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center"
+                >
                   <i data-lucide="wifi" class="w-4 h-4 text-accent"></i>
                 </div>
                 <div>
@@ -91,10 +246,17 @@
               </div>
             </div>
 
-            <div class="absolute bottom-6 left-2 glass rounded-xl p-3 animate-float-reverse">
+            <div
+              class="absolute bottom-6 left-2 glass rounded-xl p-3 animate-float-reverse"
+            >
               <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
-                  <i data-lucide="gamepad-2" class="w-4 h-4 text-purple-400"></i>
+                <div
+                  class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center"
+                >
+                  <i
+                    data-lucide="gamepad-2"
+                    class="w-4 h-4 text-purple-400"
+                  ></i>
                 </div>
                 <div>
                   <div class="text-[10px] text-text-muted">Uptime</div>
@@ -109,11 +271,16 @@
   </section>
 
   <!-- =================== PRICING =================== -->
-  <section id="pricing" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+  <section
+    id="pricing"
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center"
+  >
     <div class="reveal">
       <p class="eyebrow text-xs font-semibold mb-3">CHOOSE YOUR PLAN</p>
       <h2 class="text-3xl font-bold mb-3">Simple, Transparent Pricing</h2>
-      <p class="text-muted mb-12">Choose the perfect plan for your game server.</p>
+      <p class="text-muted mb-12">
+        Choose the perfect plan for your game server.
+      </p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
@@ -121,7 +288,10 @@
       <div class="pricing-card rounded-2xl p-7">
         <h3 class="font-semibold mb-1">Starter</h3>
         <p class="text-faint text-xs mb-5">Perfect for small communities</p>
-        <p class="mb-6"><span class="text-3xl font-extrabold">₹249</span><span class="text-faint text-sm">/mo</span></p>
+        <p class="mb-6">
+          <span class="text-3xl font-extrabold">₹249</span
+          ><span class="text-faint text-sm">/mo</span>
+        </p>
         <ul class="text-sm text-muted space-y-2.5 mb-7">
           <li class="check-mark">4 GB RAM</li>
           <li class="check-mark">1 vCPU Core</li>
@@ -129,15 +299,25 @@
           <li class="check-mark">Unmetered Bandwidth</li>
           <li class="check-mark">DDoS Protection</li>
         </ul>
-        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+        <a
+          href="{% url 'website:contact' %}"
+          class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm"
+          >Get Started</a
+        >
       </div>
 
       <!-- Pro (featured) -->
       <div class="pricing-card featured rounded-2xl p-7 relative">
-        <span class="absolute -top-3 right-7 btn-primary text-white text-[11px] font-semibold px-3 py-1 rounded-full">Most Popular</span>
+        <span
+          class="absolute -top-3 right-7 btn-primary text-white text-[11px] font-semibold px-3 py-1 rounded-full"
+          >Most Popular</span
+        >
         <h3 class="font-semibold mb-1">Pro</h3>
         <p class="text-faint text-xs mb-5">Great for growing servers</p>
-        <p class="mb-6"><span class="text-3xl font-extrabold">₹449</span><span class="text-faint text-sm">/mo</span></p>
+        <p class="mb-6">
+          <span class="text-3xl font-extrabold">₹449</span
+          ><span class="text-faint text-sm">/mo</span>
+        </p>
         <ul class="text-sm text-muted space-y-2.5 mb-7">
           <li class="check-mark">8 GB RAM</li>
           <li class="check-mark">2 vCPU Cores</li>
@@ -145,14 +325,21 @@
           <li class="check-mark">Unmetered Bandwidth</li>
           <li class="check-mark">DDoS Protection</li>
         </ul>
-        <a href="{% url 'website:contact' %}" class="btn-primary block text-center w-full text-white font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+        <a
+          href="{% url 'website:contact' %}"
+          class="btn-primary block text-center w-full text-white font-medium py-2.5 rounded-lg text-sm"
+          >Get Started</a
+        >
       </div>
 
       <!-- Advanced -->
       <div class="pricing-card rounded-2xl p-7">
         <h3 class="font-semibold mb-1">Advanced</h3>
         <p class="text-faint text-xs mb-5">For large communities</p>
-        <p class="mb-6"><span class="text-3xl font-extrabold">₹699</span><span class="text-faint text-sm">/mo</span></p>
+        <p class="mb-6">
+          <span class="text-3xl font-extrabold">₹699</span
+          ><span class="text-faint text-sm">/mo</span>
+        </p>
         <ul class="text-sm text-muted space-y-2.5 mb-7">
           <li class="check-mark">12 GB RAM</li>
           <li class="check-mark">3 vCPU Cores</li>
@@ -160,14 +347,21 @@
           <li class="check-mark">Unmetered Bandwidth</li>
           <li class="check-mark">DDoS Protection</li>
         </ul>
-        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+        <a
+          href="{% url 'website:contact' %}"
+          class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm"
+          >Get Started</a
+        >
       </div>
 
       <!-- Elite -->
       <div class="pricing-card rounded-2xl p-7">
         <h3 class="font-semibold mb-1">Elite</h3>
         <p class="text-faint text-xs mb-5">For high performance needs</p>
-        <p class="mb-6"><span class="text-3xl font-extrabold">₹999</span><span class="text-faint text-sm">/mo</span></p>
+        <p class="mb-6">
+          <span class="text-3xl font-extrabold">₹999</span
+          ><span class="text-faint text-sm">/mo</span>
+        </p>
         <ul class="text-sm text-muted space-y-2.5 mb-7">
           <li class="check-mark">16 GB RAM</li>
           <li class="check-mark">4 vCPU Cores</li>
@@ -175,65 +369,110 @@
           <li class="check-mark">Unmetered Bandwidth</li>
           <li class="check-mark">DDoS Protection</li>
         </ul>
-        <a href="{% url 'website:contact' %}" class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm">Get Started</a>
+        <a
+          href="{% url 'website:contact' %}"
+          class="btn-outline block text-center w-full font-medium py-2.5 rounded-lg text-sm"
+          >Get Started</a
+        >
       </div>
     </div>
   </section>
 
   <!-- =================== FEATURES =================== -->
-  <section id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
+  <section
+    id="features"
+    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center"
+  >
     <div class="reveal">
       <p class="eyebrow text-xs font-semibold mb-3">POWERFUL FEATURES</p>
-      <h2 class="text-3xl font-bold mb-12">Everything You Need for the Best Gameplay</h2>
+      <h2 class="text-3xl font-bold mb-12">
+        Everything You Need for the Best Gameplay
+      </h2>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-1">
-        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+      <div
+        class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-1"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4"
+        >
           <i data-lucide="zap" class="w-6 h-6 text-purple-400"></i>
         </div>
         <h3 class="font-semibold mb-2">Low Latency</h3>
-        <p class="text-text-dim text-sm leading-relaxed">Premium network with low latency for smooth gameplay.</p>
+        <p class="text-text-dim text-sm leading-relaxed">
+          Premium network with low latency for smooth gameplay.
+        </p>
       </div>
 
-      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-2">
-        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+      <div
+        class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-2"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4"
+        >
           <i data-lucide="shield" class="w-6 h-6 text-purple-400"></i>
         </div>
         <h3 class="font-semibold mb-2">DDoS Protection</h3>
-        <p class="text-text-dim text-sm leading-relaxed">Enterprise-grade DDoS protection to keep your server online.</p>
+        <p class="text-text-dim text-sm leading-relaxed">
+          Enterprise-grade DDoS protection to keep your server online.
+        </p>
       </div>
 
-      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-3">
-        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+      <div
+        class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-3"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4"
+        >
           <i data-lucide="rocket" class="w-6 h-6 text-purple-400"></i>
         </div>
         <h3 class="font-semibold mb-2">Instant Setup</h3>
-        <p class="text-text-dim text-sm leading-relaxed">Your server will be ready to play in 60 seconds.</p>
+        <p class="text-text-dim text-sm leading-relaxed">
+          Your server will be ready to play in 60 seconds.
+        </p>
       </div>
 
-      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-1">
-        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+      <div
+        class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-1"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4"
+        >
           <i data-lucide="clock" class="w-6 h-6 text-purple-400"></i>
         </div>
         <h3 class="font-semibold mb-2">Automatic Backups</h3>
-        <p class="text-text-dim text-sm leading-relaxed">Daily automated backups to keep your data safe.</p>
+        <p class="text-text-dim text-sm leading-relaxed">
+          Daily automated backups to keep your data safe.
+        </p>
       </div>
 
-      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-2">
-        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+      <div
+        class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-2"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4"
+        >
           <i data-lucide="puzzle" class="w-6 h-6 text-purple-400"></i>
         </div>
         <h3 class="font-semibold mb-2">One-Click Mods</h3>
-        <p class="text-text-dim text-sm leading-relaxed">Install plugins and mods with one click.</p>
+        <p class="text-text-dim text-sm leading-relaxed">
+          Install plugins and mods with one click.
+        </p>
       </div>
 
-      <div class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-3">
-        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+      <div
+        class="glass rounded-xl2 p-6 card-hover gradient-border reveal reveal-delay-3"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4"
+        >
           <i data-lucide="headset" class="w-6 h-6 text-purple-400"></i>
         </div>
         <h3 class="font-semibold mb-2">24/7 Support</h3>
-        <p class="text-text-dim text-sm leading-relaxed">Our expert team is always here to help you.</p>
+        <p class="text-text-dim text-sm leading-relaxed">
+          Our expert team is always here to help you.
+        </p>
       </div>
     </div>
   </section>
@@ -241,49 +480,80 @@
   <!-- =================== GAMES SUPPORTED =================== -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24 text-center">
     <div class="reveal">
-      <p class="eyebrow text-xs font-semibold mb-3">SUPPORT FOR POPULAR GAMES</p>
+      <p class="eyebrow text-xs font-semibold mb-3">
+        SUPPORT FOR POPULAR GAMES
+      </p>
       <h2 class="text-3xl font-bold mb-12">Game Servers We Support</h2>
     </div>
 
     <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-4">
-      <div class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
+      <div
+        class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center"
+        >
           <i data-lucide="box" class="w-6 h-6 text-green-400"></i>
         </div>
         <span class="text-xs font-medium">Minecraft</span>
       </div>
-      <div class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center">
+      <div
+        class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center"
+        >
           <i data-lucide="car" class="w-6 h-6 text-orange-400"></i>
         </div>
         <span class="text-xs font-medium">FiveM</span>
       </div>
-      <div class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center">
+      <div
+        class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center"
+        >
           <i data-lucide="crosshair" class="w-6 h-6 text-red-400"></i>
         </div>
         <span class="text-xs font-medium">Counter-Strike 2</span>
       </div>
-      <div class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center">
+      <div
+        class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center"
+        >
           <i data-lucide="hammer" class="w-6 h-6 text-amber-400"></i>
         </div>
         <span class="text-xs font-medium">Rust</span>
       </div>
-      <div class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center">
+      <div
+        class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center"
+        >
           <i data-lucide="mountain" class="w-6 h-6 text-cyan-400"></i>
         </div>
         <span class="text-xs font-medium">ARK: Survival Evolved</span>
       </div>
-      <div class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3">
-        <div class="w-12 h-12 rounded-xl bg-pink-500/10 flex items-center justify-center">
+      <div
+        class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-pink-500/10 flex items-center justify-center"
+        >
           <i data-lucide="paw-print" class="w-6 h-6 text-pink-400"></i>
         </div>
         <span class="text-xs font-medium">Palworld</span>
       </div>
-      <a href="{% url 'website:contact' %}" class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3 justify-center">
-        <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+      <a
+        href="{% url 'website:contact' %}"
+        class="gs-game-badge rounded-xl2 p-5 flex flex-col items-center gap-3 justify-center"
+      >
+        <div
+          class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center"
+        >
           <i data-lucide="plus" class="w-6 h-6 text-accent-light"></i>
         </div>
         <span class="text-xs font-medium text-accent-light">More Games</span>
@@ -296,7 +566,9 @@
     <div class="reveal">
       <p class="eyebrow text-xs font-semibold mb-3">GLOBAL DATA CENTERS</p>
       <h2 class="text-3xl font-bold mb-3">Servers Around the World</h2>
-      <p class="text-muted mb-12">More locations coming soon to even more regions.</p>
+      <p class="text-muted mb-12">
+        More locations coming soon to even more regions.
+      </p>
     </div>
 
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -349,18 +621,22 @@
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
     <div class="grid lg:grid-cols-2 gap-8 items-start">
       <div>
-        <p class="eyebrow text-xs font-semibold mb-3">FREQUENTLY ASKED QUESTIONS</p>
+        <p class="eyebrow text-xs font-semibold mb-3">
+          FREQUENTLY ASKED QUESTIONS
+        </p>
         <div class="space-y-3" id="faq-list">
           <div class="faq-item open rounded-xl p-4 cursor-pointer">
             <div class="faq-question flex items-center justify-between">
               <p class="text-sm font-medium flex items-center gap-2">
-                <span class="text-violet-400">»</span> How fast will my game server be setup?
+                <span class="text-violet-400">»</span> How fast will my game
+                server be setup?
               </p>
               <span class="faq-toggle text-faint">⌄</span>
             </div>
             <div class="faq-answer">
               <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
-                Most game servers are deployed automatically within 60 seconds of checkout.
+                Most game servers are deployed automatically within 60 seconds
+                of checkout.
               </p>
             </div>
           </div>
@@ -368,13 +644,15 @@
           <div class="faq-item rounded-xl p-4 cursor-pointer">
             <div class="faq-question flex items-center justify-between">
               <p class="text-sm font-medium flex items-center gap-2">
-                <span class="text-violet-400">»</span> Do you offer DDoS protection?
+                <span class="text-violet-400">»</span> Do you offer DDoS
+                protection?
               </p>
               <span class="faq-toggle text-faint">⌄</span>
             </div>
             <div class="faq-answer">
               <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
-                Yes, enterprise-grade DDoS protection is included on every plan by default.
+                Yes, enterprise-grade DDoS protection is included on every plan
+                by default.
               </p>
             </div>
           </div>
@@ -382,13 +660,15 @@
           <div class="faq-item rounded-xl p-4 cursor-pointer">
             <div class="faq-question flex items-center justify-between">
               <p class="text-sm font-medium flex items-center gap-2">
-                <span class="text-violet-400">»</span> Can I upgrade my server later?
+                <span class="text-violet-400">»</span> Can I upgrade my server
+                later?
               </p>
               <span class="faq-toggle text-faint">⌄</span>
             </div>
             <div class="faq-answer">
               <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
-                Absolutely, you can upgrade your plan anytime from your dashboard with no downtime.
+                Absolutely, you can upgrade your plan anytime from your
+                dashboard with no downtime.
               </p>
             </div>
           </div>
@@ -396,13 +676,15 @@
           <div class="faq-item rounded-xl p-4 cursor-pointer">
             <div class="faq-question flex items-center justify-between">
               <p class="text-sm font-medium flex items-center gap-2">
-                <span class="text-violet-400">»</span> Do you offer mod and plugin support?
+                <span class="text-violet-400">»</span> Do you offer mod and
+                plugin support?
               </p>
               <span class="faq-toggle text-faint">⌄</span>
             </div>
             <div class="faq-answer">
               <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
-                Yes, most game servers support one-click mod and plugin installation.
+                Yes, most game servers support one-click mod and plugin
+                installation.
               </p>
             </div>
           </div>
@@ -416,21 +698,30 @@
             </div>
             <div class="faq-answer">
               <p class="text-muted text-sm mt-3 pl-5 leading-relaxed">
-                Minecraft, FiveM, Counter-Strike 2, Rust, ARK, Palworld, and many more.
+                Minecraft, FiveM, Counter-Strike 2, Rust, ARK, Palworld, and
+                many more.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="gradient-accent rounded-3xl p-10 flex flex-col justify-center h-full text-white relative overflow-hidden">
+      <div
+        class="gradient-accent rounded-3xl p-10 flex flex-col justify-center h-full text-white relative overflow-hidden"
+      >
         <div class="absolute inset-0 grid-pattern opacity-10"></div>
         <div class="relative">
-          <h2 class="text-2xl sm:text-3xl font-bold mb-3">Ready to Start Your Game Server?</h2>
+          <h2 class="text-2xl sm:text-3xl font-bold mb-3">
+            Ready to Start Your Game Server?
+          </h2>
           <p class="text-white/80 mb-6">
-            Experience lag-free gameplay with powerful hardware and 24/7 support.
+            Experience lag-free gameplay with powerful hardware and 24/7
+            support.
           </p>
-          <a href="#pricing" class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-purple-700 rounded-xl text-sm font-semibold hover:opacity-90 transition-all w-fit">
+          <a
+            href="#pricing"
+            class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-purple-700 rounded-xl text-sm font-semibold hover:opacity-90 transition-all w-fit"
+          >
             Get Started Now
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
@@ -457,4 +748,6 @@
   revealElements.forEach((el) => revealObserver.observe(el));
 </script>
 
+{% endblock %} {% block extra_js %}
+<script src="{% static 'js/game-cursor.js' %}"></script>
 {% endblock %}
