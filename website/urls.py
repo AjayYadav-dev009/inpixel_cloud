@@ -12,4 +12,10 @@ urlpatterns = [
     path('vps-hosting/', views.vps_hosting, name='vps_hosting'),
     path('bot-hosting/', views.bot_hosting, name='bot_hosting'),
     path('contact/', views.contact, name='contact'),
+
+    # Login And Registration 
+    path('login_page/', views.login_page, name='login_page'),
+    path('registration/', views.registration, name='registration'),
+    path('do_login/', views.do_login, name='do_login'),
+    path('logout/', views.logout, name='logout'),
 ]
