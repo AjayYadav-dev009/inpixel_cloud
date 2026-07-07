@@ -7,11 +7,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %} InPixel Cloud {% endblock %}</title>
+  
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   <link rel="stylesheet" href="{% static 'css/site-global.css' %}" />
+  {% block extra_css %}{% endblock %}
+
   <script>
     // Apply saved/preferred theme before first paint, to avoid a flash
     // of the wrong theme. Default is dark; light is opt-in.
@@ -23,6 +26,7 @@
       }
     })();
   </script>
+
 </head>
 
 <body class="min-h-screen">
@@ -67,9 +71,7 @@
         </div>
 
 
-        <a href="#pricing-section" class="nav-link">Pricing</a>
         <a href="{% url 'website:about' %}" class="nav-link">About</a>
-        <a href="#" class="nav-link">Docs</a>
         <a href="{% url 'website:contact' %}" class="nav-link">Contact</a>
       </nav>
 
@@ -120,15 +122,11 @@
           </div>
         </div>
         <div class="space-y-1">
-          <a href="#"
+          <a href="{% url 'website:service' %}"
             class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">Services</a>
-          <a href="#pricing-section"
-            class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">Pricing</a>
-          <a href="#"
+          <a href="{% url 'website:about' %}"
             class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">About</a>
-          <a href="#"
-            class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">Docs</a>
-          <a href="#"
+          <a href="{% url 'website:contact' %}"
             class="flex items-center gap-3 px-4 py-3 rounded-xl text-text-dim hover:text-primary hover:bg-surface transition-colors text-sm font-medium">Contact</a>
         </div>
         <div class="mt-8 space-y-3">
@@ -455,6 +453,11 @@
   <div id="toastContainer" class="fixed top-24 right-6 z-50 space-y-3"></div>
 
   <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+
+{% block extra_js %}
+{% endblock %}
+
 </body>
 
 </html>
