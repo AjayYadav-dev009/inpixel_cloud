@@ -14,6 +14,21 @@ def login_required(view_func):
 
     return wrapper
 
+def customer_required(view_func):
+
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+
+        if "user_email" not in request.session:
+            return redirect("/login_page")
+
+        if request.session.get("user_role") != "customer":
+            return redirect("website:admin_dashboard")
+
+        return view_func(request, *args, **kwargs)
+
+    return wrapper
+
 
 
 def admin_required(view_func):

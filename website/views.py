@@ -4,7 +4,7 @@ from secret_key import pasword_decryt,pasword_encryt,time_ago
 from .models import Users
 from datetime import datetime
 import time
-from .decorators import login_required, admin_required, staff_required
+from .decorators import login_required, admin_required, staff_required, customer_required
 
 
 
@@ -130,13 +130,14 @@ def do_login(request):
 
         # Password check
         if input_password != db_password:
-            return redirect("/login_page?msg=password_wrong")
+            return redirect("/login_page?msg=invalid_password")
 
         # ==========================
         # Login Success - Session
         # ==========================
         # # request.session["user_id"] = user.user_id
         request.session["user_role"] = user.user_role
+        role = user.user_role
         request.session["account_name"] = user.account_name
         request.session["username"] = user.username
         request.session["user_email"] = user.user_email
@@ -144,12 +145,26 @@ def do_login(request):
         # # request.session["account_status"] = user.account_status
         request.session["user_image"] = user.user_image
 
-        return redirect("/?login_status=true")
+    if role == "customer":
+        return redirect("website/dashboard")
 
-    return redirect("/login_page")
+    elif role in ["staff", "admin"]:
+        return redirect("admin/dashboard")
     # return render(request,'website/index.html')
 
 
 def logout(request):
     request.session.flush()
     return redirect("/?msg=Logout Successfully ✅")
+
+
+@customer_required
+def user_dashboard(request):
+
+    return render(request,"website/dashboard.html")
+
+@staff_required
+def admin_dashboard(request):
+    
+    return render(request,"admin/dashboard.html")
+
