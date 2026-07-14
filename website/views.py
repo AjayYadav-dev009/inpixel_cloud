@@ -1,9 +1,10 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404  
 from django.http import HttpResponse,JsonResponse
 from secret_key import pasword_decryt,pasword_encryt,time_ago
 from .models import Users
 from datetime import datetime
 import time
+from .decorators import login_required, admin_required, staff_required
 
 
 
