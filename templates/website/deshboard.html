@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Panel · InPixel Cloud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   INPIXEL CLOUD — CLIENT PANEL
+   Pure CSS interactivity — no JavaScript.
+   Theme + navigation + tabs are driven by hidden radio/checkbox
+   inputs and the ~ general sibling combinator.
+   ============================================================ */
+
+  :root{
+    --font-display:'Sora',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+
+    --radius-sm:10px;
+    --radius-md:16px;
+    --radius-lg:22px;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ---------- DARK THEME (default) ---------- */
+  .app{
+    --bg:#0a0714;
+    --bg-soft:#0e0a1c;
+    --bg-blob-1:#6d28d9;
+    --bg-blob-2:#4c1d95;
+    --bg-blob-3:#7c3aed;
+    --surface:#150f2b;
+    --surface-2:#1c1538;
+    --surface-3:#241c47;
+    --border:rgba(255,255,255,.08);
+    --border-soft:rgba(255,255,255,.05);
+    --text:#f5f3fc;
+    --text-dim:#a79fc9;
+    --text-faint:#6e6690;
+    --accent:#8b5cf6;
+    --accent-2:#c026d3;
+    --accent-grad:linear-gradient(135deg,#8b5cf6,#6d28d9);
+    --accent-soft:rgba(139,92,246,.14);
+    --success:#22c55e;
+    --success-soft:rgba(34,197,94,.14);
+    --warning:#f59e0b;
+    --warning-soft:rgba(245,158,11,.14);
+    --danger:#f43f5e;
+    --danger-soft:rgba(244,63,94,.14);
+    --info:#38bdf8;
+    --info-soft:rgba(56,189,248,.14);
+    --shadow:0 20px 50px -20px rgba(0,0,0,.6);
+    --overlay-op:.55;
+    color-scheme: dark;
+  }
+
+  /* ---------- LIGHT THEME ---------- */
+  #theme-toggle:checked ~ .app{
+    --bg:#f6f5fb;
+    --bg-soft:#eeecf9;
+    --bg-blob-1:#c4b5fd;
+    --bg-blob-2:#ddd6fe;
+    --bg-blob-3:#e9d5ff;
+    --surface:#ffffff;
+    --surface-2:#f7f5fd;
+    --surface-3:#efebfb;
+    --border:rgba(30,15,60,.08);
+    --border-soft:rgba(30,15,60,.05);
+    --text:#170f2e;
+    --text-dim:#5d5580;
+    --text-faint:#948caf;
+    --accent:#7c3aed;
+    --accent-2:#a21caf;
+    --accent-grad:linear-gradient(135deg,#8b5cf6,#7c3aed);
+    --accent-soft:rgba(124,58,237,.09);
+    --success:#16a34a;
+    --success-soft:rgba(22,163,74,.1);
+    --warning:#d97706;
+    --warning-soft:rgba(217,119,6,.1);
+    --danger:#e11d48;
+    --danger-soft:rgba(225,29,72,.1);
+    --info:#0284c7;
+    --info-soft:rgba(2,132,199,.1);
+    --shadow:0 20px 40px -20px rgba(80,60,140,.18);
+    --overlay-op:.06;
+    color-scheme: light;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg,#0a0714);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button,input,textarea,select{font-family:inherit;}
+
+  /* hidden control inputs — never rendered, only drive state */
+  .ctl{
+    position:absolute;
+    width:0;height:0;
+    opacity:0;
+    pointer-events:none;
+  }
+
+  ::selection{background:var(--accent);color:#fff;}
+
+  ::-webkit-scrollbar{width:10px;height:10px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:10px;}
+
+  /* ============ APP SHELL ============ */
+  .app{
+    position:relative;
+    min-height:100vh;
+    background:var(--bg);
+    color:var(--text);
+    transition:background .35s var(--ease),color .35s var(--ease);
+    overflow-x:hidden;
+  }
+
+  .bg-decor{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:var(--overlay-op);
+    animation:float 18s ease-in-out infinite;
+  }
+  .blob-1{width:520px;height:520px;background:var(--bg-blob-1);top:-160px;left:-120px;}
+  .blob-2{width:420px;height:420px;background:var(--bg-blob-2);bottom:-140px;right:-80px;animation-delay:-6s;}
+  .blob-3{width:360px;height:360px;background:var(--bg-blob-3);top:40%;left:55%;animation-delay:-11s;}
+  @keyframes float{
+    0%,100%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(30px,-30px) scale(1.08);}
+  }
+
+  /* ============ SIDEBAR ============ */
+  .sidebar{
+    position:fixed;
+    top:0;left:0;bottom:0;
+    width:264px;
+    background:var(--surface);
+    border-right:1px solid var(--border);
+    z-index:40;
+    display:flex;
+    flex-direction:column;
+    transition:transform .35s var(--ease),background .35s var(--ease);
+  }
+  .sidebar-brand{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    padding:1.6rem 1.4rem 1.3rem;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .brand-mark{
+    width:38px;height:38px;
+    border-radius:11px;
+    background:var(--accent-grad);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);
+    font-weight:800;
+    color:#fff;
+    font-size:1.05rem;
+    box-shadow:0 8px 20px -6px rgba(124,58,237,.55);
+    flex-shrink:0;
+  }
+  .brand-text{line-height:1.15;}
+  .brand-text strong{
+    font-family:var(--font-display);
+    font-size:1.02rem;
+    font-weight:700;
+    display:block;
+  }
+  .brand-text span{
+    font-size:.68rem;
+    color:var(--text-faint);
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+
+  .sidebar-close{
+    display:none;
+    margin-left:auto;
+    width:32px;height:32px;
+    align-items:center;justify-content:center;
+    border-radius:8px;
+    color:var(--text-dim);
+    cursor:pointer;
+  }
+  .sidebar-close:hover{background:var(--surface-2);}
+
+  .sidebar-nav{
+    flex:1;
+    padding:1.1rem .9rem;
+    display:flex;
+    flex-direction:column;
+    gap:.25rem;
+    overflow-y:auto;
+  }
+  .nav-group-label{
+    font-size:.66rem;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    padding:.9rem .6rem .35rem;
+  }
+  .nav-link{
+    display:flex;
+    align-items:center;
+    gap:.8rem;
+    padding:.68rem .8rem;
+    border-radius:11px;
+    color:var(--text-dim);
+    font-size:.88rem;
+    font-weight:500;
+    cursor:pointer;
+    transition:background .2s var(--ease),color .2s var(--ease),transform .2s var(--ease);
+    position:relative;
+  }
+  .nav-link svg{width:18px;height:18px;flex-shrink:0;opacity:.85;}
+  .nav-link:hover{background:var(--surface-2);color:var(--text);}
+  .nav-link:active{transform:scale(.98);}
+  .nav-link .nl-badge{
+    margin-left:auto;
+    font-size:.66rem;
+    font-weight:700;
+    background:var(--danger-soft);
+    color:var(--danger);
+    padding:.12rem .45rem;
+    border-radius:999px;
+  }
+
+  .sidebar-foot{
+    padding:1rem .9rem 1.3rem;
+    border-top:1px solid var(--border-soft);
+  }
+  .plan-card{
+    background:var(--accent-grad);
+    border-radius:var(--radius-md);
+    padding:1rem;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+  .plan-card::after{
+    content:"";
+    position:absolute;
+    width:120px;height:120px;
+    background:rgba(255,255,255,.12);
+    border-radius:50%;
+    top:-50px;right:-40px;
+  }
+  .plan-card p{font-size:.72rem;opacity:.85;margin-bottom:.15rem;}
+  .plan-card strong{font-family:var(--font-display);font-size:1rem;}
+  .plan-card .btn{margin-top:.7rem;width:100%;justify-content:center;background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.3);}
+  .plan-card .btn:hover{background:rgba(255,255,255,.28);}
+
+  /* sidebar active states, driven by the 6 page radios below */
+  #nav-overview:checked ~ .app label[for="nav-overview"],
+  #nav-services:checked ~ .app label[for="nav-services"],
+  #nav-servers:checked ~ .app label[for="nav-servers"],
+  #nav-billing:checked ~ .app label[for="nav-billing"],
+  #nav-support:checked ~ .app label[for="nav-support"],
+  #nav-profile:checked ~ .app label[for="nav-profile"]{
+    background:var(--accent-soft);
+    color:var(--accent);
+  }
+  #nav-overview:checked ~ .app label[for="nav-overview"] svg,
+  #nav-services:checked ~ .app label[for="nav-services"] svg,
+  #nav-servers:checked ~ .app label[for="nav-servers"] svg,
+  #nav-billing:checked ~ .app label[for="nav-billing"] svg,
+  #nav-support:checked ~ .app label[for="nav-support"] svg,
+  #nav-profile:checked ~ .app label[for="nav-profile"] svg{opacity:1;}
+
+  /* ============ TOPBAR ============ */
+  .main{
+    margin-left:264px;
+    position:relative;
+    z-index:1;
+    transition:margin .35s var(--ease);
+    min-height:100vh;
+  }
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:30;
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    padding:1rem 2rem;
+    background:color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .hamburger{
+    display:none;
+    width:38px;height:38px;
+    border-radius:10px;
+    align-items:center;justify-content:center;
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    cursor:pointer;
+    color:var(--text);
+    flex-shrink:0;
+  }
+  .hamburger svg{width:18px;height:18px;}
+
+  .topbar-search{
+    flex:1;
+    max-width:360px;
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:.55rem .9rem;
+    color:var(--text-faint);
+    transition:border-color .2s;
+  }
+  .topbar-search:focus-within{border-color:var(--accent);}
+  .topbar-search svg{width:16px;height:16px;flex-shrink:0;}
+  .topbar-search input{
+    background:none;border:none;outline:none;
+    color:var(--text);
+    font-size:.85rem;
+    width:100%;
+  }
+  .topbar-search input::placeholder{color:var(--text-faint);}
+
+  .topbar-right{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+  }
+
+  .icon-btn{
+    width:40px;height:40px;
+    border-radius:11px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    color:var(--text-dim);
+    position:relative;
+    transition:background .2s,color .2s,transform .2s;
+  }
+  .icon-btn:hover{background:var(--surface-2);color:var(--text);transform:translateY(-1px);}
+  .icon-btn svg{width:17px;height:17px;}
+  .ping-dot{
+    position:absolute;top:8px;right:8px;
+    width:7px;height:7px;border-radius:50%;
+    background:var(--danger);
+    box-shadow:0 0 0 2px var(--surface);
+  }
+
+  /* theme switch */
+  .theme-switch{
+    width:40px;height:40px;
+    border-radius:11px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    color:var(--warning);
+    transition:background .2s;
+  }
+  .theme-switch:hover{background:var(--surface-2);}
+  .theme-switch svg{width:18px;height:18px;}
+  .theme-switch .i-sun{display:block;}
+  .theme-switch .i-moon{display:none;}
+  #theme-toggle:checked ~ .app .theme-switch .i-sun{display:none;}
+  #theme-toggle:checked ~ .app .theme-switch .i-moon{display:block;color:var(--accent);}
+
+  .user-chip{
+    display:flex;align-items:center;gap:.6rem;
+    padding:.35rem .7rem .35rem .35rem;
+    border-radius:12px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    cursor:pointer;
+  }
+  .user-avatar{
+    width:32px;height:32px;border-radius:9px;
+    background:var(--accent-grad);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:700;font-size:.8rem;font-family:var(--font-display);
+    flex-shrink:0;
+  }
+  .user-chip-meta{line-height:1.15;display:none;}
+  .user-chip-meta strong{font-size:.8rem;display:block;}
+  .user-chip-meta span{font-size:.68rem;color:var(--text-faint);}
+
+  /* mobile overlay + toggle */
+  .sidebar-overlay{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:35;
+  }
+  #sidebar-toggle:checked ~ .app .sidebar{transform:translateX(0);}
+  #sidebar-toggle:checked ~ .app .sidebar-overlay{display:block;}
+
+  /* ============ PAGE CONTENT ============ */
+  .content{
+    padding:1.8rem 2rem 4rem;
+  }
+  .page{display:none;animation:pageIn .5s var(--ease);}
+  #nav-overview:checked ~ .app .page-overview,
+  #nav-services:checked ~ .app .page-services,
+  #nav-servers:checked ~ .app .page-servers,
+  #nav-billing:checked ~ .app .page-billing,
+  #nav-support:checked ~ .app .page-support,
+  #nav-profile:checked ~ .app .page-profile{display:block;}
+  @keyframes pageIn{
+    from{opacity:0;transform:translateY(10px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+
+  .page-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:1rem;
+    flex-wrap:wrap;
+    margin-bottom:1.8rem;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:.4rem;
+    font-size:.72rem;font-weight:600;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:.3rem .7rem;
+    border-radius:999px;
+    margin-bottom:.7rem;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--success);animation:pulse 1.8s infinite;}
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.55);}
+    50%{box-shadow:0 0 0 5px rgba(34,197,94,0);}
+  }
+  .page-title{
+    font-family:var(--font-display);
+    font-size:1.7rem;
+    font-weight:700;
+    letter-spacing:-.02em;
+  }
+  .page-sub{color:var(--text-dim);font-size:.9rem;margin-top:.3rem;max-width:520px;}
+
+  /* buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:.45rem;
+    padding:.65rem 1.1rem;
+    border-radius:11px;
+    font-size:.83rem;
+    font-weight:600;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform .2s var(--ease),background .2s,box-shadow .2s,border-color .2s;
+    white-space:nowrap;
+  }
+  .btn svg{width:15px;height:15px;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--accent-grad);color:#fff;box-shadow:0 10px 24px -10px rgba(124,58,237,.65);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px -10px rgba(124,58,237,.75);}
+  .btn-ghost{background:var(--surface);color:var(--text);border-color:var(--border);}
+  .btn-ghost:hover{background:var(--surface-2);border-color:var(--accent);}
+  .btn-soft{background:var(--accent-soft);color:var(--accent);}
+  .btn-soft:hover{background:var(--accent);color:#fff;}
+  .btn-sm{padding:.45rem .8rem;font-size:.76rem;border-radius:9px;}
+  .btn-danger-soft{background:var(--danger-soft);color:var(--danger);}
+  .btn-danger-soft:hover{background:var(--danger);color:#fff;}
+  .btn-block{width:100%;justify-content:center;}
+
+  /* cards */
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:1.4rem;
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s;
+  }
+  .card-hover:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--accent);}
+
+  /* stat grid */
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1.1rem;
+    margin-bottom:1.6rem;
+  }
+  .stat-card{
+    display:flex;flex-direction:column;gap:.7rem;
+    animation:fadeUp .5s var(--ease) both;
+  }
+  .stat-grid .stat-card:nth-child(1){animation-delay:.02s;}
+  .stat-grid .stat-card:nth-child(2){animation-delay:.08s;}
+  .stat-grid .stat-card:nth-child(3){animation-delay:.14s;}
+  .stat-grid .stat-card:nth-child(4){animation-delay:.2s;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  .stat-top{display:flex;align-items:center;justify-content:space-between;}
+  .stat-icon{
+    width:40px;height:40px;border-radius:11px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .stat-icon svg{width:19px;height:19px;}
+  .stat-icon.p{background:var(--accent-soft);color:var(--accent);}
+  .stat-icon.s{background:var(--success-soft);color:var(--success);}
+  .stat-icon.w{background:var(--warning-soft);color:var(--warning);}
+  .stat-icon.i{background:var(--info-soft);color:var(--info);}
+  .stat-trend{font-size:.72rem;font-weight:700;padding:.2rem .5rem;border-radius:999px;}
+  .stat-trend.up{color:var(--success);background:var(--success-soft);}
+  .stat-trend.down{color:var(--danger);background:var(--danger-soft);}
+  .stat-value{font-family:var(--font-display);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;}
+  .stat-label{font-size:.8rem;color:var(--text-faint);}
+
+  /* two column layout */
+  .split{display:grid;grid-template-columns:1.6fr 1fr;gap:1.1rem;align-items:flex-start;}
+  .stack{display:flex;flex-direction:column;gap:1.1rem;}
+
+  .section-card-head{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:1.1rem;
+  }
+  .section-card-head h3{font-family:var(--font-display);font-size:1.02rem;font-weight:700;}
+  .section-card-head a{font-size:.78rem;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:.25rem;}
+
+  /* service row (overview compact) */
+  .srv-row{
+    display:flex;align-items:center;gap:.9rem;
+    padding:.85rem;
+    border-radius:14px;
+    border:1px solid var(--border-soft);
+    margin-bottom:.6rem;
+    transition:background .2s,border-color .2s;
+  }
+  .srv-row:last-child{margin-bottom:0;}
+  .srv-row:hover{background:var(--surface-2);border-color:var(--border);}
+  .srv-icon{
+    width:42px;height:42px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--surface-2);color:var(--accent);
+    flex-shrink:0;
+  }
+  .srv-icon svg{width:19px;height:19px;}
+  .srv-meta{flex:1;min-width:0;}
+  .srv-meta strong{font-size:.87rem;display:block;}
+  .srv-meta span{font-size:.75rem;color:var(--text-faint);}
+  .srv-price{text-align:right;font-size:.85rem;font-weight:700;flex-shrink:0;}
+  .srv-price span{display:block;font-size:.68rem;font-weight:500;color:var(--text-faint);}
+
+  /* status dot + badges */
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;}
+  .dot.running{background:var(--success);box-shadow:0 0 0 3px var(--success-soft);animation:pulse2 2s infinite;}
+  .dot.stopped{background:var(--text-faint);}
+  .dot.suspended{background:var(--danger);box-shadow:0 0 0 3px var(--danger-soft);}
+  @keyframes pulse2{0%,100%{box-shadow:0 0 0 3px var(--success-soft);}50%{box-shadow:0 0 0 6px transparent;}}
+
+  .badge{
+    display:inline-flex;align-items:center;gap:.35rem;
+    font-size:.68rem;font-weight:700;
+    padding:.28rem .6rem;
+    border-radius:999px;
+    text-transform:uppercase;letter-spacing:.02em;
+  }
+  .badge.success{background:var(--success-soft);color:var(--success);}
+  .badge.warning{background:var(--warning-soft);color:var(--warning);}
+  .badge.danger{background:var(--danger-soft);color:var(--danger);}
+  .badge.info{background:var(--info-soft);color:var(--info);}
+  .badge.neutral{background:var(--surface-3);color:var(--text-dim);}
+
+  /* invoice mini list */
+  .inv-row{
+    display:flex;align-items:center;gap:.7rem;
+    padding:.7rem 0;
+    border-bottom:1px solid var(--border-soft);
+    font-size:.82rem;
+  }
+  .inv-row:last-child{border-bottom:none;}
+  .inv-id{font-family:var(--font-mono);font-size:.72rem;color:var(--text-faint);}
+  .inv-desc{flex:1;min-width:0;}
+  .inv-desc strong{display:block;font-size:.83rem;}
+  .inv-desc span{font-size:.72rem;color:var(--text-faint);}
+  .inv-amt{font-weight:700;font-size:.85rem;}
+
+  /* quick actions */
+  .qa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+  .qa-card{
+    display:flex;flex-direction:column;align-items:flex-start;gap:.7rem;
+    cursor:pointer;
+  }
+  .qa-card .stat-icon{width:44px;height:44px;border-radius:13px;}
+  .qa-card strong{font-size:.85rem;}
+  .qa-card span{font-size:.72rem;color:var(--text-faint);}
+
+  /* progress bars */
+  .bar-row{margin-bottom:.85rem;}
+  .bar-row:last-child{margin-bottom:0;}
+  .bar-top{display:flex;justify-content:space-between;font-size:.74rem;color:var(--text-dim);margin-bottom:.4rem;}
+  .bar-top b{color:var(--text);}
+  .bar-track{height:7px;border-radius:999px;background:var(--surface-3);overflow:hidden;}
+  .bar-fill{height:100%;border-radius:999px;background:var(--accent-grad);width:0;animation:fillbar 1.2s var(--ease) forwards;animation-delay:.3s;}
+  .bar-fill.warn{background:linear-gradient(135deg,#fbbf24,#f59e0b);}
+  .bar-fill.ok{background:linear-gradient(135deg,#4ade80,#16a34a);}
+  @keyframes fillbar{from{width:0;}}
+
+  /* tables */
+  .table-wrap{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;font-size:.83rem;}
+  thead th{
+    text-align:left;
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--text-faint);
+    padding:.6rem .8rem;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+  }
+  tbody td{
+    padding:.85rem .8rem;
+    border-bottom:1px solid var(--border-soft);
+    white-space:nowrap;
+  }
+  tbody tr{transition:background .2s;}
+  tbody tr:hover{background:var(--surface-2);}
+  tbody tr:last-child td{border-bottom:none;}
+
+  /* forms */
+  .field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.1rem;}
+  .field label{font-size:.78rem;font-weight:600;color:var(--text-dim);}
+  .field input,.field select,.field textarea{
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:11px;
+    padding:.72rem .9rem;
+    font-size:.85rem;
+    color:var(--text);
+    outline:none;
+    transition:border-color .2s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+  /* toggle switch (2FA etc) */
+  .switch{position:relative;width:44px;height:25px;flex-shrink:0;}
+  .switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1;}
+  .switch .track{
+    position:absolute;inset:0;
+    background:var(--surface-3);
+    border-radius:999px;
+    transition:background .25s;
+  }
+  .switch .thumb{
+    position:absolute;top:3px;left:3px;
+    width:19px;height:19px;border-radius:50%;
+    background:#fff;
+    transition:transform .25s var(--ease);
+    box-shadow:0 2px 6px rgba(0,0,0,.25);
+  }
+  .switch input:checked ~ .track{background:var(--accent-grad);}
+  .switch input:checked ~ .thumb{transform:translateX(19px);}
+
+  .row-between{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+
+  hr.sep{border:none;border-top:1px solid var(--border-soft);margin:1.1rem 0;}
+
+  /* tabs (radio-driven, generic) */
+  .tabbar{display:inline-flex;background:var(--surface-2);padding:.3rem;border-radius:12px;gap:.2rem;border:1px solid var(--border);}
+  .tabbar label{
+    padding:.5rem 1rem;font-size:.8rem;font-weight:600;
+    border-radius:9px;cursor:pointer;color:var(--text-dim);
+    transition:background .2s,color .2s;
+  }
+
+  .srv-tab{display:none;}
+  #srv-mc:checked ~ .app .srv-panel-mc,
+  #srv-vps:checked ~ .app .srv-panel-vps,
+  #srv-web:checked ~ .app .srv-panel-web{display:block;}
+  #srv-mc:checked ~ .app label[for="srv-mc"],
+  #srv-vps:checked ~ .app label[for="srv-vps"],
+  #srv-web:checked ~ .app label[for="srv-web"]{
+    background:var(--surface);
+    color:var(--text);
+    box-shadow:0 4px 12px -6px rgba(0,0,0,.3);
+  }
+  .srv-pick-row{
+    display:flex;align-items:center;gap:.8rem;
+    padding:.8rem;border-radius:13px;
+    cursor:pointer;margin-bottom:.5rem;
+    border:1px solid transparent;
+    transition:background .2s,border-color .2s;
+  }
+  .srv-pick-row:hover{background:var(--surface-2);}
+  #srv-mc:checked ~ .app label[for="srv-mc"].srv-pick-row,
+  #srv-vps:checked ~ .app label[for="srv-vps"].srv-pick-row,
+  #srv-web:checked ~ .app label[for="srv-web"].srv-pick-row{
+    background:var(--accent-soft);border-color:var(--accent);
+  }
+
+  /* console */
+  .console{
+    background:#0a0714;
+    border-radius:14px;
+    padding:1.1rem 1.2rem;
+    font-family:var(--font-mono);
+    font-size:.78rem;
+    line-height:1.85;
+    color:#c9c3e0;
+    max-height:260px;
+    overflow-y:auto;
+    border:1px solid var(--border);
+  }
+  .console .c-ok{color:#4ade80;}
+  .console .c-info{color:#38bdf8;}
+  .console .c-warn{color:#fbbf24;}
+  .console .c-muted{color:#665f85;}
+
+  .avatar-lg{
+    width:78px;height:78px;border-radius:20px;
+    background:var(--accent-grad);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:var(--font-display);font-weight:800;font-size:1.6rem;
+    flex-shrink:0;
+  }
+
+  .file-row{
+    display:flex;align-items:center;gap:.7rem;
+    padding:.65rem .5rem;
+    border-radius:10px;
+    font-size:.82rem;
+    transition:background .2s;
+  }
+  .file-row:hover{background:var(--surface-2);}
+  .file-row svg{width:17px;height:17px;color:var(--text-faint);flex-shrink:0;}
+  .file-row span{color:var(--text-faint);margin-left:auto;font-size:.72rem;}
+
+  .empty-hint{
+    text-align:center;padding:2.5rem 1rem;color:var(--text-faint);font-size:.85rem;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (min-width:1101px){
+    .user-chip-meta{display:block;}
+  }
+  @media (max-width:1100px){
+    .sidebar{transform:translateX(-100%);box-shadow:0 0 60px rgba(0,0,0,.4);}
+    .sidebar-close{display:flex;}
+    .main{margin-left:0;}
+    .hamburger{display:flex;}
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .qa-grid{grid-template-columns:repeat(2,1fr);}
+    .split{grid-template-columns:1fr;}
+  }
+  @media (max-width:640px){
+    .topbar{padding:.9rem 1rem;}
+    .content{padding:1.3rem 1rem 3rem;}
+    .stat-grid{grid-template-columns:1fr 1fr;gap:.7rem;}
+    .qa-grid{grid-template-columns:1fr 1fr;gap:.7rem;}
+    .page-title{font-size:1.4rem;}
+    .topbar-search{max-width:none;}
+    .field-row{grid-template-columns:1fr;}
+    .card{padding:1.1rem;}
+  }
+  @media (max-width:420px){
+    .stat-grid{grid-template-columns:1fr;}
+    .qa-grid{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ STATE CONTROLLERS (no JS) ============ -->
+<input type="checkbox" id="theme-toggle" class="ctl">
+<input type="checkbox" id="sidebar-toggle" class="ctl">
+<input type="radio" name="pagenav" id="nav-overview" class="ctl" checked>
+<input type="radio" name="pagenav" id="nav-services" class="ctl">
+<input type="radio" name="pagenav" id="nav-servers" class="ctl">
+<input type="radio" name="pagenav" id="nav-billing" class="ctl">
+<input type="radio" name="pagenav" id="nav-support" class="ctl">
+<input type="radio" name="pagenav" id="nav-profile" class="ctl">
+<input type="radio" name="srvpick" id="srv-mc" class="ctl" checked>
+<input type="radio" name="srvpick" id="srv-vps" class="ctl">
+<input type="radio" name="srvpick" id="srv-web" class="ctl">
+
+<div class="app">
+  <div class="bg-decor">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <label for="sidebar-toggle" class="sidebar-overlay"></label>
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark">ip</div>
+      <div class="brand-text">
+        <strong>InPixel Cloud</strong>
+        <span>Client Panel</span>
+      </div>
+      <label for="sidebar-toggle" class="sidebar-close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </label>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-group-label">Main</span>
+      <label for="nav-overview" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>
+        Overview
+      </label>
+      <label for="nav-services" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><circle cx="7" cy="7" r=".6" fill="currentColor"/><circle cx="7" cy="17" r=".6" fill="currentColor"/></svg>
+        My Services
+      </label>
+      <label for="nav-servers" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></svg>
+        Server Control
+      </label>
+      <label for="nav-billing" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>
+        Billing &amp; Invoices
+      </label>
+      <label for="nav-support" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/><path d="m5.2 5.2 3.3 3.3M18.8 5.2l-3.3 3.3M5.2 18.8l3.3-3.3M18.8 18.8l-3.3-3.3"/></svg>
+        Support Tickets
+        <span class="nl-badge">1</span>
+      </label>
+      <span class="nav-group-label">Account</span>
+      <label for="nav-profile" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.6-3.8 5-5.5 7.5-5.5s5.9 1.7 7.5 5.5"/></svg>
+        Profile Settings
+      </label>
+      <a href="#" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Logout
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="plan-card">
+        <p>Wallet balance</p>
+        <strong>₹1,240.00</strong>
+        <a href="#billing-topup" class="btn"><label for="nav-billing" style="cursor:pointer;">Add funds</label></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <header class="topbar">
+      <label for="sidebar-toggle" class="hamburger">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </label>
+
+      <div class="topbar-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" placeholder="Search services, invoices, tickets…">
+      </div>
+
+      <div class="topbar-right">
+        <label class="theme-switch" for="theme-toggle" title="Toggle theme">
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+        </label>
+        <div class="icon-btn" title="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 8a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>
+          <span class="ping-dot"></span>
+        </div>
+        <label for="nav-profile" class="user-chip">
+          <div class="user-avatar">RS</div>
+          <div class="user-chip-meta">
+            <strong>Rahul Sharma</strong>
+            <span>Pro Member</span>
+          </div>
+        </label>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- PAGE:OVERVIEW -->
+      <section class="page page-overview">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> All Systems Operational</span>
+            <h1 class="page-title">Welcome back, Rahul 👋</h1>
+            <p class="page-sub">Here's what's happening with your services today.</p>
+          </div>
+          <label for="nav-services" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Add New Service
+          </label>
+        </div>
+
+        <div class="stat-grid">
+          <div class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/></svg></div>
+              <span class="stat-trend up">+1 this mo.</span>
+            </div>
+            <div class="stat-value">4</div>
+            <div class="stat-label">Active Services</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <span class="stat-trend up">+12%</span>
+            </div>
+            <div class="stat-value">₹18,540</div>
+            <div class="stat-label">Total Spent (2026)</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon w"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></div>
+              <span class="stat-trend down">1 open</span>
+            </div>
+            <div class="stat-value">1</div>
+            <div class="stat-label">Support Tickets</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-top">
+              <div class="stat-icon i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div>
+              <span class="stat-trend up">Stable</span>
+            </div>
+            <div class="stat-value">99.98%</div>
+            <div class="stat-label">Server Uptime</div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="stack">
+            <div class="card">
+              <div class="section-card-head">
+                <h3>Active Services</h3>
+                <label for="nav-services">View all →</label>
+              </div>
+
+              <div class="srv-row">
+                <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 15s1.5-8 8-8 8 8 8 8M4 15l-1 5h18l-1-5M4 15h16"/></svg></div>
+                <div class="srv-meta">
+                  <strong>SurvivalCraft <span class="dot running" style="margin-left:.35rem;"></span></strong>
+                  <span>Game Server · Mumbai · Renews Aug 14, 2026</span>
+                </div>
+                <div class="srv-price">₹249<span>/mo</span></div>
+              </div>
+
+              <div class="srv-row">
+                <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m8 9 2 2-2 2M13 15h4"/></svg></div>
+                <div class="srv-meta">
+                  <strong>web-prod-01 <span class="dot running" style="margin-left:.35rem;"></span></strong>
+                  <span>VPS Hosting · Bangalore · Renews Jul 22, 2026</span>
+                </div>
+                <div class="srv-price">₹399<span>/mo</span></div>
+              </div>
+
+              <div class="srv-row">
+                <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
+                <div class="srv-meta">
+                  <strong>inpixel.store <span class="dot running" style="margin-left:.35rem;"></span></strong>
+                  <span>Web Hosting · Mumbai · Renews Sep 03, 2026</span>
+                </div>
+                <div class="srv-price">₹149<span>/mo</span></div>
+              </div>
+
+              <div class="srv-row">
+                <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 10h.01M15 10h.01M8 15c1.2 1 2.6 1.5 4 1.5s2.8-.5 4-1.5"/></svg></div>
+                <div class="srv-meta">
+                  <strong>ModBot#4521 <span class="dot suspended" style="margin-left:.35rem;"></span></strong>
+                  <span>Bot Hosting · Singapore · Payment overdue</span>
+                </div>
+                <div class="srv-price">₹99<span>/mo</span></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="section-card-head"><h3>Quick Actions</h3></div>
+              <div class="qa-grid">
+                <label for="nav-servers" class="card card-hover qa-card">
+                  <div class="stat-icon p"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12a7 7 0 1 1 2.2 5.1M5 12v5h5"/></svg></div>
+                  <strong>Renew Service</strong>
+                  <span>Extend expiry date</span>
+                </label>
+                <label for="nav-billing" class="card card-hover qa-card">
+                  <div class="stat-icon s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 5v14M5 12h14"/></svg></div>
+                  <strong>Add Funds</strong>
+                  <span>Top up wallet</span>
+                </label>
+                <label for="nav-support" class="card card-hover qa-card">
+                  <div class="stat-icon w"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.5 8.5 0 1 1-4-7.2M21 4v6h-6"/></svg></div>
+                  <strong>Open Ticket</strong>
+                  <span>Get expert help</span>
+                </label>
+                <label for="nav-services" class="card card-hover qa-card">
+                  <div class="stat-icon i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v6H4zM4 14h10v6H4z"/></svg></div>
+                  <strong>Upgrade Plan</strong>
+                  <span>More power</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="stack">
+            <div class="card">
+              <p class="stat-label" style="margin-bottom:.3rem;">Wallet Balance</p>
+              <div class="stat-value" style="font-size:2rem;margin-bottom:1rem;">₹1,240.00</div>
+              <label for="nav-billing" class="btn btn-primary btn-block">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                Add Funds
+              </label>
+            </div>
+
+            <div class="card">
+              <div class="section-card-head">
+                <h3>Recent Invoices</h3>
+                <label for="nav-billing">View all →</label>
+              </div>
+              <div class="inv-row">
+                <div class="inv-desc"><strong>VPS Hosting Renewal</strong><span class="inv-id">INV-2026-0745 · Jul 05</span></div>
+                <div class="inv-amt">₹399</div>
+                <span class="badge success">Paid</span>
+              </div>
+              <div class="inv-row">
+                <div class="inv-desc"><strong>Game Server Renewal</strong><span class="inv-id">INV-2026-0732 · Jun 22</span></div>
+                <div class="inv-amt">₹249</div>
+                <span class="badge success">Paid</span>
+              </div>
+              <div class="inv-row">
+                <div class="inv-desc"><strong>Web Hosting Renewal</strong><span class="inv-id">INV-2026-0718 · Jun 14</span></div>
+                <div class="inv-amt">₹149</div>
+                <span class="badge success">Paid</span>
+              </div>
+              <div class="inv-row">
+                <div class="inv-desc"><strong>Bot Hosting Renewal</strong><span class="inv-id">INV-2026-0705 · Jun 01</span></div>
+                <div class="inv-amt">₹99</div>
+                <span class="badge danger">Failed</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE:SERVICES -->
+      <section class="page page-services">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> 4 Services</span>
+            <h1 class="page-title">My Services</h1>
+            <p class="page-sub">Manage, renew, or upgrade all your hosting products in one place.</p>
+          </div>
+          <a class="btn btn-primary" href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Order New Service
+          </a>
+        </div>
+
+        <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+          <div class="card card-hover">
+            <div class="row-between" style="margin-bottom:1rem;">
+              <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 15s1.5-8 8-8 8 8 8 8M4 15l-1 5h18l-1-5M4 15h16"/></svg></div>
+              <span class="badge success"><span class="dot running"></span> Running</span>
+            </div>
+            <strong style="display:block;font-size:.95rem;">SurvivalCraft</strong>
+            <span class="stat-label">Game Server · Minecraft · Mumbai</span>
+            <hr class="sep">
+            <div class="bar-row">
+              <div class="bar-top"><span>CPU</span><b>62%</b></div>
+              <div class="bar-track"><div class="bar-fill" style="width:62%;"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-top"><span>RAM</span><b>74%</b></div>
+              <div class="bar-track"><div class="bar-fill warn" style="width:74%;"></div></div>
+            </div>
+            <hr class="sep">
+            <div class="row-between">
+              <div><strong>₹249</strong><span class="stat-label">/mo · renews Aug 14</span></div>
+              <label for="nav-servers" class="btn btn-soft btn-sm">Manage</label>
+            </div>
+          </div>
+
+          <div class="card card-hover">
+            <div class="row-between" style="margin-bottom:1rem;">
+              <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m8 9 2 2-2 2M13 15h4"/></svg></div>
+              <span class="badge success"><span class="dot running"></span> Running</span>
+            </div>
+            <strong style="display:block;font-size:.95rem;">web-prod-01</strong>
+            <span class="stat-label">VPS Hosting · KVM · Bangalore</span>
+            <hr class="sep">
+            <div class="bar-row">
+              <div class="bar-top"><span>CPU</span><b>38%</b></div>
+              <div class="bar-track"><div class="bar-fill ok" style="width:38%;"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-top"><span>Disk</span><b>41%</b></div>
+              <div class="bar-track"><div class="bar-fill ok" style="width:41%;"></div></div>
+            </div>
+            <hr class="sep">
+            <div class="row-between">
+              <div><strong>₹399</strong><span class="stat-label">/mo · renews Jul 22</span></div>
+              <label for="nav-servers" class="btn btn-soft btn-sm">Manage</label>
+            </div>
+          </div>
+
+          <div class="card card-hover">
+            <div class="row-between" style="margin-bottom:1rem;">
+              <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
+              <span class="badge success"><span class="dot running"></span> Running</span>
+            </div>
+            <strong style="display:block;font-size:.95rem;">inpixel.store</strong>
+            <span class="stat-label">Web Hosting · LiteSpeed · Mumbai</span>
+            <hr class="sep">
+            <div class="bar-row">
+              <div class="bar-top"><span>Storage</span><b>28%</b></div>
+              <div class="bar-track"><div class="bar-fill ok" style="width:28%;"></div></div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-top"><span>Bandwidth</span><b>17%</b></div>
+              <div class="bar-track"><div class="bar-fill ok" style="width:17%;"></div></div>
+            </div>
+            <hr class="sep">
+            <div class="row-between">
+              <div><strong>₹149</strong><span class="stat-label">/mo · renews Sep 03</span></div>
+              <a href="#" class="btn btn-soft btn-sm">Manage</a>
+            </div>
+          </div>
+
+          <div class="card card-hover">
+            <div class="row-between" style="margin-bottom:1rem;">
+              <div class="srv-icon" style="color:var(--danger);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M9 10h.01M15 10h.01M8 15c1.2 1 2.6 1.5 4 1.5s2.8-.5 4-1.5"/></svg></div>
+              <span class="badge danger"><span class="dot suspended"></span> Suspended</span>
+            </div>
+            <strong style="display:block;font-size:.95rem;">ModBot#4521</strong>
+            <span class="stat-label">Bot Hosting · Discord · Singapore</span>
+            <hr class="sep">
+            <p style="font-size:.78rem;color:var(--text-faint);line-height:1.6;">Payment failed on Jul 01. Bot is offline. Renew now to restore service instantly.</p>
+            <hr class="sep">
+            <div class="row-between">
+              <div><strong>₹99</strong><span class="stat-label">/mo · overdue</span></div>
+              <label for="nav-billing" class="btn btn-primary btn-sm">Renew Now</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE:SERVERS -->
+      <section class="page page-servers">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> 3 Manageable Servers</span>
+            <h1 class="page-title">Server Control Panel</h1>
+            <p class="page-sub">Start, stop, and monitor your servers in real time.</p>
+          </div>
+        </div>
+
+        <div class="split" style="grid-template-columns:280px 1fr;">
+          <div class="card" style="padding:.8rem;">
+            <label for="srv-mc" class="srv-pick-row">
+              <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 15s1.5-8 8-8 8 8 8 8M4 15l-1 5h18l-1-5M4 15h16"/></svg></div>
+              <div class="srv-meta"><strong>SurvivalCraft</strong><span>Minecraft · Mumbai</span></div>
+              <span class="dot running"></span>
+            </label>
+            <label for="srv-vps" class="srv-pick-row">
+              <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m8 9 2 2-2 2M13 15h4"/></svg></div>
+              <div class="srv-meta"><strong>web-prod-01</strong><span>VPS · Bangalore</span></div>
+              <span class="dot running"></span>
+            </label>
+            <label for="srv-web" class="srv-pick-row">
+              <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
+              <div class="srv-meta"><strong>inpixel.store</strong><span>Web · Mumbai</span></div>
+              <span class="dot running"></span>
+            </label>
+          </div>
+
+          <div class="stack">
+            <!-- Minecraft panel -->
+            <div class="srv-tab srv-panel-mc">
+              <div class="card" style="margin-bottom:1.1rem;">
+                <div class="row-between" style="margin-bottom:1.1rem;flex-wrap:wrap;gap:.8rem;">
+                  <div>
+                    <strong style="font-size:1.05rem;">SurvivalCraft</strong>
+                    <div class="stat-label">47 / 100 players online · uptime 12d 4h</div>
+                  </div>
+                  <div style="display:flex;gap:.5rem;">
+                    <a href="#" class="btn btn-soft btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7Z"/></svg>Start</a>
+                    <a href="#" class="btn btn-danger-soft btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>Stop</a>
+                    <a href="#" class="btn btn-ghost btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1 1 2.3 5.6M4 12v5.6h5.6"/></svg>Restart</a>
+                  </div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-top"><span>CPU Usage</span><b>62%</b></div>
+                  <div class="bar-track"><div class="bar-fill" style="width:62%;"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-top"><span>RAM · 5.9 / 8 GB</span><b>74%</b></div>
+                  <div class="bar-track"><div class="bar-fill warn" style="width:74%;"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-top"><span>Disk · 12 / 30 GB</span><b>41%</b></div>
+                  <div class="bar-track"><div class="bar-fill ok" style="width:41%;"></div></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="section-card-head"><h3>Live Console</h3><span class="badge success">Connected</span></div>
+                <div class="console">
+                  <div><span class="c-muted">[14:02:11]</span> <span class="c-ok">[Server]</span> Done (1.4s)! For help, type "help"</div>
+                  <div><span class="c-muted">[14:02:14]</span> <span class="c-info">[INFO]</span> Player Steve_47 joined the game</div>
+                  <div><span class="c-muted">[14:03:02]</span> <span class="c-info">[INFO]</span> Player NightRaider joined the game</div>
+                  <div><span class="c-muted">[14:05:41]</span> <span class="c-warn">[WARN]</span> Can't keep up! Running 62ms behind</div>
+                  <div><span class="c-muted">[14:06:18]</span> <span class="c-ok">[Server]</span> Saved the game</div>
+                  <div><span class="c-muted">[14:07:55]</span> <span class="c-info">[INFO]</span> DragonSlayer99 lost connection: Disconnected</div>
+                  <div><span class="c-muted">[14:09:20]</span> <span class="c-ok">[Server]</span> Autosave complete · 47 players online</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- VPS panel -->
+            <div class="srv-tab srv-panel-vps">
+              <div class="card" style="margin-bottom:1.1rem;">
+                <div class="row-between" style="margin-bottom:1.1rem;flex-wrap:wrap;gap:.8rem;">
+                  <div>
+                    <strong style="font-size:1.05rem;">web-prod-01</strong>
+                    <div class="stat-label">4 vCPU · 8 GB RAM · Ubuntu 24.04 · uptime 41d 9h</div>
+                  </div>
+                  <div style="display:flex;gap:.5rem;">
+                    <a href="#" class="btn btn-soft btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 5v14l11-7Z"/></svg>Start</a>
+                    <a href="#" class="btn btn-danger-soft btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="1.5"/></svg>Stop</a>
+                    <a href="#" class="btn btn-ghost btn-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1 1 2.3 5.6M4 12v5.6h5.6"/></svg>Restart</a>
+                  </div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-top"><span>CPU Usage</span><b>38%</b></div>
+                  <div class="bar-track"><div class="bar-fill ok" style="width:38%;"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-top"><span>RAM · 3.2 / 8 GB</span><b>40%</b></div>
+                  <div class="bar-track"><div class="bar-fill ok" style="width:40%;"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-top"><span>Disk · 41 / 100 GB</span><b>41%</b></div>
+                  <div class="bar-track"><div class="bar-fill ok" style="width:41%;"></div></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="section-card-head"><h3>File Manager</h3><a href="#">Upload →</a></div>
+                <div class="file-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg> public_html <span>—</span></div>
+                <div class="file-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg> logs <span>—</span></div>
+                <div class="file-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M13 2v7h7"/></svg> docker-compose.yml <span>2.1 KB</span></div>
+                <div class="file-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M13 2v7h7"/></svg> .env <span>0.4 KB</span></div>
+              </div>
+            </div>
+
+            <!-- Web hosting panel -->
+            <div class="srv-tab srv-panel-web">
+              <div class="card">
+                <div class="row-between" style="margin-bottom:1.1rem;flex-wrap:wrap;gap:.8rem;">
+                  <div>
+                    <strong style="font-size:1.05rem;">inpixel.store</strong>
+                    <div class="stat-label">LiteSpeed · cPanel · Mumbai</div>
+                  </div>
+                  <a href="#" class="btn btn-soft btn-sm">Open cPanel →</a>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-top"><span>Storage · 5.6 / 20 GB</span><b>28%</b></div>
+                  <div class="bar-track"><div class="bar-fill ok" style="width:28%;"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-top"><span>Bandwidth · 170 / 1000 GB</span><b>17%</b></div>
+                  <div class="bar-track"><div class="bar-fill ok" style="width:17%;"></div></div>
+                </div>
+                <div class="bar-row">
+                  <div class="bar-top"><span>Email Accounts · 3 / 10</span><b>30%</b></div>
+                  <div class="bar-track"><div class="bar-fill ok" style="width:30%;"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE:BILLING -->
+      <section class="page page-billing">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> Billing</span>
+            <h1 class="page-title">Billing &amp; Invoices</h1>
+            <p class="page-sub">Manage payment methods, top up your wallet, and download invoices.</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="stack">
+            <div class="card">
+              <div class="section-card-head"><h3>Invoice History</h3><a href="#"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg> Export CSV</a></div>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Invoice</th><th>Description</th><th>Date</th><th>Amount</th><th>Status</th><th></th></tr></thead>
+                  <tbody>
+                    <tr><td class="inv-id">INV-0745</td><td>VPS Hosting Renewal</td><td>Jul 05, 2026</td><td>₹399</td><td><span class="badge success">Paid</span></td><td><a href="#" class="btn btn-ghost btn-sm">↓</a></td></tr>
+                    <tr><td class="inv-id">INV-0732</td><td>Game Server Renewal</td><td>Jun 22, 2026</td><td>₹249</td><td><span class="badge success">Paid</span></td><td><a href="#" class="btn btn-ghost btn-sm">↓</a></td></tr>
+                    <tr><td class="inv-id">INV-0718</td><td>Web Hosting Renewal</td><td>Jun 14, 2026</td><td>₹149</td><td><span class="badge success">Paid</span></td><td><a href="#" class="btn btn-ghost btn-sm">↓</a></td></tr>
+                    <tr><td class="inv-id">INV-0705</td><td>Bot Hosting Renewal</td><td>Jun 01, 2026</td><td>₹99</td><td><span class="badge danger">Failed</span></td><td><a href="#" class="btn btn-ghost btn-sm">↓</a></td></tr>
+                    <tr><td class="inv-id">INV-0688</td><td>VPS Hosting Renewal</td><td>Jun 05, 2026</td><td>₹399</td><td><span class="badge success">Paid</span></td><td><a href="#" class="btn btn-ghost btn-sm">↓</a></td></tr>
+                    <tr><td class="inv-id">INV-0654</td><td>Wallet Top-up</td><td>May 18, 2026</td><td>₹1,000</td><td><span class="badge success">Paid</span></td><td><a href="#" class="btn btn-ghost btn-sm">↓</a></td></tr>
+                    <tr><td class="inv-id">INV-0641</td><td>Domain Renewal · inpixel.store</td><td>May 02, 2026</td><td>₹899</td><td><span class="badge success">Paid</span></td><td><a href="#" class="btn btn-ghost btn-sm">↓</a></td></tr>
+                    <tr><td class="inv-id">INV-0620</td><td>Game Server Renewal</td><td>Apr 22, 2026</td><td>₹249</td><td><span class="badge warning">Pending</span></td><td><a href="#" class="btn btn-ghost btn-sm">↓</a></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="stack" id="billing-topup">
+            <div class="card">
+              <p class="stat-label" style="margin-bottom:.3rem;">Wallet Balance</p>
+              <div class="stat-value" style="font-size:2rem;margin-bottom:1rem;">₹1,240.00</div>
+              <div class="field">
+                <label>Add amount (₹)</label>
+                <input type="number" placeholder="e.g. 500" value="500">
+              </div>
+              <a href="#" class="btn btn-primary btn-block">Add Funds</a>
+            </div>
+
+            <div class="card">
+              <div class="section-card-head"><h3>Payment Method</h3></div>
+              <div class="srv-row" style="border:1px solid var(--border);">
+                <div class="srv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg></div>
+                <div class="srv-meta"><strong>UPI · rahul@okhdfc</strong><span>Primary payment method</span></div>
+                <span class="badge success">Default</span>
+              </div>
+              <a href="#" class="btn btn-ghost btn-block" style="margin-top:.8rem;">+ Add Payment Method</a>
+            </div>
+
+            <div class="card">
+              <div class="section-card-head"><h3>This Month</h3></div>
+              <div class="row-between" style="margin-bottom:.6rem;"><span class="stat-label">Spent</span><strong>₹896</strong></div>
+              <div class="row-between" style="margin-bottom:.6rem;"><span class="stat-label">Next renewal</span><strong>Jul 22</strong></div>
+              <div class="row-between"><span class="stat-label">Auto top-up</span>
+                <div class="switch"><input type="checkbox" checked><div class="track"></div><div class="thumb"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE:SUPPORT -->
+      <section class="page page-support">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> Support</span>
+            <h1 class="page-title">Support Tickets</h1>
+            <p class="page-sub">Get help from our 24/7 expert team.</p>
+          </div>
+          <a href="#" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            New Ticket
+          </a>
+        </div>
+
+        <div class="split">
+          <div class="stack">
+            <div class="card" style="padding:0;overflow:hidden;">
+              <div class="srv-row" style="border-radius:0;border:none;border-bottom:1px solid var(--border-soft);margin:0;padding:1.1rem 1.3rem;">
+                <div class="srv-icon" style="color:var(--warning);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a1.8 1.8 0 0 0 1.5 2.7h16.2a1.8 1.8 0 0 0 1.5-2.7L13.7 3.9a1.8 1.8 0 0 0-3.4 0Z"/></svg></div>
+                <div class="srv-meta"><strong>#8841 — Server lag during peak hours</strong><span>Game Server · Updated 2h ago</span></div>
+                <span class="badge warning">Open</span>
+              </div>
+              <div class="srv-row" style="border-radius:0;border:none;border-bottom:1px solid var(--border-soft);margin:0;padding:1.1rem 1.3rem;">
+                <div class="srv-icon" style="color:var(--text-faint);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-9-9"/></svg></div>
+                <div class="srv-meta"><strong>#8790 — Billing question about upgrade</strong><span>Billing · Updated 5d ago</span></div>
+                <span class="badge neutral">Closed</span>
+              </div>
+              <div class="srv-row" style="border-radius:0;border:none;margin:0;padding:1.1rem 1.3rem;">
+                <div class="srv-icon" style="color:var(--text-faint);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-9-9"/></svg></div>
+                <div class="srv-meta"><strong>#8762 — Need SSL renewal help</strong><span>Web Hosting · Updated 12d ago</span></div>
+                <span class="badge neutral">Closed</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="section-card-head"><h3>#8841 · Server lag during peak hours</h3><span class="badge warning">High Priority</span></div>
+              <div style="display:flex;flex-direction:column;gap:.9rem;">
+                <div style="display:flex;gap:.7rem;">
+                  <div class="user-avatar" style="border-radius:50%;">RS</div>
+                  <div class="card" style="flex:1;background:var(--surface-2);padding:.8rem 1rem;">
+                    <p style="font-size:.83rem;line-height:1.6;">My Minecraft server drops to 8 TPS every evening around 7–9 PM IST when ~40+ players are online. Can you check the host node load?</p>
+                    <span class="stat-label" style="display:block;margin-top:.4rem;">Rahul Sharma · 2h ago</span>
+                  </div>
+                </div>
+                <div style="display:flex;gap:.7rem;">
+                  <div class="stat-icon p" style="border-radius:50%;">ip</div>
+                  <div class="card" style="flex:1;background:var(--accent-soft);padding:.8rem 1rem;">
+                    <p style="font-size:.83rem;line-height:1.6;">Thanks for reporting Rahul — we've identified elevated load on the Mumbai node and are migrating your server to a dedicated slot. ETA 30 mins.</p>
+                    <span class="stat-label" style="display:block;margin-top:.4rem;">InPixel Support · 1h ago</span>
+                  </div>
+                </div>
+              </div>
+              <hr class="sep">
+              <div class="field" style="margin-bottom:.7rem;">
+                <textarea rows="3" placeholder="Type your reply…"></textarea>
+              </div>
+              <a href="#" class="btn btn-primary">Send Reply</a>
+            </div>
+          </div>
+
+          <div class="stack">
+            <div class="card">
+              <div class="section-card-head"><h3>Need help fast?</h3></div>
+              <p class="stat-label" style="margin-bottom:1rem;">Average first response time: <b style="color:var(--text);">4 minutes</b></p>
+              <a href="#" class="btn btn-ghost btn-block" style="margin-bottom:.6rem;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-8.8 8.4 8.5 8.5 0 0 1-4-1L3 20l1.1-5.2A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+                Live Chat
+              </a>
+              <a href="#" class="btn btn-ghost btn-block">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                Email Support
+              </a>
+            </div>
+            <div class="card">
+              <div class="section-card-head"><h3>Knowledge Base</h3></div>
+              <div class="file-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V6a2 2 0 0 1 2-2h9l5 5v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/></svg> How to point a domain to InPixel</div>
+              <div class="file-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V6a2 2 0 0 1 2-2h9l5 5v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/></svg> Installing mods on game servers</div>
+              <div class="file-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V6a2 2 0 0 1 2-2h9l5 5v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/></svg> Setting up free SSL</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE:PROFILE -->
+      <section class="page page-profile">
+        <div class="page-head">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> Account</span>
+            <h1 class="page-title">Profile Settings</h1>
+            <p class="page-sub">Manage your personal information and account security.</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="stack">
+            <div class="card">
+              <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem;">
+                <div class="avatar-lg">RS</div>
+                <div>
+                  <strong style="font-size:1.05rem;display:block;">Rahul Sharma</strong>
+                  <span class="stat-label">Pro Member · since Jan 2025</span>
+                  <div style="margin-top:.5rem;"><a href="#" class="btn btn-ghost btn-sm">Change Photo</a></div>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field"><label>Full Name</label><input type="text" value="Rahul Sharma"></div>
+                <div class="field"><label>Email Address</label><input type="email" value="rahul@inpixel.store"></div>
+              </div>
+              <div class="field-row">
+                <div class="field"><label>Phone Number</label><input type="text" value="+91 98765 43210"></div>
+                <div class="field"><label>Country</label><input type="text" value="India"></div>
+              </div>
+              <div class="field"><label>Billing Address</label><input type="text" value="H.No 42, Najafgarh, New Delhi, 110043"></div>
+              <a href="#" class="btn btn-primary">Save Changes</a>
+            </div>
+
+            <div class="card">
+              <div class="section-card-head"><h3>API Access</h3><span class="badge info">Developer</span></div>
+              <div class="field">
+                <label>Your API Key</label>
+                <input type="password" value="ipx_live_9f82ad61bc4e7f0a2d5b8c31" readonly>
+              </div>
+              <a href="#" class="btn btn-ghost btn-sm">Regenerate Key</a>
+            </div>
+          </div>
+
+          <div class="stack">
+            <div class="card">
+              <div class="section-card-head"><h3>Security</h3></div>
+              <div class="row-between" style="margin-bottom:1rem;">
+                <div>
+                  <strong style="font-size:.85rem;display:block;">Two-Factor Auth</strong>
+                  <span class="stat-label">Extra layer of account security</span>
+                </div>
+                <div class="switch"><input type="checkbox" checked><div class="track"></div><div class="thumb"></div></div>
+              </div>
+              <div class="row-between" style="margin-bottom:1rem;">
+                <div>
+                  <strong style="font-size:.85rem;display:block;">Email Alerts</strong>
+                  <span class="stat-label">Renewals, invoices &amp; downtime</span>
+                </div>
+                <div class="switch"><input type="checkbox" checked><div class="track"></div><div class="thumb"></div></div>
+              </div>
+              <div class="row-between">
+                <div>
+                  <strong style="font-size:.85rem;display:block;">SMS Alerts</strong>
+                  <span class="stat-label">Critical outages only</span>
+                </div>
+                <div class="switch"><input type="checkbox"><div class="track"></div><div class="thumb"></div></div>
+              </div>
+              <hr class="sep">
+              <a href="#" class="btn btn-ghost btn-block">Change Password</a>
+            </div>
+
+            <div class="card" style="border-color:var(--danger-soft);">
+              <div class="section-card-head"><h3 style="color:var(--danger);">Danger Zone</h3></div>
+              <p class="stat-label" style="margin-bottom:1rem;">Permanently delete your account and all associated services. This cannot be undone.</p>
+              <a href="#" class="btn btn-danger-soft btn-block">Delete Account</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
