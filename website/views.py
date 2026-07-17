@@ -145,8 +145,8 @@ def do_login(request):
         # # request.session["account_status"] = user.account_status
         request.session["user_image"] = user.user_image
 
-    if role == "customer":
-        return redirect("website/dashboard")
+    if role == "user":
+        return redirect("website/index.html")
 
     elif role in ["staff", "admin"]:
         return redirect("admin/dashboard")
