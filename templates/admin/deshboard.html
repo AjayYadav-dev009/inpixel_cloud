@@ -1,0 +1,66 @@
+{% extends 'admin-base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block admin_content %}
+<div class="dash-page-header">
+  <div>
+    <h1>Admin Overview</h1>
+    <p>A quick look at how InPixel Cloud is doing today.</p>
+  </div>
+</div>
+
+<!-- ============ STAT CARDS ============ -->
+<div class="dash-stats">
+  <div class="dash-card stat-card">
+    <div class="stat-card-top">
+      <div class="stat-icon purple"><i data-lucide="users" class="w-5 h-5"></i></div>
+      <div>
+        <p class="stat-label">Total Customers</p>
+        <p class="stat-value">--</p>
+      </div>
+    </div>
+    <a href="#" class="stat-link">View all customers <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+  </div>
+
+  <div class="dash-card stat-card">
+    <div class="stat-card-top">
+      <div class="stat-icon blue"><i data-lucide="box" class="w-5 h-5"></i></div>
+      <div>
+        <p class="stat-label">Active Services</p>
+        <p class="stat-value">--</p>
+      </div>
+    </div>
+    <a href="{% url 'website:service' %}" class="stat-link">View all services <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+  </div>
+
+  <div class="dash-card stat-card">
+    <div class="stat-card-top">
+      <div class="stat-icon green"><i data-lucide="message-circle" class="w-5 h-5"></i></div>
+      <div>
+        <p class="stat-label">Open Tickets</p>
+        <p class="stat-value">--</p>
+      </div>
+    </div>
+    <a href="#" class="stat-link">View all tickets <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+  </div>
+
+  <div class="dash-card stat-card">
+    <div class="stat-card-top">
+      <div class="stat-icon amber"><i data-lucide="indian-rupee" class="w-5 h-5"></i></div>
+      <div>
+        <p class="stat-label">Revenue This Month</p>
+        <p class="stat-value">--</p>
+      </div>
+    </div>
+    <a href="#" class="stat-link">View billing <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+  </div>
+</div>
+
+<div class="dash-card" style="padding: 40px 24px; text-align: center;">
+  <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">
+    This is a starting point for the admin panel — hook these cards
+    and a customers/services table up to real data whenever you're
+    ready to build that part out.
+  </p>
+</div>
+{% endblock %}
