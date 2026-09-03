@@ -6,12 +6,8 @@ from datetime import datetime
 import time
 from .decorators import login_required, admin_required, staff_required, customer_required
 
-
-
 # Create your views here.
-
 def index(request):
-
     login_status = False
     accountHold_Name = ""
     accountHold_Username = ""
@@ -152,11 +148,9 @@ def do_login(request):
         return redirect("admin/dashboard")
     # return render(request,'website/index.html')
 
-
 def logout(request):
     request.session.flush()
     return redirect("/?msg=Logout Successfully ✅")
-
 
 @customer_required
 def user_dashboard(request):
@@ -167,4 +161,3 @@ def user_dashboard(request):
 def admin_dashboard(request):
     
     return render(request,"admin/dashboard.html")
-
