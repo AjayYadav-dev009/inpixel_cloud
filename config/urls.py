@@ -21,3 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('website.urls')),
 ]
+
+
+
+# ikiaipsdipmsa
+# dlasdiopjaspoid
+# asldk[oasd[o
+#            sldolas]
